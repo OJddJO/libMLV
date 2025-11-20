@@ -66,7 +66,7 @@ jobs:
       - name: Package assets
         run: |
           set -e
-          mkdir -p release tmp_release
+          mkdir -p release tmp_release tmp_release/include/
           rm -rf tmp_release/* _linux/build/
           cp -a _linux/. tmp_release/
           cp -a README.md README COPYING AUTHORS gpl.txt tmp_release/
