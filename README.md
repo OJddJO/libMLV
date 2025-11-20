@@ -11,9 +11,9 @@
 This repo is just a repo for precompiled version of libMLV. If you find any bugs or have any questions, please report/ask them to the library maintainer.
 You can still ask for bugs in the discussions but there is no guarantee that it will be solved !
 
-## INSTALLATION
+## Usage
 
-Go to the releases and download the version you need.
+Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the version you need.
 
 You'll also need to install `sdl1.2`, `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
 
