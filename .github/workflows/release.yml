@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           # find latest tag (if any)
-          LATEST_TAG=$(git describe --tags --abbrev=0)
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || false)
           if [ -n "$LATEST_TAG" ]; then
             RANGE="${LATEST_TAG}..HEAD"
             HEADER="<details><summary>Commits since ${LATEST_TAG}:</summary>"
