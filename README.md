@@ -13,7 +13,7 @@ You can still ask for bugs in the discussions but there is no guarantee that it 
 
 ## Description
 
-The mlv library is a simplified multimedia libary.
+The `MLV` (stands for `Marne-la-Vallée`) library is a simplified multimedia libary.
 
 The library is perfect for beginners in C programming who want to use graphic and sound effects.
 The library permit to:
