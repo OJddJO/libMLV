@@ -9,6 +9,7 @@
 ## A repo for a precompiled version of libMLV
 
 This repo is just a repo for precompiled version of libMLV. If you find any bugs or have any questions, please report/ask them to the library maintainer.
+You can still ask for bugs in the discussions but there is no guarantee that it will be solved !
 
 ## INSTALLATION
 
