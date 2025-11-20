@@ -13,8 +13,8 @@ endif
 SRC 	= $(wildcard MLV/*.c)
 OBJ 	= $(subst MLV,$(OSDIR)/build,$(patsubst %.c,%.o,$(SRC)))
 
-INCLUDE = -I ./include -I ./include/SDL -I ./include/glib  -I ./include/libxml
-LIB 	= -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_gfx -lglib-2.0 -lxml2
+INCLUDE = -I ./include -I ./include/SDL2 -I ./include/glib  -I ./include/libxml
+LIB 	= -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_gfx -lglib-2.0 -lxml2
 CCARGS	= -Wall -Werror -O2 -fPIC
 
 all: createDirs $(OBJ)
