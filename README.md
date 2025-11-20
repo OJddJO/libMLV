@@ -35,4 +35,4 @@ Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the
 
 You'll also need to install `sdl1.2`, `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
 
-If you have any issues with the installation, please leave an issue or open a discussion.
+If you have any questions/issues with the installation, please leave an issue or open a discussion.
