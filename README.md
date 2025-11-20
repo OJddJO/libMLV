@@ -13,6 +13,8 @@ You can still ask for bugs in the discussions but there is no guarantee that it 
 
 ## Usage
 
+Currently, there's only a Linux version (should work on any `x86_64` Linux, tested on `NixOS`, `ArchLinux` and `Ubuntu`)
+
 Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the version you need.
 
 You'll also need to install `sdl1.2`, `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
