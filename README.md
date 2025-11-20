@@ -8,8 +8,7 @@
 
 ## A repo for a precompiled version of libMLV
 
-This repo is just a repo for precompiled versions of `libMLV`. If you find any bugs or have any questions related to the library, please report/ask them to the library maintainer *(Maintainers: Adrien Boussicault <adrien.boussicault@labri.fr> [`source:debian 11/20/2025`](https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=libmlv3;dist=unstable))*.
-You can still ask for bugs in the discussions but there is no guarantee that it will be solved !
+This repo is just a repo for precompiled versions of `libMLV`. If you find any bugs or have any questions related to the library, please report/ask them in the issues or discussions before reporting them to the library maintainer *(Maintainers: Adrien Boussicault <adrien.boussicault@labri.fr> [`source:debian 11/20/2025`](https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=libmlv3;dist=unstable))*.
 
 ## Description
 
