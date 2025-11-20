@@ -57,7 +57,7 @@ jobs:
       - name: Set up build tools
         run: |
           sudo apt-get update
-          sudo apt-get install --fix-missing build-essential libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libglib2.0-dev libxml2-dev -yq
+          sudo apt-get install --fix-missing build-essential libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libglib2.0-dev libxml2-dev -yq
 
       - name: Build
         run: make
