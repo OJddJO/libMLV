@@ -22,7 +22,7 @@
 
 #include "memory_management.h"
 
-int sldKeyIsACharacter( SDLKey key){
+int sldKeyIsACharacter( SDL_KeyCode key){
     int result = 1;
 
     switch( key ) {
@@ -103,7 +103,7 @@ int sldKeyIsACharacter( SDLKey key){
 }
 
 
-int converSdlKeyToChar( SDLKey key, SDLMod mod, char* character ){
+int converSdlKeyToChar( SDL_KeyCode key, SDL_Keymod mod, char* character ){
     int result = 0;
 /*
  *     if( mod & KMOD_NUM ) printf( "NUMLOCK " );

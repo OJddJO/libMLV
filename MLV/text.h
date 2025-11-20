@@ -25,11 +25,11 @@
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL_ttf.h>
+#	include <SDL2/SDL_ttf.h>
 #elif defined( OS_APPLE )
 #	include <SDL_ttf/SDL_ttf.h>
 #else
-#	include <SDL/SDL_ttf.h>
+#	include <SDL2/SDL_ttf.h>
 #endif
 #else
 #include "memory_debug.h"

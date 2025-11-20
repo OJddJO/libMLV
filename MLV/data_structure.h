@@ -25,14 +25,14 @@
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_framerate.h>
 #elif defined( OS_APPLE )
-#   include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
+#   include <SDL2/SDL.h>
+#	include <SDL2/SDL_framerate.h>
 #else
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_framerate.h>
 #endif
 
 

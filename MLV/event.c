@@ -25,14 +25,14 @@
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_framerate.h>
 #elif defined( OS_APPLE )
-#   include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
+#   include <SDL2/SDL.h>
+#	include <SDL2/SDL_framerate.h>
 #else
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_framerate.h>
 #endif
 #else
 #include "memory_debug.h"
@@ -73,7 +73,7 @@ MLV_Event MLV_get_event(
 								event.key.keysym.mod;
 						}
 						if( unicode ){
-							(*unicode) = event.key.keysym.unicode;
+							(*unicode) = event.key.keysym.sym;
 						}
 						if( state ){
 							(*state) = MLV_PRESSED;
@@ -93,7 +93,7 @@ MLV_Event MLV_get_event(
 								event.key.keysym.mod;
 						}
 						if( unicode ){
-							(*unicode) = event.key.keysym.unicode;
+							(*unicode) = event.key.keysym.sym;
 						}
 						if( state ){
 							(*state) = MLV_RELEASED;

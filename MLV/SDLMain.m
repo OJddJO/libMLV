@@ -22,7 +22,7 @@
  *   along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 #include "SDLMain.h"
 #include <sys/param.h> /* for MAXPATHLEN */
 #include <unistd.h>

@@ -29,7 +29,7 @@
 #include "warning_error.h"
 
 #ifndef MEMORY_DEBUG
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #else
 #include "memory_debug.h"
 #endif

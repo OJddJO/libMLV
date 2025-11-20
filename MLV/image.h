@@ -37,11 +37,11 @@
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
+#	include <SDL2/SDL.h>
 #elif defined( OS_APPLE )
-#	include <SDL/SDL.h>
+#	include <SDL2/SDL.h>
 #else
-#	include <SDL/SDL.h>
+#	include <SDL2/SDL.h>
 #endif
 #else
 #include "memory_debug.h"

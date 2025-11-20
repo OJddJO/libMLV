@@ -25,7 +25,7 @@
  * \author Marc Zipstein
  *
  * Cette interface est inspiré du tutoriel : 
- * http://www.gnurou.org/writing/linuxmag/sdl/partie3
+ * http://www.gnurou.org/writing/linuxmag/SDL2/partie3
  *
  * \brief Ce fichier définit les prototypes des fonctions permettant de mettre 
  *        en oeuvre des animations.

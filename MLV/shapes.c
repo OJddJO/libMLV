@@ -25,11 +25,11 @@
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL_gfxPrimitives.h>
+#	include <SDL2/SDL_gfxPrimitives.h>
 #elif defined( OS_APPLE )
-#	include <SDL/SDL_gfxPrimitives.h>
+#	include <SDL2/SDL_gfxPrimitives.h>
 #else
-#	include <SDL/SDL_gfxPrimitives.h>
+#	include <SDL2/SDL_gfxPrimitives.h>
 #endif
 #else
 #include "memory_debug.h"

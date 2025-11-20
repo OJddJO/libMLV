@@ -22,13 +22,13 @@
 #define __MLV__SDLKEYBOARDTOCHAR_H__
 
 #ifndef MEMORY_DEBUG
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #else
 #include "memory_debug.h"
 #endif
 
-int converSdlKeyToChar( SDLKey key, SDLMod mod, char* character  );
-int sldKeyIsACharacter( SDLKey key );
+int converSdlKeyToChar( SDL_KeyCode key, SDL_Keymod mod, char* character  );
+int sldKeyIsACharacter( SDL_KeyCode key );
 
 #endif
 

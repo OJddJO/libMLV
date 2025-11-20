@@ -25,17 +25,17 @@
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_image.h>
-#	include <SDL/SDL_rotozoom.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_image.h>
+#	include <SDL2/SDL_rotozoom.h>
 #elif defined( OS_APPLE )
-#	include <SDL/SDL.h>
+#	include <SDL2/SDL.h>
 #	include <SDL_image/SDL_image.h>
-#	include <SDL/SDL_rotozoom.h>
+#	include <SDL2/SDL_rotozoom.h>
 #else
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_image.h>
-#	include <SDL/SDL_rotozoom.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_image.h>
+#	include <SDL2/SDL_rotozoom.h>
 #endif
 #else
 #include "memory_debug.h"
@@ -65,13 +65,13 @@ SDL_Surface* create_surface( int width, int height ){
 	#endif
 	#if defined( OS_ANDROID )
 		return SDL_CreateRGBSurface(
-			SDL_SWSURFACE|SDL_SRCALPHA,
+			0,
 			width, height,
 			MLV_BPP, rmask, gmask, bmask, amask
 		);
 	#else
 		return SDL_CreateRGBSurface(
-			SDL_HWSURFACE|SDL_SRCALPHA,
+			0,
 			width, height,
 			MLV_BPP, rmask, gmask, bmask, amask
 		);
@@ -90,8 +90,10 @@ MLV_Image* MLV_load_image( const char* file_image ){
 	}
 
 	MLV_Image* image = MLV_MALLOC( 1, MLV_Image );
-	image->surface = SDL_DisplayFormatAlpha(
-		surface
+	image->surface = SDL_ConvertSurfaceFormat(
+		surface,
+		SDL_PACKEDORDER_RGBA,
+		0
 	);
 	
 	SDL_FreeSurface( surface );
@@ -244,7 +246,11 @@ MLV_Image* MLV_copy_partial_image( const MLV_Image* image, int x, int y, int wid
 
 	SDL_Surface* tmp = create_surface( width, height );
 
-	result->surface = SDL_DisplayFormatAlpha( tmp );
+	result->surface = SDL_ConvertSurfaceFormat(
+		tmp,
+		SDL_PACKEDORDER_RGBA,
+		0
+	);
 	SDL_FreeSurface( tmp );	
 
 	SDL_LockSurface( image->surface );

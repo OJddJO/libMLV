@@ -68,9 +68,9 @@ jobs:
           set -e
           mkdir -p release tmp_release tmp_release/include/
           rm -rf tmp_release/* _linux/build/
-          cp -a _linux/. tmp_release/
-          cp -a README.md README COPYING AUTHORS gpl.txt tmp_release/
-          cp -a include/MLV tmp_release/include/MLV
+          cp -R _linux/. tmp_release/
+          cp -R README.md README COPYING AUTHORS gpl.txt tmp_release/
+          cp -R include/MLV tmp_release/include/
           tar -czf "release/MLV-${VERSION}-linux.tar.gz" -C tmp_release .
           rm -rf tmp_release
         shell: bash

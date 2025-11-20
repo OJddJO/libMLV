@@ -44,14 +44,14 @@ extern int vasprintf (char **, const char *, va_list);
 
 #ifndef MEMORY_DEBUG
 #if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_gfxPrimitives.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_gfxPrimitives.h>
 #elif defined( OS_APPLE )
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_gfxPrimitives.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_gfxPrimitives.h>
 #else
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_gfxPrimitives.h>
+#	include <SDL2/SDL.h>
+#	include <SDL2/SDL_gfxPrimitives.h>
 #endif
 #else
 #include "memory_debug.h"
