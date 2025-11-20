@@ -12,7 +12,7 @@ permissions:
 jobs:
   create_release:
     name: Create Release and upload assets
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
 
@@ -47,7 +47,7 @@ jobs:
   build-ubuntu:
     name: Build and Package for Ubuntu
     needs: create_release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
 
@@ -66,10 +66,11 @@ jobs:
       - name: Package assets
         run: |
           set -e
-          mkdir -p release tmp_release
-          rm -rf tmp_release/* build/
-          cp -a _linux/. tmp_release/
-          cp -a include/ README.md LICENSE tmp_release/
+          mkdir -p release tmp_release tmp_release/include
+          rm -rf tmp_release/* _linux/build/
+          cp -R _linux/. tmp_release/
+          cp -R README.md README AUTHORS COPYING Changelog gpl.txt tmp_release/
+          cp -R include/MLV tmp_release/include/
           tar -czf "release/MLV-${VERSION}-linux.tar.gz" -C tmp_release .
           rm -rf tmp_release
         shell: bash
@@ -108,7 +109,7 @@ jobs:
   #       run: |
   #         mkdir -p release
   #         rm -rf _windows/build/ _windows/build_static/
-  #         (cd _windows && 7z a -tzip "../release/MLVV-${VERSION}-windows.zip" ./*)
+  #         (cd _windows && 7z a -tzip "../release/MLV-${VERSION}-windows.zip" ./*)
   #         7z a -tzip "release/MLV-${VERSION}-windows.zip" include README.md LICENSE
   #       shell: bash
 
