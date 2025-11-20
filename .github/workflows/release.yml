@@ -67,9 +67,10 @@ jobs:
         run: |
           set -e
           mkdir -p release tmp_release
-          rm -rf tmp_release/* build/
+          rm -rf tmp_release/* _linux/build/
           cp -a _linux/. tmp_release/
-          cp -a include/ README.md LICENSE tmp_release/
+          cp -a README.md README COPYING AUTHORS gpl.txt tmp_release/
+          cp -a include/MLV tmp_release/include/MLV
           tar -czf "release/MLV-${VERSION}-linux.tar.gz" -C tmp_release .
           rm -rf tmp_release
         shell: bash
@@ -107,7 +108,7 @@ jobs:
   #     - name: Package assets
   #       run: |
   #         mkdir -p release
-  #         rm -rf _windows/build/ _windows/build_static/
+  #         rm -rf _windows/build/
   #         (cd _windows && 7z a -tzip "../release/MLVV-${VERSION}-windows.zip" ./*)
   #         7z a -tzip "release/MLV-${VERSION}-windows.zip" include README.md LICENSE
   #       shell: bash
