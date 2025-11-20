@@ -34,4 +34,17 @@ Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the
 
 You'll also need to install `sdl1.2`, `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
 
+#### NixOS
+You can use the [`shell.nix`](./shell.nix) file.
+#### Arch
+Use the following command:
+```bash
+sudo pacman -S glib2 libxml2 sdl sdl_image sdl_mixer sdl_ttf sdl_gfx
+```
+#### Ubuntu
+Use the following command:
+```bash
+sudo apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libglib2.0-dev libxml2-dev
+```
+
 If you have any questions/issues with the installation, please leave an issue or open a discussion.
