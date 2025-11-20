@@ -18,7 +18,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define _GNU_SOURCE
+
 #include <stdio.h>
 
 #include "platform.h"
@@ -59,7 +59,7 @@ extern int vasprintf (char **, const char *, va_list);
 #endif
 
 #include "sdlkeyboardtochar.h"
-#include "glib.h"
+// #include "glib.h"
 
 #include <string.h>
 #include "warning_error.h"

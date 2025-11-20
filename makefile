@@ -36,7 +36,7 @@ clean:
 
 $(OSDIR)/build/%.o: MLV/%.c
 	@echo Compiling $*.c
-	@gcc -c MLV/$*.c -o $(OSDIR)/build/$*.o $(INCLUDE) $(LIB) $(CCARGS)
+	@gcc -c MLV/$*.c -o $(OSDIR)/build/$*.o $(INCLUDE) $(LIB) $(CCARGS) $(EXTRA)
 
 release:
 	mkdir -p MLV-release/

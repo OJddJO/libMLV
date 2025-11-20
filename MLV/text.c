@@ -18,7 +18,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define _GNU_SOURCE
+
 #include <stdio.h>
 
 #include "platform.h"

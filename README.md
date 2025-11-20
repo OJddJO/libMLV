@@ -32,19 +32,24 @@ Currently, there's only a Linux version (should work on any `x86_64` Linux, test
 
 Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the version you need.
 
-You'll also need to install `sdl1.2`, `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
+You'll also need to install `sdl1.2-compat` (cause SDL1.2 is ultra-deprecated), `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
 
 #### NixOS
 You can use the [`shell.nix`](./shell.nix) file.
 #### Arch
 Use the following command:
 ```bash
-sudo pacman -S glib2 libxml2 sdl sdl_image sdl_mixer sdl_ttf sdl_gfx
+sudo pacman -S glib2 libxml2 sdl12-compat sdl_image sdl_mixer sdl_ttf sdl_gfx
 ```
 #### Ubuntu
 Use the following command:
 ```bash
-sudo apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libglib2.0-dev libxml2-dev
+sudo apt-get install libsdl1.2-compat-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libglib2.0-dev libxml2-dev
+```
+#### Windows (MSYS2)
+Use the following command:
+```bash
+pacman -S glib2 libxml2 mingw-w64-x86_64-sdl12-compat mingw-w64-x86_64-SDL_gfx mingw-w64-x86_64-SDL_ttf mingw-w64-x86_64-SDL_image mingw-w64-x86_64-SDL_mixer
 ```
 
 If you have any questions/issues with the installation, please leave an issue or open a discussion.
