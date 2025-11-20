@@ -1,0 +1,170 @@
+name: Release new version
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  create_release:
+    name: Create Release and upload assets
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
+
+    steps:
+      - name: Checkout repository (full history)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Create changelog from commits since latest tag
+        id: make_changelog
+        run: |
+          set -euo pipefail
+          # find latest tag (if any)
+          LATEST_TAG=$(git describe --tags --abbrev=0)
+          if [ -n "$LATEST_TAG" ]; then
+            RANGE="${LATEST_TAG}..HEAD"
+            HEADER="<details><summary>Commits since ${LATEST_TAG}:</summary>"
+          else
+            RANGE="HEAD"
+            HEADER="All commits:"
+          fi
+
+          # build a URL to the full changelog on GitHub
+          if [ -n "$LATEST_TAG" ]; then
+            FULL_CHANGELOG_URL="https://github.com/${GITHUB_REPOSITORY}/compare/${LATEST_TAG}...${VERSION}"
+          else
+            FULL_CHANGELOG_URL="https://github.com/${GITHUB_REPOSITORY}/commits/${VERSION}"
+          fi
+
+          # get commit subject and short sha, preserve order, group by subject and keep first sha
+          raw=$(git --no-pager log --pretty=format:'%s|%h' "${RANGE}" || true)
+          if [ -z "$raw" ]; then
+            BODY="No changes"
+          else
+            BODY=$(printf '%s\n' "$raw" | awk -F'|' '
+              {
+                subj=$1
+                sha=$2
+                if (!(subj in seen)) { seen[subj]=1; order[++n]=subj; firstsha[subj]=sha }
+                lastsha[subj]=sha
+                count[subj]++
+              }
+              END {
+                for (i=1;i<=n;i++) {
+                  s=order[i]
+                  repo=ENVIRON["GITHUB_REPOSITORY"]
+                  if (count[s] > 1) {
+                    # link to compare range first..last
+                    printf "- %s — https://github.com/%s/compare/%s...%s (x%d)\n", s, repo, lastsha[s], firstsha[s], count[s]
+                  } else {
+                    # single commit link
+                    printf "- %s — https://github.com/%s/commit/%s\n", s, repo, firstsha[s]
+                  }
+                }
+              }')
+          fi
+
+          # build CHANGELOG with real newlines
+          CHANGELOG="$(printf '%s\n\n%s\n</details>\n\nFull changelog: %s' "$HEADER" "$BODY" "$FULL_CHANGELOG_URL")"
+
+          # output multiline changelog safely
+          echo "changelog<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$CHANGELOG" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+        shell: bash
+
+      - name: Create GitHub Release (API)
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          VERSION: ${{ env.VERSION }}
+          CHANGELOG: ${{ steps.make_changelog.outputs.changelog }}
+        run: |
+          set -euo pipefail
+          API="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
+          JSON=$(jq -n --arg tag "${VERSION}" --arg name "${VERSION}" --arg body "${CHANGELOG}" \
+            '{ tag_name: $tag, name: $name, body: $body, draft: false, prerelease: false }')
+          curl -sSL -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" \
+            -d "$JSON" "$API"
+        shell: bash
+
+  build-ubuntu:
+    name: Build and Package for Ubuntu
+    needs: create_release
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --fix-missing build-essential libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev libglib2.0-dev libxml2-dev -yq
+
+      - name: Build
+        run: make
+        shell: bash
+
+      - name: Package assets
+        run: |
+          set -e
+          mkdir -p release tmp_release
+          rm -rf tmp_release/* build/
+          cp -a _linux/. tmp_release/
+          cp -a include/ README.md LICENSE tmp_release/
+          tar -czf "release/MLV-${VERSION}-linux.tar.gz" -C tmp_release .
+          rm -rf tmp_release
+        shell: bash
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./release/MLV-${{ env.VERSION }}-linux.tar.gz
+          tag_name: ${{ env.VERSION }}
+
+  # build-windows:
+  #   name: Build and Package for Windows
+  #   needs: create_release
+  #   runs-on: windows-latest
+  #   env:
+  #     VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+  #     - name: Set up build tools
+  #       uses: msys2/setup-msys2@v2
+  #       with:
+  #         msystem: MINGW64
+  #         update: true
+  #         install: >
+  #           mingw-w64-x86_64-toolchain
+  #           make
+  #           mingw-w64-x86_64-7zip
+
+  #     - name: Build
+  #       run: make
+  #       shell: bash
+
+  #     - name: Package assets
+  #       run: |
+  #         mkdir -p release
+  #         rm -rf _windows/build/ _windows/build_static/
+  #         (cd _windows && 7z a -tzip "../release/MLVV-${VERSION}-windows.zip" ./*)
+  #         7z a -tzip "release/MLV-${VERSION}-windows.zip" include README.md LICENSE
+  #       shell: bash
+
+  #     - name: Upload release assets
+  #       uses: softprops/action-gh-release@v2
+  #       with:
+  #         files: ./release/MLV-${{ env.VERSION }}-windows.zip
+  #         tag_name: ${{ env.VERSION }}
