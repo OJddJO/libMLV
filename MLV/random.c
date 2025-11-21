@@ -26,23 +26,31 @@
 #include "memory_debug.h"
 #endif
 
-#include <glib.h>
+#include <stdlib.h>
 
 #include "warning_error.h"
-#include "memory_management.h"
+#include "memory_management.h" 
 
 void MLV_set_seed( int32_t seed ){
-	g_random_set_seed(seed);
+	srand((uint32_t)seed);
 }
 
 int MLV_get_random_boolean(){
-	return g_random_boolean( );
+	return rand()%2;
+}
+
+inline int rand_int() {
+	#if RAND_MAX == INT32_MAX
+		return rand();
+	#else // minimum value of RAND_MAX is 32768=0x7FFF
+		return (uint32_t)((rand() & 1) << 30 | (rand() & 0x7FFF) << 15 | (rand() & 0x7FFF))
+	#endif
 }
 
 int MLV_get_random_integer(int begin, int end){
-	return g_random_int_range( begin, end+1 );
+	return begin + rand_int() % (end - begin + 1);
 }
 
 double MLV_get_random_double(double begin, double end){
-	return g_random_double_range( begin, end );
+	return begin + ((double)rand_int()/(double)(INT32_MAX)) * (end - begin);
 }

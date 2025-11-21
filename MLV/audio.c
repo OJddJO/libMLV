@@ -36,7 +36,7 @@
 #	include <SDL/SDL_mixer.h>
 #endif
 
-#include <glib.h>
+// #include <glib.h>
 
 extern DataMLV* MLV_data;
 
@@ -46,10 +46,6 @@ struct _MLV_Music {
 
 struct _MLV_Sound {
 	Mix_Chunk* sample;
-};
-
-struct _MLV_Playlist {
-    GList* list_music;
 };
 
 #define MLV_AUDIO_BUFFER_SIZE 1024
