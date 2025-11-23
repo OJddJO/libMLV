@@ -87,7 +87,7 @@ int MLV_path_is_absolute( const char* path ){
 
 	
 #if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
-    if( strlen(path) == 4 && 
+    if( strlen(path) == 3 && 
 		((path[0] >= 'a' && path[0] <= 'z') ||
 		(path[0] >= 'A' && path[0] <= 'Z')) &&
 		path[1] == ':' &&
