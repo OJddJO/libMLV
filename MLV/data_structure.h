@@ -2,6 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2025 OJddJO (Remove glib dependencies)
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -40,8 +41,6 @@
 #else
 #include "memory_management.h"
 #endif
-
-// #include <glib.h>
 
 #include "MLV_playlist.h"
 #include "MLV_text.h"

@@ -2,6 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010,2011,2012,2012 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2025 OJddJO (Remove glib dependencies)
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -59,7 +60,6 @@ extern int vasprintf (char **, const char *, va_list);
 #endif
 
 #include "sdlkeyboardtochar.h"
-// #include "glib.h"
 
 #include <string.h>
 #include "warning_error.h"

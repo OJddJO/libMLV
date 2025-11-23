@@ -2,6 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010,2011,2012 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2025 OJddJO (Remove glib dependencies)
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -43,7 +44,7 @@ extern int asprintf (char **, const char *, ...);
 
 #include "data_structure.h"
 
-#include <glib.h>
+// #include <glib.h>
 
 #include <stdio.h>
 #include <libxml/xmlmemory.h>
