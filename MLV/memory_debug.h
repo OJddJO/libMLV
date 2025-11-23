@@ -472,6 +472,8 @@ void* memory_debug_malloc( size_t size, int line, char* file );
 
 void* memory_debug_calloc( size_t nmemb, size_t size, int line, char* file );
 
+void *memory_debug_realloc( void *ptr, size_t size, int line, char *file);
+
 void memory_debug_free( void* ptr, int line, char* file );
 
 typedef struct{

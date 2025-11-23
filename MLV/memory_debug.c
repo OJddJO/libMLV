@@ -79,6 +79,7 @@ typedef enum {
 	MEMORY_DEBUG_FREE_SEMAPHORE,
 	MEMORY_DEBUG_MALLOC,
 	MEMORY_DEBUG_CALLOC,
+	MEMORY_DEBUG_REALLOC,
 	MEMORY_DEBUG_FREE,
 	MEMORY_DEBUG_FREE_WAVE,
 	MEMORY_DEBUG_LOAD_WAVE,
@@ -485,6 +486,11 @@ void* memory_debug_calloc( size_t nmemb, size_t size, int line, char* file ){
 	update_memory_statistics( MEMORY_DEBUG_CALLOC );
 	fprintf(stderr, "Memory Debug : calloc ligne : %i, fichier : %s \n", line, file );
 	return calloc( nmemb, size );
+}
+
+void *memory_debug_realloc( void *ptr, size_t size, int line, char *file) {
+	fprintf(stderr, "Memory Debug : realloc ligne : %i, fichier : %s \n", line, file);
+	return realloc( ptr, size );
 }
 
 void memory_debug_free( void* ptr, int line, char* file ){

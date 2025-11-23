@@ -41,7 +41,7 @@
 #include "memory_management.h"
 #endif
 
-#include <glib.h>
+// #include <glib.h>
 
 #include "MLV_playlist.h"
 #include "MLV_text.h"

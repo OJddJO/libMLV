@@ -910,14 +910,49 @@ void MLV_draw_text_box_on_image(
 	va_end( pile );
 }
 
-char* MLV_convert_unicode_to_string( int unicode ){
-	gunichar v = unicode;
-	gchar* message;
+inline int ucs4ToUtf8(int in, char *out) {
+	switch (out == NULL) {
+		case (0):
+			if (in <= 0x007F) {
+				out[0] = (char)(in & 0x7F);
+				return 1;
+			} else if (in <= 0x07FF) {
+				out[0] = (char)(0xC0 | ((in >> 6) & 0x1F));
+				out[1] = (char)(0x80 | (in & 0x3F));
+				return 2;
+			} else if (in <= 0xFFFF) {
+				out[0] = (char)(0xE0 | ((in >> 12) & 0x0F));
+				out[1] = (char)(0x80 | ((in >> 6) & 0x3F));
+				out[2] = (char)(0x80 | (in & 0x3F));
+				return 3;
+			} else if (in <= 0x10FFFF) {
+				out[0] = (char)(0xF0 | ((in >> 18) & 0x07));
+				out[1] = (char)(0x80 | ((in >> 12) & 0x3F));
+				out[2] = (char)(0x80 | ((in >> 6) & 0x3F));
+				out[3] = (char)(0x80 | (in & 0x3F));
+				return 4;
+			}
+			break;
+		case (1):
+			if (in <= 0x007F) return 1;
+			else if (in <= 0x07FF) return 2;
+			else if (in <= 0xFFFF) return 3;
+			else if (in <= 0x10FFFF) return 4;
+			break;
+	}
+	return 0; // Should never be reached
+}
 
-	int size = g_unichar_to_utf8(v,NULL);
-	message = (char*) MLV_MALLOC( size + 1, gchar );
+char* MLV_convert_unicode_to_string( int unicode ){
+	// gunichar v = unicode;
+	char* message;
+
+	// int size = g_unichar_to_utf8(v,NULL);
+	int size = ucs4ToUtf8(unicode,NULL);
+	message = (char*) MLV_MALLOC( size + 1, char );
 	message[ size ] = '\0';
-	g_unichar_to_utf8(v, message);
+	// g_unichar_to_utf8(v, message);
+	ucs4ToUtf8(unicode, message);
 
 //	const char* encodage;
 //	g_get_charset( &encodage );

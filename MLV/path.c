@@ -24,19 +24,81 @@
 #include "memory_management.h"
 #include "data_structure.h"
 
-#include <glib.h>
+// #include <glib.h>
 #include <stdarg.h>
 
+#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+    #define MLV_IS_DIR_SEPARATOR(c) ((c) == '/' || (c) == '\\')
+	#define MLV_DIR_SEPARATOR_CHAR '\\'
+	#define MLV_DIR_SEPARATOR "\\"
+#else
+    #define MLV_IS_DIR_SEPARATOR(c) ((c) == '/')
+	#define MLV_DIR_SEPARATOR_CHAR '/'
+	#define MLV_DIR_SEPARATOR "/"
+#endif
+
 char* MLV_get_base_name( const char* path ){
-	return g_path_get_basename( path );
+	// return g_path_get_basename( path );
+
+	if (!path) return NULL;
+
+	long len = strlen(path);
+	if (len == 1) {
+		if (MLV_IS_DIR_SEPARATOR(path[0])) return strdup(MLV_DIR_SEPARATOR);
+		return strdup(".");
+	}
+
+	const char *end = path + len;
+	const char *start = end -1;
+	while (start >= path && !MLV_IS_DIR_SEPARATOR(*start)) start--;
+
+	start++;
+
+	long base_len = end - start;
+	char *result = (char *) MLV_MALLOC( base_len + 1, char );
+	memcpy( result, start, base_len );
+	result[base_len] = '\0';
+
+	return result;
 }
 
 char* MLV_get_directory_name( const char* path ){
-	return g_path_get_dirname( path );
+	// return g_path_get_dirname( path );
+
+	if (!path) return NULL;
+
+	long len = strlen(path);
+
+	while (len > 0 && MLV_IS_DIR_SEPARATOR(path[len - 1])) len--;
+
+	if (len == 0) return strdup(".");
+
+	char *result = (char *) MLV_MALLOC( len + 1, char );
+	memcpy( result, path, len );
+	result[len] = '\0';
+
+	return result;
 }
 
 int MLV_path_is_absolute( const char* path ){
-	return g_path_is_absolute( path );
+	// return g_path_is_absolute( path );
+	if( path == NULL ) return 0;
+
+	
+#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+    if( strlen(path) == 3 && 
+		((path[0] >= 'a' && path[0] <= 'z') ||
+		(path[0] >= 'A' && path[0] <= 'Z')) &&
+		path[1] == ':' &&
+		MLV_IS_DIR_SEPARATOR( path[2] )
+	){
+		return 1;
+	}
+#else
+	if( MLV_IS_DIR_SEPARATOR( path[0] ) ) return 1;
+#endif
+
+    return 0;
 }
 
 int MLV_path_is_relative( const char* path ){
@@ -44,11 +106,25 @@ int MLV_path_is_relative( const char* path ){
 }
 
 char* MLV_build_path_v( char** elements ){
-	gchar* tmp_res = g_build_filenamev( elements );
-	char* result = strdup( tmp_res );
-	g_free( tmp_res ); // tmp_res have to be freed with g_free ( 
-	                   //     see glib documentation
-	                   // )
+	// gchar* tmp_res = g_build_filenamev( elements );
+	// char* result = strdup( tmp_res );
+	// g_free( tmp_res ); // tmp_res have to be freed with g_free ( 
+	//                    //     see glib documentation
+	//                    // )
+
+	long len = strlen(*elements);
+	char *result = (char *) MLV_MALLOC( len + 1, char );
+	strncpy(result, *elements, len);
+	while (*(++elements)) {
+		if (! MLV_IS_DIR_SEPARATOR(result[len - 1])) {
+			result[len] = MLV_DIR_SEPARATOR_CHAR;
+			len++;
+		}
+		long elemLen = strlen(*elements);
+		result = (char *) MLV_REALLOC( result, len + elemLen, char );
+		strncpy(result + len, *elements, elemLen);
+	}
+	result[len] = '\0';
 	return result; 
 }
 
