@@ -8,7 +8,7 @@
 
 ## A repo for an alternative version of libMLV with precompiled binaries
 
-This repo is for reworked and precompiled versions of `libMLV`. It is based on the [`MLV` library](#Links-to-official-libMLV) If you find any bugs or have any questions related to the library, please report/ask them in the issues or discussions. **DO NOT** report them to the official library maintainers.
+This repo is for reworked and precompiled versions of `libMLV`. It is based on the [`MLV` library](#Links-to-official-libMLV). If you find any bugs or have any questions related to the library, please report/ask them in the issues or discussions. **DO NOT** report them to the official library maintainers.
 
 ## Description
 
@@ -71,7 +71,7 @@ Start a discussion and explain what feature you want implemented in the library 
 
 ## Links to official libMLV
 
-- [Official Website *(outdated)*](https://www-igm.univ-mlv.fr/~boussica/mlv/index.html) (The latest version is MLV3 but the site only references MLV2 and previous versions)
+- [Official Website *(outdated)*](https://www-igm.univ-mlv.fr/~boussica/mlv/index.html) (The latest version is `libMLV3` but the site only references `libMLV2` and previous versions)
 - [pkgs.org](https://pkgs.org/download/libmlv3)
 - [Debian](https://packages.debian.org/bullseye/arm64/libmlv3)
 - [Ubuntu](https://launchpad.net/ubuntu/+source/mlv/)
