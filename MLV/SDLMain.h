@@ -3,7 +3,7 @@
  *   Copyright (C)
  *     Initial Version: Darrell Walisser <dwaliss1@purdue.edu>
  *     Non-NIB-Code & other changes: Max Horn <max@quendi.de>
- *     Change "Feel free to customize this file to suit your needs" to a 
+ *     Change "Feel free to customize this file to suit your needs" to a
  *     GPL licence for the MLV Library : Adrien Boussicault (2013)
  *
  *   This file is part of the MLV Library.
@@ -20,7 +20,7 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this Library.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #ifndef _SDLMain_h_
 #define _SDLMain_h_

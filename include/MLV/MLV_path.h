@@ -18,7 +18,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_path.h
  *
  * \author Adrien Boussicault
@@ -47,7 +47,7 @@ extern "C" {
  * \param path Le chemin à analyser.
  * \return Une chaîne de caractères.
  */
-char* MLV_get_base_name( const char* path );
+char *MLV_get_base_name(const char *path);
 
 /** \~french
  *
@@ -59,7 +59,7 @@ char* MLV_get_base_name( const char* path );
  * \param path Le chemin à analyser.
  * \return Une chaîne de caractères.
  */
-char* MLV_get_directory_name( const char* path );
+char *MLV_get_directory_name(const char *path);
 
 /** \~french
  * \brief Teste si un chemin est absolu.
@@ -67,7 +67,7 @@ char* MLV_get_directory_name( const char* path );
  * \param path Le chemin
  * \return Renvoie 1 si le chemin est absolue, 0 sinon.
  */
-int MLV_path_is_absolute( const char* path );
+int MLV_path_is_absolute(const char *path);
 
 /** \~french
  * \brief Teste si un chemin est relatif.
@@ -75,7 +75,7 @@ int MLV_path_is_absolute( const char* path );
  * \param path Le chemin
  * \return Renoie 1 si le chemin est relatif, 0 sinon.
  */
-int MLV_path_is_relative( const char* path );
+int MLV_path_is_relative(const char *path);
 
 /** \~french
  *
@@ -86,7 +86,7 @@ int MLV_path_is_relative( const char* path );
  * \return Renvoie 1 si le chemin est associé à un dossier ou à un fichier
  *         existant, 0 sinon.
  */
-int MLV_path_exists( const char* path );
+int MLV_path_exists(const char *path);
 
 /** \~french
  * \brief Vérifie si un chemin est associé à un répertoire.
@@ -94,7 +94,7 @@ int MLV_path_exists( const char* path );
  * \param path Le chemin
  * \return Renvoie 1 si le chemin est associé à un dossier, 0 sinon.
  */
-int MLV_path_is_a_directory( const char* path );
+int MLV_path_is_a_directory(const char *path);
 
 /** \~french
  * \brief Vérifie si un chemin est associé à un fichier.
@@ -102,14 +102,14 @@ int MLV_path_is_a_directory( const char* path );
  * \param path Le chemin
  * \return Renvoie 1 si le chemin est associé à un fichier, 0 sinon.
  */
-int MLV_path_is_a_file( const char* path );
+int MLV_path_is_a_file(const char *path);
 
 /** \~french
- * \brief Construit en concaténant différents textes, une chaîne de caractères 
- *        représentant un chemin dont les séparateurs corespondent aux 
+ * \brief Construit en concaténant différents textes, une chaîne de caractères
+ *        représentant un chemin dont les séparateurs corespondent aux
  *        spécifications de la plateforme sur laquel s'exécute le programme.
  *
- * \bug Cette fonction ne fait que concaténer les differentes chaînes en 
+ * \bug Cette fonction ne fait que concaténer les differentes chaînes en
  *      mettant entre chaque chaîne un séparateur de répertoire compatible
  *      avec le système d'exploitation. Par contre, ce qui constitue le bug, il
  *      ne convertit pas chaque chaîne dans un format compatible avec celui du
@@ -121,7 +121,7 @@ int MLV_path_is_a_file( const char* path );
  * \param ... Les autres éléments à concaténer.
  * \return Le chemin vérifiant les normes de la plateforme hôte.
  */
-char* MLV_build_path( const char* first_element, ... );
+char *MLV_build_path(const char *first_element, ...);
 
 /** \~french
  * \brief Même chose que MLV_build_path
@@ -129,10 +129,10 @@ char* MLV_build_path( const char* first_element, ... );
  * La chaîne de caractères doit être désallouée après utilisation.
  *
  * \param elements Les éléments à concaténer ensemble.
- * \return Le chemin vérifiant les normes de la plateforme qui va exécuter 
+ * \return Le chemin vérifiant les normes de la plateforme qui va exécuter
  *         le programme.
  */
-char* MLV_build_path_v( char** elements );
+char *MLV_build_path_v(char **elements);
 
 /** \~french
  * \brief Détermine le répertoire courant.
@@ -141,7 +141,7 @@ char* MLV_build_path_v( char** elements );
  *
  * \return Le chemin du répertoire courant.
  */
-char * MLV_get_current_directory( );
+char *MLV_get_current_directory();
 
 /** \~french
  * \brief Détermine le répertoire temporaire.
@@ -154,7 +154,7 @@ char * MLV_get_current_directory( );
  *
  * \return Le chemin du répertoire temporaire.
  */
-const char * MLV_get_temporary_directory( );
+const char *MLV_get_temporary_directory();
 
 /** \~french
  * \brief Détermine le répertoire personnel de l'utilisateur courant.
@@ -163,7 +163,7 @@ const char * MLV_get_temporary_directory( );
  *
  * \return Le chemin du répertoire personnel.
  */
-const char * MLV_get_home_directory( );
+const char *MLV_get_home_directory();
 
 #ifdef __cplusplus
 }

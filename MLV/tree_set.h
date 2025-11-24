@@ -24,34 +24,27 @@
 typedef struct _MLV_TreeSet MLV_TreeSet;
 
 struct _MLV_TreeSet {
-	MLV_TreeSet* father;
-	MLV_TreeSet* left_son;
-	MLV_TreeSet* right_son;
-	void* data;
-	void (* data_destroying_function )( void* data );
-	int (* sorting_function )( void* data1, void*data2 );
-	int height;
+    MLV_TreeSet *father;
+    MLV_TreeSet *left_son;
+    MLV_TreeSet *right_son;
+    void *data;
+    void (*data_destroying_function)(void *data);
+    int (*sorting_function)(void *data1, void *data2);
+    int height;
 };
 
-MLV_TreeSet* MLV_add_data_in_tree_set(
-	void* data,
-	void (* data_destroying_function)( void* data ),
-	int (* sorting_function)( void* data1, void* data2 ),
-	MLV_TreeSet * tree_set
-);
+MLV_TreeSet *MLV_add_data_in_tree_set(void *data, void (*data_destroying_function)(void *data),
+    int (*sorting_function)(void *data1, void *data2), MLV_TreeSet *tree_set);
 
-void MLV_init_tree_set( MLV_TreeSet* tree_set );
+void MLV_init_tree_set(MLV_TreeSet *tree_set);
 
-void MLV_clear_tree_set( MLV_TreeSet* tree_set );
+void MLV_clear_tree_set(MLV_TreeSet *tree_set);
 
-void* MLV_get_data_from_tree_set( void* data, MLV_TreeSet* tree_set );
+void *MLV_get_data_from_tree_set(void *data, MLV_TreeSet *tree_set);
 
-MLV_TreeSet* MLV_find_tree_set( void* data, MLV_TreeSet* tree_set );
+MLV_TreeSet *MLV_find_tree_set(void *data, MLV_TreeSet *tree_set);
 
-void MLV_foreach_data_tree_set(
-	void (* data_function )( void* data, void* data_user ),
-	void* data_user,
-	MLV_TreeSet* tree_set
-);
+void MLV_foreach_data_tree_set(void (*data_function)(void *data, void *data_user), void *data_user,
+    MLV_TreeSet *tree_set);
 
 #endif

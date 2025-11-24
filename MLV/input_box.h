@@ -22,9 +22,9 @@
 #define __MLV__INPUT_BOX_H__
 
 #ifndef MEMORY_DEBUG
-#include <SDL/SDL.h>
+    #include <SDL/SDL.h>
 #else
-#include "memory_debug.h"
+    #include "memory_debug.h"
 #endif
 
 void init_input_box_mechanism();

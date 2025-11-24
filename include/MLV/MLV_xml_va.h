@@ -18,7 +18,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_xml_va.h
  *
  * \author Adrien Boussicault
@@ -27,11 +27,11 @@
  * \brief Ce fichier définit les même prototypes des fonctions que MLV_xml.h
  *        mais en utilisant en argument sulémentaire une liste de type va_list.
  *
- * Les fichiers xml sont utilisés pour stocker les données nécessaires au 
+ * Les fichiers xml sont utilisés pour stocker les données nécessaires au
  * fonctionnement d'un programme. Ils permettent de modifier facilement
- * l'exécution du programme sans avoir à le modifier. En effet, ils sont 
+ * l'exécution du programme sans avoir à le modifier. En effet, ils sont
  * lisibles par l'homme et par la machine en même temps.
- * Ils constituent donc une interface pratique entre l'ordinateur et 
+ * Ils constituent donc une interface pratique entre l'ordinateur et
  * l'utilisateur.
  *
  */
@@ -45,29 +45,27 @@
 extern "C" {
 #endif
 
-/** \~french 
+/** \~french
  * \brief Permet d'accéder à l'interieur d'un champs donné du fichier xml.
  *
- * Attention: Il ne faut pas oublier de libérer la mémoire associée au 
+ * Attention: Il ne faut pas oublier de libérer la mémoire associée au
  *            champs result.
  *
  * \param xml_data Les données xml.
- * \param result Un pointeur vers une addresse vide qui contiendra l'addresse de la chaîne de caractères correspondant au résultat de la fonction.
+ * \param result Un pointeur vers une addresse vide qui contiendra l'addresse de la chaîne de caractères correspondant
+ * au résultat de la fonction.
  * \param xpath Le chemin d'accès.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
-MLV_Xml_error MLV_get_string_value_from_xml_va(
-	const MLV_Xml* xml_data, char** result, const char* xpath, va_list pile
-);
+MLV_Xml_error MLV_get_string_value_from_xml_va(const MLV_Xml *xml_data, char **result, const char *xpath, va_list pile);
 
-
-/** \~french 
+/** \~french
  * \brief Permet de récupérer l'entier d'un champs donné du fichier xml.
  *
- * Tout comme la fonction MLV_get_string_value_from_xml(), cette fonction peut 
+ * Tout comme la fonction MLV_get_string_value_from_xml(), cette fonction peut
  * contenir un nombre variable de paramètres.
- * Pour plus d'informations, veuillez lire la documentation de la fonction 
+ * Pour plus d'informations, veuillez lire la documentation de la fonction
  * MLV_get_string_value_from_xml().
  *
  * \param xml_data Les données xml.
@@ -76,48 +74,44 @@ MLV_Xml_error MLV_get_string_value_from_xml_va(
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
-MLV_Xml_error MLV_get_integer_value_from_xml_va(
-	const MLV_Xml* xml_data, int* result, const char* xpath, va_list pile
-);
+MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *result, const char *xpath, va_list pile);
 
-/** \~french 
+/** \~french
  * \brief Permet de récupérer le reel d'un champs donné du fichier xml.
  *
- * Tout comme la fonction MLV_get_string_value_from_xml(), cette fonction peut 
+ * Tout comme la fonction MLV_get_string_value_from_xml(), cette fonction peut
  * contenir un nombre variable de paramètres.
- * Pour plus d'informations, veuillez lire la documentation de la fonction 
+ * Pour plus d'informations, veuillez lire la documentation de la fonction
  * MLV_get_string_value_from_xml().
  *
  * \param xml_data Les données xml.
  * \param result Un pointeur vers un réel dans lequel le résultat de la fonction sera enregistré.
  * \param xpath Le chemin d'accès.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
- * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée du document xml.
+ * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée
+ * du document xml.
  */
-MLV_Xml_error MLV_get_double_value_from_xml_va(
-	const MLV_Xml* xml_data, double* result, const char* xpath, va_list pile
-);
+MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *result, const char *xpath,
+    va_list pile);
 
-/** \~french 
+/** \~french
  * \brief Permet de récupérer le réel d'un champs donné du fichier xml.
  *
- * Tout comme la fonction MLV_get_string_value_from_xml(), cette fonction peut 
+ * Tout comme la fonction MLV_get_string_value_from_xml(), cette fonction peut
  * contenir un nombre variable de paramètres.
- * Pour plus d'informations, veuillez lire la documentation de la fonction 
+ * Pour plus d'informations, veuillez lire la documentation de la fonction
  * MLV_get_string_value_from_xml().
  *
  * \param xml_data Les données xml.
  * \param result Un pointeur vers un réel dans lequel le résultat de la fonction sera enregistré.
  * \param xpath Le chemin d'accès.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
- * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée du document xml.
+ * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée
+ * du document xml.
  */
-MLV_Xml_error MLV_get_float_value_from_xml_va(
-	const MLV_Xml* xml_data, float* result, const char* xpath, va_list pile
-);
+MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *result, const char *xpath, va_list pile);
 
-
-/** \~french 
+/** \~french
  * \brief Compte le nombre d'objets présents dans le fichier xml verifiant
  *        un certain nombre de critères passés en paramètre de la fonction.
  *
@@ -125,15 +119,13 @@ MLV_Xml_error MLV_get_float_value_from_xml_va(
  * \param xpath Le chemin d'accès.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  *
- * \return Cette fonction renvoie le nombre d'objet ayant pour chemin d'accès 
- *         "xpath". 
+ * \return Cette fonction renvoie le nombre d'objet ayant pour chemin d'accès
+ *         "xpath".
  */
-int MLV_get_number_of_objects_from_xml_va(
-	const MLV_Xml* xml_data, const char* xpath, va_list pile
-);
+int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *xpath, va_list pile);
 
-/** \~french 
- * \brief Permet de récupérer un noeud interne de l'arbre représentant le 
+/** \~french
+ * \brief Permet de récupérer un noeud interne de l'arbre représentant le
  *        fichier XML.
  *
  * Cette fonction n'est pas encore implémentée.
@@ -144,9 +136,7 @@ int MLV_get_number_of_objects_from_xml_va(
  *
  * \return Un noeud interne de l'arbre XML.
  */
-MLV_Xml* MLV_get_xml_object_of_va(
-	const MLV_Xml* xml_data, const char* xpath, va_list pile
-);
+MLV_Xml *MLV_get_xml_object_of_va(const MLV_Xml *xml_data, const char *xpath, va_list pile);
 
 #ifdef __cplusplus
 }

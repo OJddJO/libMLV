@@ -19,7 +19,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_random.h
  *
  * \author Adrien Boussicault
@@ -27,7 +27,7 @@
  *
  * \brief Ce fichier définit tous les prototypes des fonctions concernant
  *        la manipulation des nombres aléatoires.
- * 
+ *
  */
 
 #ifndef __MLV__MLV_RANDOM_H__
@@ -43,28 +43,28 @@ extern "C" {
  *
  * \brief Initialise la graine du générateur de nombre interne.
  *
- * Par défaut, la graine de générateur de nombre est automatiquement 
+ * Par défaut, la graine de générateur de nombre est automatiquement
  * initialisé, à des valeurs différentes à chaque execution du programme.
  *
  * Utilisez cette fonction si vous voulez que le générateur de nombre
- * aléatoire utilise une graine particulière (pour faire des tests 
+ * aléatoire utilise une graine particulière (pour faire des tests
  * reproductibles d'une execution sur l'autre).
  * Dans le cas contraire, vous n'avez pas besoin d'utiliser cette fonction.
  *
  * \param seed La graine (entier sur 32 bits).
  *
  */
-void MLV_set_seed( int32_t seed );
+void MLV_set_seed(int32_t seed);
 
-/** \~french 
+/** \~french
  * \brief Renvoie 0 ou 1 aléatoirement.
  *
  * \return 0 ou 1 aléatoirement.
  */
 int MLV_get_random_boolean();
 
-/** \~french 
- * \brief Renvoie un entier aléatoire choisi dans un intervalle donné en 
+/** \~french
+ * \brief Renvoie un entier aléatoire choisi dans un intervalle donné en
  *        paramètre.
  *
  * \param begin Borne inférieur de l'intervalle ( inclusif )
@@ -73,8 +73,8 @@ int MLV_get_random_boolean();
  */
 int MLV_get_random_integer(int begin, int end);
 
-/** \~french 
- * \brief Renvoie un réel aléatoire choisi dans un intervalle donné en 
+/** \~french
+ * \brief Renvoie un réel aléatoire choisi dans un intervalle donné en
  *        paramètre.
  *
  * \param begin Borne inférieur de l'intervalle ( inclusif )

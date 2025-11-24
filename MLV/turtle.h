@@ -18,12 +18,12 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file turtle.h
  *
  * \author Adrien Boussicault
  *
- * \brief Ce fichier définit les prototypes des fonctions permettant de 
+ * \brief Ce fichier définit les prototypes des fonctions permettant de
  *        manipuler une tortue.
  */
 

@@ -2,7 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010 Adrien Boussicault, Marc Zipstein
- *   Copyright (C) 2025 OJddJO (Remove glib dependencies)
+ *   Copyright (C) 2025 OJddJO
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -25,54 +25,51 @@
 #include "platform.h"
 
 #ifndef MEMORY_DEBUG
-#if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
-#elif defined( OS_APPLE )
-#   include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
-#else
-#	include <SDL/SDL.h>
-#	include <SDL/SDL_framerate.h>
-#endif
-
-
+    #if defined(OS_WINDOWS)
+        #include <SDL/SDL.h>
+        #include <SDL/SDL_framerate.h>
+    #elif defined(OS_APPLE)
+        #include <SDL/SDL.h>
+        #include <SDL/SDL_framerate.h>
+    #else
+        #include <SDL/SDL.h>
+        #include <SDL/SDL_framerate.h>
+    #endif
 
 #else
-#include "memory_management.h"
+    #include "memory_management.h"
 #endif
 
 #include "MLV_playlist.h"
 #include "MLV_text.h"
-
 #include "list.h"
 #include "turtle.h"
 
 typedef struct _DataMLV {
-	SDL_Surface *screen;
-	Uint32 width;
-	Uint32 height;
-	int full_screen_is_enable;
-	SDL_Rect rectangle;
-	SDL_Surface *save_screen;
-	SDL_sem* audio_semaphore;
-	SDL_AudioSpec audio_device_spec;
-	MLV_List* playing_streaming;
-	MLV_List* playlists;
-	MLV_List* active_playlists;
-	MLV_Font* defaultFont;
-	FPSmanager frame_rate_manager;
-	FPSmanager frame_rate_manager_for_MLV_wait_event;
-	MLV_Leonardo_turtle* leonardo; // The turtle mascot of MLV
-	MLV_Color ground_color;
+    SDL_Surface *screen;
+    Uint32 width;
+    Uint32 height;
+    int full_screen_is_enable;
+    SDL_Rect rectangle;
+    SDL_Surface *save_screen;
+    SDL_sem *audio_semaphore;
+    SDL_AudioSpec audio_device_spec;
+    MLV_List *playing_streaming;
+    MLV_List *playlists;
+    MLV_List *active_playlists;
+    MLV_Font *defaultFont;
+    FPSmanager frame_rate_manager;
+    FPSmanager frame_rate_manager_for_MLV_wait_event;
+    MLV_Leonardo_turtle *leonardo; // The turtle mascot of MLV
+    MLV_Color ground_color;
 
-	SDL_Surface* post_screen; // This screen is used when a post render is needed.
-	MLV_Image* post_production_image;
-	MLV_List* post_producters;
+    SDL_Surface *post_screen; // This screen is used when a post render is needed.
+    MLV_Image *post_production_image;
+    MLV_List *post_producters;
 } DataMLV;
 
 struct _MLV_Image {
-    SDL_Surface * surface;
+    SDL_Surface *surface;
 };
 
 #endif

@@ -21,14 +21,14 @@
 #ifndef __MLV__PLATFORM_H__
 #define __MLV__PLATFORM_H__
 
-#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
-#   define OS_WINDOWS
-#elif defined( __APPLE_CC__)
-#   define OS_APPLE
-#elif defined( __MLV_ANDROID__ )
-#	define OS_ANDROID
+#if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
+    #define OS_WINDOWS
+#elif defined(__APPLE_CC__)
+    #define OS_APPLE
+#elif defined(__MLV_ANDROID__)
+    #define OS_ANDROID
 #else
-#   define OS_LINUX
+    #define OS_LINUX
 #endif
 
 #endif

@@ -18,7 +18,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_information.h
  *
  * \author Adrien Boussicault
@@ -35,64 +35,22 @@
 extern "C" {
 #endif
 
-/** \~french 
+/** \~french
  * \brief Renvoie le nom de la bibliothèque.
  *
  * \return Le nom de la bibliothèque.
  */
-const char* MLV_get_package_name( );
+const char *MLV_get_package_name();
 
-/** \~french 
- * \brief Renvoie la version de la bibliothèque
- *
- * \return La version de la bibliothèque.
- */
-const char* MLV_get_version( );
-
-/** \~french 
- * \brief Renvoie la révision du dépot du logiciel de gestion de version de 
- *        mlv.
- *
- * \return La révision du dépot du logiciel de gestion de version de mlv.
- */
-const char* MLV_get_revision_of_revision_control_software( );
-
-
-/** \~french 
- * \brief Renvoie l'adresse du dépot de code source où se trouve la 
- *        bibliothèque.
- *
- * \return Le dépôt de la bibliothèque.
- */
-const char* MLV_get_repository( );
-
-/** \~french 
- * \brief Renvoie l'addresse mail à laquelle vous pouvez envoyer les bugs que 
- *        vous rencontrez.
- *
- * \return L'addresse mail.
- */
-const char* MLV_get_bug_report_address( );
-
-/** \~french 
+/** \~french
  * \brief Renvoie le nom de la licence de la bibliothèque.
  *
  * \return Le nom de la licence de la bibliothèque.
  */
-const char* MLV_get_licence( );
-
-/** \~french 
- * \brief Renvoie l'addresse internet où l'on peut trouver le code source de la
- *        bibliothèque.
- *
- * \return L'addresse internet où l'on peut trouver le code source de la
- *         bibliothèque.
- */
-const char* MLV_get_web_distribution( );
+const char *MLV_get_licence();
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

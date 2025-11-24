@@ -24,29 +24,26 @@
 #include "platform.h"
 
 #ifndef MEMORY_DEBUG
-#if defined( OS_WINDOWS )
-#	include <SDL/SDL_ttf.h>
-#elif defined( OS_APPLE )
-#	include <SDL_ttf/SDL_ttf.h>
+    #if defined(OS_WINDOWS)
+        #include <SDL/SDL_ttf.h>
+    #elif defined(OS_APPLE)
+        #include <SDL_ttf/SDL_ttf.h>
+    #else
+        #include <SDL/SDL_ttf.h>
+    #endif
 #else
-#	include <SDL/SDL_ttf.h>
-#endif
-#else
-#include "memory_debug.h"
+    #include "memory_debug.h"
 #endif
 
 struct _MLV_Font {
-	int size;
-	TTF_Font* font;
+    int size;
+    TTF_Font *font;
 };
 
 void init_font();
 
 void quit_font();
 
-void drawString(
-	SDL_Surface* textBox, int x, int y, 
-	const char* message, MLV_Color color, TTF_Font* font 
-);
+void drawString(SDL_Surface *textBox, int x, int y, const char *message, MLV_Color color, TTF_Font *font);
 
 #endif

@@ -21,36 +21,36 @@
 #include "MLV_random.h"
 
 #ifndef MEMORY_DEBUG
-#include <SDL/SDL.h>
+    #include <SDL/SDL.h>
 #else
-#include "memory_debug.h"
+    #include "memory_debug.h"
 #endif
+
+#include "memory_management.h"
+#include "warning_error.h"
 
 #include <stdlib.h>
 
-#include "warning_error.h"
-#include "memory_management.h" 
-
-void MLV_set_seed( int32_t seed ){
-	srand((uint32_t)seed);
+void MLV_set_seed(int32_t seed) {
+    srand((uint32_t)seed);
 }
 
-int MLV_get_random_boolean(){
-	return rand()%2;
+int MLV_get_random_boolean() {
+    return rand() % 2;
 }
 
 inline int rand_int() {
-	#if RAND_MAX == INT32_MAX
-		return rand();
-	#else // minimum value of RAND_MAX is 32768=0x7FFF
-		return (uint32_t)((rand() & 1) << 30 | (rand() & 0x7FFF) << 15 | (rand() & 0x7FFF));
-	#endif
+#if RAND_MAX == INT32_MAX
+    return rand();
+#else // minimum value of RAND_MAX is 32768=0x7FFF
+    return (uint32_t)((rand() & 1) << 30 | (rand() & 0x7FFF) << 15 | (rand() & 0x7FFF));
+#endif
 }
 
-int MLV_get_random_integer(int begin, int end){
-	return begin + rand_int() % (end - begin + 1);
+int MLV_get_random_integer(int begin, int end) {
+    return begin + rand_int() % (end - begin + 1);
 }
 
-double MLV_get_random_double(double begin, double end){
-	return begin + ((double)rand_int()/(double)(INT32_MAX)) * (end - begin);
+double MLV_get_random_double(double begin, double end) {
+    return begin + ((double)rand_int() / (double)(INT32_MAX)) * (end - begin);
 }

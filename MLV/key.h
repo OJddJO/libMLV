@@ -23,20 +23,16 @@
 
 typedef struct _MLV_Key MLV_Key;
 
-MLV_Key* MLV_create_key(
-	void* value,
-	void (* value_destroying_function )( void* value ),
-	int (* compare_values )( void* value1, void* value2 )
-);
+MLV_Key *MLV_create_key(void *value, void (*value_destroying_function)(void *value),
+    int (*compare_values)(void *value1, void *value2));
 
-void MLV_free_key( MLV_Key* key );
+void MLV_free_key(MLV_Key *key);
 
-int MLV_compare_keys( MLV_Key* key1, MLV_Key* key2 );
+int MLV_compare_keys(MLV_Key *key1, MLV_Key *key2);
 
-MLV_Key* MLV_string_to_key( const char* text );
-MLV_Key* MLV_integer_to_key( int integer );
+MLV_Key *MLV_string_to_key(const char *text);
+MLV_Key *MLV_integer_to_key(int integer);
 
-void* MLV_get_value_from_key( MLV_Key* key );
+void *MLV_get_value_from_key(MLV_Key *key);
 
 #endif
-

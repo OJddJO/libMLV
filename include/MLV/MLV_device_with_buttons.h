@@ -18,14 +18,14 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_device_with_buttons.h
  *
  * \author Adrien Boussicault
  * \author Marc Zipstein
  *
- * \brief Ce fichier définit des énumérations et des prototypes de fonctions pour 
- *        manipuler des boutons de différents matériels (bouttons de souris, 
+ * \brief Ce fichier définit des énumérations et des prototypes de fonctions pour
+ *        manipuler des boutons de différents matériels (bouttons de souris,
  *        boutons de claviers, etc ...)
  *
  */
@@ -37,14 +37,13 @@
 extern "C" {
 #endif
 
-/** \~french 
+/** \~french
  * \brief Énumère les différents états possibles d'un bouton.
  */
 typedef enum {
-	MLV_PRESSED, /**< \~french Le bouton est en position appuyée */
-	MLV_RELEASED /**< \~french Le bouton est en position relachée */
+    MLV_PRESSED, /**< \~french Le bouton est en position appuyée */
+    MLV_RELEASED /**< \~french Le bouton est en position relachée */
 } MLV_Button_state;
-
 
 #ifdef __cplusplus
 }

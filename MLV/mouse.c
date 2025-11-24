@@ -18,133 +18,91 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "MLV_mouse.h"
 #include "MLV_event.h"
+#include "MLV_mouse.h"
 #include "MLV_time.h"
 
 #ifndef MEMORY_DEBUG
-#include <SDL/SDL.h>
+    #include <SDL/SDL.h>
 #else
-#include "memory_debug.h"
+    #include "memory_debug.h"
 #endif
 
+#include "memory_management.h"
 #include "warning_error.h"
 
-#include "memory_management.h"
+void MLV_wait_mouse(int *x, int *y) {
+    MLV_Button_state state;
+    MLV_Mouse_button mouse_button;
 
-void MLV_wait_mouse(int *x, int *y){
-	MLV_Button_state state;
-	MLV_Mouse_button mouse_button;
+    // We remove all existing event from the queue
+    MLV_flush_event_queue();
 
-	// We remove all existing event from the queue
-	MLV_flush_event_queue();
-
-	//We wait for a new mouse event
-	while(
-		(
-			MLV_wait_event(
-					NULL, NULL, NULL,
-					NULL, NULL,
-					x, y, &mouse_button,
-					&state
-			) != MLV_MOUSE_BUTTON
-		) ||
-		( mouse_button != MLV_BUTTON_LEFT ) ||
-		( state != MLV_PRESSED )
-	);
-};
-
-
-MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
-	MLV_Event resultat = MLV_NONE;
-	MLV_Button_state state;
-	MLV_Mouse_button mouse_button;
-
-	// We remove all existing event from the queue
-	MLV_flush_event_queue();
-
-	int time = MLV_get_time();
-
-	//We wait for a new mouse event
-	int tmp_x, tmp_y;
-	while(
-		(	
-			(
-				(
-					resultat = MLV_wait_event_or_milliseconds(
-						NULL, NULL, NULL,
-						NULL, NULL,
-						&tmp_x, &tmp_y, &mouse_button,
-						&state,
-						milliseconds - ( MLV_get_time() - time )
-					)
-				) != MLV_MOUSE_BUTTON
-			) ||
-			( mouse_button != MLV_BUTTON_LEFT ) ||
-			( state != MLV_PRESSED )
-		) && (
-			(MLV_get_time() - time) < milliseconds
-		)
-	);
-	if( 
-		resultat == MLV_MOUSE_BUTTON &&
-		mouse_button == MLV_BUTTON_LEFT &&
-		state == MLV_PRESSED
-	){
-		if( x ) *x = tmp_x;
-		if( y ) *y = tmp_y;
-	}else{
-		resultat = MLV_NONE;
-	}
-	return resultat;
+    // We wait for a new mouse event
+    while ((MLV_wait_event(NULL, NULL, NULL, NULL, NULL, x, y, &mouse_button, &state) != MLV_MOUSE_BUTTON) ||
+           (mouse_button != MLV_BUTTON_LEFT) || (state != MLV_PRESSED))
+        ;
 }
 
+MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds) {
+    MLV_Event resultat = MLV_NONE;
+    MLV_Button_state state;
+    MLV_Mouse_button mouse_button;
 
-MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
-	return MLV_wait_mouse_or_milliseconds(
-		x, y, seconds*1000
-	);
+    // We remove all existing event from the queue
+    MLV_flush_event_queue();
+
+    int time = MLV_get_time();
+
+    // We wait for a new mouse event
+    int tmp_x, tmp_y;
+    while ((((resultat = MLV_wait_event_or_milliseconds(NULL, NULL, NULL, NULL, NULL, &tmp_x, &tmp_y, &mouse_button,
+                  &state, milliseconds - (MLV_get_time() - time))) != MLV_MOUSE_BUTTON) ||
+               (mouse_button != MLV_BUTTON_LEFT) || (state != MLV_PRESSED)) &&
+           ((MLV_get_time() - time) < milliseconds))
+        ;
+    if (resultat == MLV_MOUSE_BUTTON && mouse_button == MLV_BUTTON_LEFT && state == MLV_PRESSED) {
+        if (x) *x = tmp_x;
+        if (y) *y = tmp_y;
+    } else {
+        resultat = MLV_NONE;
+    }
+    return resultat;
 }
 
-const char* MLV_convert_mouse_button_to_string( MLV_Mouse_button button_code ){
-	switch( button_code ){
-		case MLV_BUTTON_LEFT:
-			return "MLV_BUTTON_LEFT";
-		case MLV_BUTTON_MIDDLE:
-			return "MLV_BUTTON_MIDDLE";
-		case MLV_BUTTON_RIGHT:
-			return "MLV_BUTTON_RIGHT";
-		default:
-			ERROR("Button code unexpected");
-	}
-	return NULL;
+MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds) {
+    return MLV_wait_mouse_or_milliseconds(x, y, seconds * 1000);
 }
 
-MLV_Mouse_button MLV_convert_string_to_mouse_button( const char* button_string ){
-	if( strcmp( button_string, "MLV_BUTTON_LEFT" )==0 ){
-		return MLV_BUTTON_LEFT;
-	}
-	if( strcmp( button_string, "MLV_BUTTON_MIDDLE" )==0 ){
-		return MLV_BUTTON_MIDDLE;
-	}
-	if( strcmp( button_string, "MLV_BUTTON_RIGHT" )==0 ){
-		return MLV_BUTTON_RIGHT;
-	}
-	ERROR("Button name unexpected");
-	return -1;
+const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code) {
+    switch (button_code) {
+        case MLV_BUTTON_LEFT:
+            return "MLV_BUTTON_LEFT";
+        case MLV_BUTTON_MIDDLE:
+            return "MLV_BUTTON_MIDDLE";
+        case MLV_BUTTON_RIGHT:
+            return "MLV_BUTTON_RIGHT";
+        default:
+            ERROR("Button code unexpected");
+    }
+    return NULL;
 }
 
-void MLV_get_mouse_position( int* x, int* y ){
-	SDL_PumpEvents();
-	SDL_GetMouseState(x,y);
+MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string) {
+    if (strcmp(button_string, "MLV_BUTTON_LEFT") == 0) { return MLV_BUTTON_LEFT; }
+    if (strcmp(button_string, "MLV_BUTTON_MIDDLE") == 0) { return MLV_BUTTON_MIDDLE; }
+    if (strcmp(button_string, "MLV_BUTTON_RIGHT") == 0) { return MLV_BUTTON_RIGHT; }
+    ERROR("Button name unexpected");
+    return -1;
 }
 
-MLV_Button_state MLV_get_mouse_button_state( MLV_Mouse_button mouse_button ){
-	SDL_PumpEvents();
-	if( SDL_GetMouseState(NULL,NULL) & SDL_BUTTON( mouse_button ) ){
-		return MLV_PRESSED;
-	}
-	return MLV_RELEASED;
+void MLV_get_mouse_position(int *x, int *y) {
+    SDL_PumpEvents();
+    SDL_GetMouseState(x, y);
 }
 
-
+MLV_Button_state MLV_get_mouse_button_state(MLV_Mouse_button mouse_button) {
+    SDL_PumpEvents();
+    if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(mouse_button)) { return MLV_PRESSED; }
+    return MLV_RELEASED;
+}

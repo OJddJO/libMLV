@@ -19,32 +19,11 @@
  */
 
 #include "MLV_information.h"
-#include "config.h"
 
-const char* MLV_get_package_name( ){
-	return "libMLV";
+const char *MLV_get_package_name() {
+    return "libMLV";
 }
 
-const char* MLV_get_version( ){
-	return "";
-}
-
-const char* MLV_get_revision_of_revision_control_software( ){
-	return "";
-}
-
-const char* MLV_get_repository( ){
-	return "";
-}
-
-const char* MLV_get_bug_report_address( ){
-	return "";
-}
-
-const char* MLV_get_web_distribution( ){
-	return "";
-}
-
-const char* MLV_get_licence( ){
-	return "GPL V3";
+const char *MLV_get_licence() {
+    return "GPL V3";
 }

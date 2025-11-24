@@ -18,13 +18,13 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_mouse.h
  *
  * \author Adrien Boussicault
  * \author Marc Zipstein
- * 
- * \brief Ce fichier définit les prototypes des fonctions qui permettent 
+ *
+ * \brief Ce fichier définit les prototypes des fonctions qui permettent
  *        d'utiliser la souris.
  *
  */
@@ -33,9 +33,9 @@
 #define __MLV__MLV_MOUSE_H__
 
 #ifndef MEMORY_DEBUG
-#include <SDL/SDL.h>
+    #include <SDL/SDL.h>
 #else
-#include "memory_debug.h"
+    #include "memory_debug.h"
 #endif
 
 #include "MLV_device_with_buttons.h"
@@ -44,17 +44,17 @@
 extern "C" {
 #endif
 
-/** \~french 
+/** \~french
  * \brief Énumère les différents bouttons de la souris
  *
  */
-typedef enum{
-	MLV_BUTTON_LEFT = SDL_BUTTON_LEFT, /**< \~french  Bouton gauche de la souris */
-	MLV_BUTTON_MIDDLE = SDL_BUTTON_MIDDLE, /**< \~french  Bouton du milieu de la souris */
-	MLV_BUTTON_RIGHT = SDL_BUTTON_RIGHT /**< \~french  Bouton droit de la souris */
+typedef enum {
+    MLV_BUTTON_LEFT = SDL_BUTTON_LEFT,     /**< \~french  Bouton gauche de la souris */
+    MLV_BUTTON_MIDDLE = SDL_BUTTON_MIDDLE, /**< \~french  Bouton du milieu de la souris */
+    MLV_BUTTON_RIGHT = SDL_BUTTON_RIGHT    /**< \~french  Bouton droit de la souris */
 } MLV_Mouse_button;
 
-/** \~french 
+/** \~french
  *
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur clique sur le bouton
  *        gauche de la souris.
@@ -68,14 +68,14 @@ typedef enum{
 void MLV_wait_mouse(int *x, int *y);
 
 /** \~french
- * \brief Convertit le code associé à un boutton de la souris (MLV_Mouse_button) en 
+ * \brief Convertit le code associé à un boutton de la souris (MLV_Mouse_button) en
  *        chaîne de caratères.
  *
  * \param button_code Le code du bouton.
  * \return La chaîne de caratères correspondant au code du boutton de la
  *          souris passé en paramètre.
  */
-const char* MLV_convert_mouse_button_to_string( MLV_Mouse_button button_code );
+const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code);
 
 /** \~french
  * \brief Convertit une chaîne de caractères en un code bouton.
@@ -83,25 +83,25 @@ const char* MLV_convert_mouse_button_to_string( MLV_Mouse_button button_code );
  * \param button_string La chaîne de caractères à convertir.
  * \return Le code bouton associé à la chaîne de caractères.
  */
-MLV_Mouse_button MLV_convert_string_to_mouse_button( const char* button_string );
+MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string);
 
 /** \~french
  *
- * \brief Renvoie la position courante de la souris. 
+ * \brief Renvoie la position courante de la souris.
  *
  * \param x Coordonnée en X de la position de la souris dans la fenêtre.
  * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
  */
-void MLV_get_mouse_position( int* x, int* y );
+void MLV_get_mouse_position(int *x, int *y);
 
 /** \~french
  *
  * \brief Renvoie l'état (préssé ou relaché) d'un bouton de la souris.
  *
  * \param mouse_button Le code du bouton de la souris
- * \return L'état du bouton. 
+ * \return L'état du bouton.
  */
-MLV_Button_state MLV_get_mouse_button_state( MLV_Mouse_button mouse_button );
+MLV_Button_state MLV_get_mouse_button_state(MLV_Mouse_button mouse_button);
 
 #ifdef __cplusplus
 }

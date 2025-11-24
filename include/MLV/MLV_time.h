@@ -18,7 +18,7 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \~french 
+/** \~french
  * \file MLV_time.h
  *
  * \author Adrien Boussicault
@@ -26,7 +26,7 @@
  *
  * \brief Ce fichier définit tous les prototypes des fonctions concernant la
  *        gestion du temps.
- * 
+ *
  */
 
 #ifndef __MLV__MLV_TIME_H__
@@ -36,34 +36,34 @@
 extern "C" {
 #endif
 
-/** \~french 
- * \brief Le programme s'intérompt pendant un nombre de milli-secondes donné 
+/** \~french
+ * \brief Le programme s'intérompt pendant un nombre de milli-secondes donné
  *        en paramètre.
  *
  * \param milliseconds Le nombre de milli-secondes à attendre.
  */
 void MLV_wait_milliseconds(int milliseconds);
 
-/** \~french 
+/** \~french
  * \brief Le programme s'intérompt pendant un nombre de secondes.
  *
  * \param seconds Le nombre de secondes à attendre.
  */
 void MLV_wait_seconds(int seconds);
 
-/** \~french 
+/** \~french
  * \brief Renvoie le nombre de millisecondes écoulées depuis le début de
  *        l'initialisation de la bibliothèque MLV ( avec MLV_create_window ).
  * \return Le temps écoulé depuis l'initialisation de la bibliothèque MLV.
  */
 int MLV_get_time();
 
-/** \~french 
+/** \~french
  * \brief Donne la date du jour (seconde/heure/jour/mois/annee).
  *
  * L'année est donnée depuis l'an 0.
  *
- * Une valeur nulle peut être passée en paramètre de la fonction. Dans ce cas, 
+ * Une valeur nulle peut être passée en paramètre de la fonction. Dans ce cas,
  * le paramètre est ignoré par la fonction.
  *
  * \param seconds Le nombre de secondes écoulées depuis le dernier changement de
@@ -74,43 +74,39 @@ int MLV_get_time();
  * \param day Le quantième du mois.
  * \param month Le nombre de mois écoulés depuis le début de l'année.
  * \param year Le nombre d'années depuis l'an 0.
- * \param day_of_the_week Le jour de la semaine ( 0: Lundi, 1:Mardi, ..., 
+ * \param day_of_the_week Le jour de la semaine ( 0: Lundi, 1:Mardi, ...,
  *                        6:Dimanche).
- * \return Renvoie 1 si le décalage heure d'hivers et heure d'été a été 
- *         pris en compte, 0 si il ne l'a pas été et -1 si l'information 
+ * \return Renvoie 1 si le décalage heure d'hivers et heure d'été a été
+ *         pris en compte, 0 si il ne l'a pas été et -1 si l'information
  *         n'est pas disponible.
  */
-int MLV_get_date(
-	int* seconds, int* minutes, int* hours,
-	int* day, int* month, int* year,
-	int* day_of_the_week
-);
+int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, int *year, int *day_of_the_week);
 
-/** \~french 
+/** \~french
  * \brief Configure la fréquence de rafraichissement en Hz.
  *
- * La fréquence de rafraîchissement par defaut est de 100 Hz. Cela signifie 
- * que si l'on utilise MLV_delay_according_to_frame_rate() entre chaque  
- * rafraîchissement de la fenêtre graphique, on obtient un rafraichissement 
+ * La fréquence de rafraîchissement par defaut est de 100 Hz. Cela signifie
+ * que si l'on utilise MLV_delay_according_to_frame_rate() entre chaque
+ * rafraîchissement de la fenêtre graphique, on obtient un rafraichissement
  * de 100 images par secondes.
  *
  * \param rate Fréquence de rafraîchissement.
  */
-void MLV_change_frame_rate( int rate );
+void MLV_change_frame_rate(int rate);
 
-/** \~french 
+/** \~french
  * \brief Donne la fréquence de rafraîchissement courante.
  *
  * \return La fréquence de rafraîchissement courante.
  */
-int MLV_get_frame_rate( );
+int MLV_get_frame_rate();
 
-/** \~french 
- * \brief Suspend l'exécution du programme de façon à ce que le temps écoulé 
- *        depuis le drenier appel à cette fonction, soit égale à la période de 
+/** \~french
+ * \brief Suspend l'exécution du programme de façon à ce que le temps écoulé
+ *        depuis le drenier appel à cette fonction, soit égale à la période de
  *        la fréquence de rafraîchissement configuré par MLV_change_frame_rate.
  */
-void MLV_delay_according_to_frame_rate( );
+void MLV_delay_according_to_frame_rate();
 
 #ifdef __cplusplus
 }

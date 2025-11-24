@@ -2,7 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010 Adrien Boussicault, Marc Zipstein
- *   Copyright (C) 2025 OJddJO (Add memory debug realloc)
+ *   Copyright (C) 2025 OJddJO
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -25,17 +25,17 @@
 #include <stdlib.h>
 
 #ifndef MEMORY_DEBUG
-	#define MLV_MALLOC( size, type ) (type *) malloc( (size) * sizeof( type ) ) 
-	#define MLV_CALLOC( nmemb, size, type ) (type *) calloc( nmemb, (size) * sizeof( type ) ) 
-	#define MLV_REALLOC( ptr, size, type ) realloc(ptr, size * sizeof(type))
-	#define MLV_FREE( ptr, type ) free( (ptr) ) 
+    #define MLV_MALLOC(size, type)        (type *)malloc((size) * sizeof(type))
+    #define MLV_CALLOC(nmemb, size, type) (type *)calloc(nmemb, (size) * sizeof(type))
+    #define MLV_REALLOC(ptr, size, type)  realloc(ptr, size * sizeof(type))
+    #define MLV_FREE(ptr, type)           free((ptr))
 #else
-	#include "memory_debug.h"
+    #include "memory_debug.h"
 
-	#define MLV_MALLOC( size, type ) (type *) memory_debug_malloc( (size) * sizeof( type ), __LINE__, __FILE__ ) 
-	#define MLV_CALLOC( size, type ) (type *) memory_debug_calloc( (size) * sizeof( type ), __LINE__ , __FILE__ ) 
-	#define MLV_REALLOC( ptr, size, type ) (type *) memory_debug_realloc( ptr, (size) * sizeof(type), __LINE__, __FILE__ )
-	#define MLV_FREE( ptr, type ) memory_debug_free( (ptr), __LINE__, __FILE__ ) 
+    #define MLV_MALLOC(size, type)       (type *)memory_debug_malloc((size) * sizeof(type), __LINE__, __FILE__)
+    #define MLV_CALLOC(size, type)       (type *)memory_debug_calloc((size) * sizeof(type), __LINE__, __FILE__)
+    #define MLV_REALLOC(ptr, size, type) (type *)memory_debug_realloc(ptr, (size) * sizeof(type), __LINE__, __FILE__)
+    #define MLV_FREE(ptr, type)          memory_debug_free((ptr), __LINE__, __FILE__)
 #endif
 
 #endif

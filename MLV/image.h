@@ -23,33 +23,31 @@
 
 #include "platform.h"
 
-#if defined( __MLV_ANDROID__ )
-#	define MLV_16_BPP 16
+#if defined(__MLV_ANDROID__)
+    #define MLV_16_BPP 16
 #else
-#	define MLV_32_BPP 32
+    #define MLV_32_BPP 32
 #endif
 
-#if defined( MLV_32_BPP )
-#	define MLV_BPP 32
-#elif defined( MLV_16_BPP )
-#	define MLV_BPP 16
+#if defined(MLV_32_BPP)
+    #define MLV_BPP 32
+#elif defined(MLV_16_BPP)
+    #define MLV_BPP 16
 #endif
 
 #ifndef MEMORY_DEBUG
-#if defined( OS_WINDOWS )
-#	include <SDL/SDL.h>
-#elif defined( OS_APPLE )
-#	include <SDL/SDL.h>
+    #if defined(OS_WINDOWS)
+        #include <SDL/SDL.h>
+    #elif defined(OS_APPLE)
+        #include <SDL/SDL.h>
+    #else
+        #include <SDL/SDL.h>
+    #endif
 #else
-#	include <SDL/SDL.h>
-#endif
-#else
-#include "memory_debug.h"
+    #include "memory_debug.h"
 #endif
 
-SDL_Surface* create_surface( int width, int height );
-void get_pixel_on_image_unsafe( SDL_Surface* surface, int x, int y,
-	int* red, int* green, int* blue, int* alpha
-);
+SDL_Surface *create_surface(int width, int height);
+void get_pixel_on_image_unsafe(SDL_Surface *surface, int x, int y, int *red, int *green, int *blue, int *alpha);
 
 #endif

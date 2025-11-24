@@ -21,7 +21,6 @@
 #ifndef __MLV__MATHEMATICS_H__
 #define __MLV__MATHEMATICS_H__
 
-int max( int a, int b );
+int max(int a, int b);
 
 #endif
-
