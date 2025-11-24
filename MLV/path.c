@@ -25,8 +25,17 @@
 #include "memory_management.h"
 #include "data_structure.h"
 
-// #include <glib.h>
 #include <stdarg.h>
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <dirent.h>
+#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+	#include <fileapi.h>
+#else
+	#include <sys/stat.h>
+	#include <unistd.h>
+#endif
 
 #if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
     #define MLV_IS_DIR_SEPARATOR(c) ((c) == '/' || (c) == '\\')
@@ -113,9 +122,12 @@ char* MLV_build_path_v( char** elements ){
 	//                    //     see glib documentation
 	//                    // )
 
+	if (!*elements) return NULL;
+
 	long len = strlen(*elements);
 	char *result = (char *) MLV_MALLOC( len + 1, char );
 	strncpy(result, *elements, len);
+
 	while (*(++elements)) {
 		if (! MLV_IS_DIR_SEPARATOR(result[len - 1])) {
 			result[len] = MLV_DIR_SEPARATOR_CHAR;
@@ -125,6 +137,7 @@ char* MLV_build_path_v( char** elements ){
 		result = (char *) MLV_REALLOC( result, len + elemLen, char );
 		strncpy(result + len, *elements, elemLen);
 	}
+
 	result[len] = '\0';
 	return result; 
 }
@@ -174,26 +187,55 @@ char* MLV_build_path( const char* first_element, ...){
 }
 
 int MLV_path_is_a_directory( const char* path ){
-	return g_file_test( path, G_FILE_TEST_IS_DIR );
+	if (!path) return 0;
+	DIR *dir = opendir(path);
+	if (dir) closedir(dir);
+	return dir != NULL;
 }
 
 int MLV_path_is_a_file( const char* path ){
-	return g_file_test( path, G_FILE_TEST_IS_REGULAR );
+	if (!path) return 0;
+	DIR *dir = opendir(path);
+	if (dir) {
+		closedir(dir);
+		return 0;
+	}
+	FILE *file = fopen(path, "r");
+	if (file) fclose(file);
+	return file != NULL;
 }
 
 int MLV_path_exists( const char* path ){
-	return g_file_test( path, G_FILE_TEST_EXISTS );
+	if (!path) return 0;
+	FILE *file = fopen(path, "r");
+	if (file) fclose(file);
+	return file != NULL;
 }
 
 char * MLV_get_current_directory( ){
-	return g_get_current_dir();
+	#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+		#error NOT IMPLEMENTED YET
+	#else
+		return getcwd(NULL, 0);
+	#endif
 }
 
+static char *tmp_path = NULL;
 const char * MLV_get_temporary_directory( ){
-	return g_get_tmp_dir();
+	#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+		#error NOT IMPLEMENTED YET
+	#else
+		return strdup("/tmp");
+	#endif
 }
 
 const char * MLV_get_home_directory( ){
-	return g_get_home_dir();
+	#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+		#error NOT IMPLEMENTED YET
+	#else
+		char *path = getenv("HOME");
+		if (!path) return NULL;
+		return strdup(path);
+	#endif
 }
 
