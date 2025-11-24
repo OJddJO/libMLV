@@ -26,9 +26,8 @@
 #include "data_structure.h"
 
 #include <stdarg.h>
+#include <string.h>
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <dirent.h>
 #if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
 	#include <fileapi.h>
@@ -125,8 +124,8 @@ char* MLV_build_path_v( char** elements ){
 	if (!*elements) return NULL;
 
 	long len = strlen(*elements);
-	char *result = (char *) MLV_MALLOC( len + 1, char );
-	strncpy(result, *elements, len);
+	char *result = (char *) MLV_MALLOC( len + 2, char );
+	memcpy(result, *elements, len);
 
 	while (*(++elements)) {
 		if (! MLV_IS_DIR_SEPARATOR(result[len - 1])) {
@@ -134,11 +133,15 @@ char* MLV_build_path_v( char** elements ){
 			len++;
 		}
 		long elemLen = strlen(*elements);
-		result = (char *) MLV_REALLOC( result, len + elemLen, char );
-		strncpy(result + len, *elements, elemLen);
+		char *newRes = (char *) MLV_REALLOC( result, len + elemLen + 1, char );
+		if (!newRes) return NULL;
+		result = newRes;
+		memcpy(result + len, *elements, elemLen);
+		len += elemLen;
 	}
 
-	result[len] = '\0';
+	result[len] = '\\';
+	result[len + 1] = '\0';
 	return result; 
 }
 
@@ -214,16 +217,21 @@ int MLV_path_exists( const char* path ){
 
 char * MLV_get_current_directory( ){
 	#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
-		#error NOT IMPLEMENTED YET
+		return _getcwd(NULL, 0);
 	#else
 		return getcwd(NULL, 0);
 	#endif
 }
 
-static char *tmp_path = NULL;
 const char * MLV_get_temporary_directory( ){
 	#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
-		#error NOT IMPLEMENTED YET
+		DWORD size = GetTempPathA(0, NULL) + 1;
+		LPSTR path = (LPSTR)malloc(size * sizeof(CHAR));
+		if (!GetTempPathA(size, path)) {
+			free(path);
+			return NULL;
+		}
+		return (char *)path;
 	#else
 		return strdup("/tmp");
 	#endif
@@ -231,11 +239,11 @@ const char * MLV_get_temporary_directory( ){
 
 const char * MLV_get_home_directory( ){
 	#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
-		#error NOT IMPLEMENTED YET
+		char *path = getenv("HOMEPATH");
 	#else
 		char *path = getenv("HOME");
-		if (!path) return NULL;
-		return strdup(path);
 	#endif
+	if (!path) return NULL;
+	return strdup(path);
 }
 
