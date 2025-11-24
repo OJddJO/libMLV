@@ -14,42 +14,47 @@ This repo is just a repo for precompiled versions of `libMLV`. If you find any b
 
 The `MLV` (stands for `Marne-la-Vallée`) library is a simplified multimedia libary.
 
-The library is perfect for beginners in C programming who want to use graphic and sound effects.
-The library permit to:
+The library is perfect for beginners in C programming who wants to use graphics and sound effects.
+The library allows to:
  - draw figures, text and boxed text,
  - display images,
- - plays musics,
- - get Keyboard and mouse event
+ - play music,
+ - get keyboard and mouse event
  - get informations by input boxes
 
-This tools is a simplified interface of the SDL libraries.
+This tool is a simplified interface of the SDL libraries.
 
-If you are not a beginner, we recommend you to use the SDL libraries (sdl, sdl-gfx, sdl-sound, sdl-ttf) instead of the mlv library.
+If you are not a beginner, we recommend you to use the SDL libraries (sdl, sdl-gfx, sdl-sound, sdl-ttf) instead of the `MLV` library.
 
 ## Usage
 
 Currently, there's only a Linux version (should work on any `x86_64` Linux, tested on `NixOS`, `ArchLinux` and `Ubuntu`)
 
+I'm working on a Windows version. And maybe for MacOS too, though it will be hard...
+
 Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the version you need.
 
-You'll also need to install `sdl1.2-compat` (cause SDL1.2 is ultra-deprecated), `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx`, `glib` and `libxml2`.
+You'll also need to install `sdl1.2-compat` (cause `SDL1.2` is ultra-deprecated), `sdl1.2-mixer`, `sdl1.2-ttf`, `sdl1.2-image`, `sdl1.2-gfx` and `libxml2`.
 
 #### NixOS
 You can use the [`shell.nix`](./shell.nix) file.
 #### Arch
 Use the following command:
 ```bash
-sudo pacman -S glib2 libxml2 sdl12-compat sdl_image sdl_mixer sdl_ttf sdl_gfx
+sudo pacman -S libxml2 sdl12-compat sdl_image sdl_mixer sdl_ttf sdl_gfx
 ```
 #### Ubuntu
 Use the following command:
 ```bash
-sudo apt-get install libsdl1.2-compat-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libglib2.0-dev libxml2-dev
+sudo apt-get install libsdl1.2-compat-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libxml2-dev
 ```
 #### Windows (MSYS2)
 Use the following command:
 ```bash
-pacman -S glib2 libxml2 mingw-w64-x86_64-sdl12-compat mingw-w64-x86_64-SDL_gfx mingw-w64-x86_64-SDL_ttf mingw-w64-x86_64-SDL_image mingw-w64-x86_64-SDL_mixer
+pacman -S libxml2 mingw-w64-x86_64-sdl12-compat mingw-w64-x86_64-SDL_gfx mingw-w64-x86_64-SDL_ttf mingw-w64-x86_64-SDL_image mingw-w64-x86_64-SDL_mixer
 ```
 
 If you have any questions/issues with the installation, please leave an issue or open a discussion.
+
+## Changes compared to the official release
+- Removed `glib2` dependency
