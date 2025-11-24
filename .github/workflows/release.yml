@@ -6,9 +6,6 @@ on:
         description: 'Version to release'
         required: true
 
-permissions:
-  contents: write
-
 jobs:
   create_release:
     name: Create Release and upload assets
@@ -26,7 +23,7 @@ jobs:
         id: make_changelog
         run: |
           set -euo pipefail
-          CHANGELOG="$(printf 'MLV ${VERSION}\n\n')"
+          CHANGELOG="$(printf 'MLV ${VERSION}\n\n**Full Changelog**: https://github.com/OJddJO/libMLV/commits/${VERSION}\n\n')"
         shell: bash
 
       - name: Create GitHub Release (API)
