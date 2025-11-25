@@ -7,7 +7,6 @@ in pkgs.mkShell {
     SDL_mixer
     SDL_ttf
     SDL_gfx
-    glib
     libxml2
   ];
 }
