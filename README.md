@@ -8,7 +8,7 @@
 
 ## A repo for an alternative version of libMLV with precompiled binaries
 
-This repo is for reworked and precompiled versions of `libMLV`. It is based on the [`MLV` library](#Links-to-official-libMLV). If you find any bugs or have any questions related to the library, please report/ask them in the issues or discussions. **DO NOT** report them to the official library maintainers.
+This repo is for reworked and precompiled versions of `libMLV`. It is based on the [`MLV` library](#Links-to-official-libMLV) (version `3.1.0`). If you find any bugs or have any questions related to the library, please report/ask them in the issues or discussions. **DO NOT** report them to the official library maintainers.
 
 ## Description
 
