@@ -4,7 +4,7 @@
 
 > [!NOTE]
 > This library isn't originally made by me.
-> For further information, see the [README](./README) file.
+> For further information, see the [links section](#Links-to-official-libMLV).
 
 ## A repo for an alternative version of libMLV with precompiled binaries
 
