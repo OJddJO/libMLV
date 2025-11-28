@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   create_release:
-    name: Create Release and upload assets
+    name: Create Release
     runs-on: ubuntu-22.04
     env:
       VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
