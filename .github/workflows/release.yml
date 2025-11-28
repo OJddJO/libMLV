@@ -6,6 +6,9 @@ on:
         description: 'Version to release'
         required: true
 
+permissions:
+  contents: write
+
 jobs:
   create_release:
     name: Create Release and upload assets
