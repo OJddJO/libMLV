@@ -85,7 +85,7 @@ MLV_TreeSet *MLV_get_maximal_node_of_tree_set(MLV_TreeSet *tree_set) {
  * obtenu.
  *
  */
-MLV_TreeSet *remove_node_of_tree_set(MLV_TreeSet *tree_set) {
+MLV_TreeSet *remove_node_of_tree_set([[maybe_unused]] MLV_TreeSet *tree_set) {
     NOT_IMPLEMENTED;
     return NULL;
 }
@@ -400,32 +400,32 @@ void foreach_node_tree_set(void (*node_function)(MLV_TreeSet *tree_set, void *da
 /*
  * Un wrapper à utiliser avec foreach_node_tree_set.
  */
-void wrapper_destroy_node_data_of_tree_set(MLV_TreeSet *tree_set, void *useless_data) {
+void wrapper_destroy_node_data_of_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
     destroy_node_data_of_tree_set(tree_set);
 }
 
 /*
  * Un wrapper à utiliser avec foreach_node_tree_set.
  */
-void wrapper_remove_node_of_tree_set(MLV_TreeSet *tree_set, void *useless_data) {
+void wrapper_remove_node_of_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
     remove_node_of_tree_set(tree_set);
 }
 
 /*
  * Un wrapper à utiliser avec foreach_node_tree_set.
  */
-void wrapper_destroy_node_and_his_data_of_tree_set(MLV_TreeSet *tree_set, void *useless_data) {
+void wrapper_destroy_node_and_his_data_of_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
     destroy_node_and_his_data_of_tree_set(tree_set);
 }
 
 /*
  * Un wrapper à utiliser avec foreach_node_tree_set.
  */
-void wrapper_destroy_node_of_tree_set(MLV_TreeSet *tree_set, void *useless_data) {
+void wrapper_destroy_node_of_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
     destroy_node_of_tree_set(tree_set);
 }
 
-void free_tree_set(MLV_TreeSet *tree_set, void *useless_data) {
+void free_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
     MLV_FREE(tree_set, MLV_TreeSet);
 }
 
@@ -436,7 +436,7 @@ void MLV_init_tree_set(MLV_TreeSet *tree_set) {
     foreach_node_tree_set(free_tree_set, NULL, tree_set);
 }
 
-void deep_free_tree_set(MLV_TreeSet *tree_set, void *useless_data) {
+void deep_free_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
     destroy_node_data_of_tree_set(tree_set);
     free_tree_set(tree_set, useless_data);
 }

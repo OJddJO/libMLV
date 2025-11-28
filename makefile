@@ -15,24 +15,32 @@ OBJ 	= $(subst MLV,$(OSDIR)/build,$(patsubst %.c,%.o,$(SRC)))
 
 INCLUDE = -I ./include -I ./include/MLV -I ./include/SDL -I ./include/glib  -I ./include/libxml
 LIB 	= -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_gfx -lglib-2.0 -lxml2
-CCARGS	= -Wall -Wextra -Werror -O2 -fPIC
+CCARGS	= -Wall -Wextra -Werror -fPIC -std=c17 -flto -fno-strict-aliasing
+
 EXTRA	= -D_GNU_SOURCE
 
 all: createDirs $(OBJ)
-	@echo Building dynamic library...
+	@printf "Building dynamic library... "
 ifeq ($(OS),Windows_NT)
 	@gcc -shared -o $(DLL_BUILD) $(OBJ) $(LIB) -Wl,--out-implib=$(IMPLIB_BUILD)
 else
 	@gcc -shared -fPIC -o $(DLL_BUILD) $(OBJ) $(LIB)
 	@cp $(DLL_BUILD) $(IMPLIB_BUILD)
 endif
+	@printf "Done\n"
+
+remake: clean all
+
 
 createDirs:
-	@echo Creating build dirs...
+	@printf "Creating build dirs... "
 	@mkdir -p $(OSDIR)/bin $(OSDIR)/build $(OSDIR)/lib
+	@printf "Done\n"
 
 clean:
-	rm -f $(OSDIR)/build/*
+	@printf "Cleaning build dir... "
+	@rm -f $(OSDIR)/build/*
+	@printf "Done\n"
 
 $(OSDIR)/build/%.o: MLV/%.c
 	@echo Compiling $*.c
@@ -45,4 +53,3 @@ release:
 	cp -r include/MLV MLV-release/MLV
 	zip -r MLV.zip MLV-release
 	rm -rf MLV-release/
-

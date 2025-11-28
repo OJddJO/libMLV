@@ -218,9 +218,9 @@ char *MLV_get_current_directory() {
 const char *MLV_get_temporary_directory() {
 #if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
     DWORD size = GetTempPathA(0, NULL) + 1;
-    LPSTR path = (LPSTR)malloc(size * sizeof(CHAR));
+    LPSTR path = (LPSTR)MLV_MALLOC(size, CHAR);
     if (!GetTempPathA(size, path)) {
-        free(path);
+        MLV_FREE(path, CHAR);
         return NULL;
     }
     return (char *)path;

@@ -436,7 +436,6 @@ void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animati
  *
  * \param animation_player Le lecteur de l'animation à aficher
  * \param layer     Couche de l'image.
- * \param image    image sur laquel il faut dessiner l'animation
  * \param source_x       Coordonnée en X de la position de la portion à recopier
  * \param source_y       Coordonnée en Y de la position de la portion à recopier
  * \param source_width   Largeur de la portion à recopier
@@ -447,7 +446,7 @@ void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animati
  *                 l'image à afficher.
  */
 void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer,
-    int source_x, int source_y, int source_width, int source_height, MLV_Image *image, int x, int y);
+    int source_x, int source_y, int source_width, int source_height, int x, int y);
 
 /** \~french
  * \brief Dessine sur une image donnée à une position donnée l'image

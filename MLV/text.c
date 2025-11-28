@@ -246,8 +246,8 @@ int internal_draw_adapted_text_box_size_with_font(char *copy, const MLV_Font *fo
     return nb_line;
 }
 
-void internal_draw_text_box_with_font(char *copy, const MLV_Font *font, int sizeInterligne, MLV_Color borderColor,
-    MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, int corner_position_x,
+void internal_draw_text_box_with_font(char *copy, const MLV_Font *font, int sizeInterligne,
+    MLV_Color textColor, MLV_Text_justification text_justification, int corner_position_x,
     int corner_position_y, int width_text, int nb_line, SDL_Surface *textBox) {
     char *new = copy;
     char *old = new;
@@ -301,7 +301,7 @@ void internal_draw_adapted_text_box_with_font_on_image(int x, int y, const char 
 
     boxColor(textBox, 0, 0, width - 1, height - 1, backgroundColor);
 
-    internal_draw_text_box_with_font(copy, font, sizeInterligne, borderColor, textColor, backgroundColor,
+    internal_draw_text_box_with_font(copy, font, sizeInterligne, textColor,
         text_justification, 0, 0, width_text, nb_line, textBox);
 
     rectangleColor(textBox, 0, 0, width - 1, height - 1, borderColor);
@@ -474,7 +474,7 @@ void internal_draw_text_box_with_font_on_image(int x, int y, int width, int heig
         default:
             ERROR("MLV_Vertical_position ne contient pas de bonnes valeurs.");
     }
-    internal_draw_text_box_with_font(copy, font, sizeInterligne, borderColor, textColor, backgroundColor,
+    internal_draw_text_box_with_font(copy, font, sizeInterligne, textColor,
         text_justification, position_corner_x, position_corner_y, width_text, nb_line, textBox);
 
     rectangleColor(textBox, 0, 0, width - 1, height - 1, borderColor);

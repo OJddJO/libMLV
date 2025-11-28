@@ -559,7 +559,7 @@ MLV_Input_box *MLV_create_input_box(int top_left_corner_X, int top_left_corner_Y
     return result;
 }
 
-void free_NTS(void *data, void *useless) {
+void free_NTS(void *data, [[maybe_unused]] void *useless) {
     //	DEBUG("Free Entry Hystory");
     MLV_FREE(data, char);
 }
@@ -632,9 +632,10 @@ void MLV_draw_input_box(MLV_Input_box *input_box) {
     unlock_input_box(input_box);
 }
 
+inline void _1 (void *a, [[maybe_unused]]void *unused) { MLV_draw_input_box(a); }
 void MLV_draw_all_input_boxes() {
     lock_input_box_information();
-    MLV_foreach_list(input_box_information.input_box_list, (void (*)(void *, void *))MLV_draw_input_box,
+    MLV_foreach_list(input_box_information.input_box_list, _1,
         MLV_data->screen);
     unlock_input_box_information();
 }
@@ -717,7 +718,7 @@ inline
 inline
 #endif
     void input_box_move_right_answer_NTS(MLV_Input_box *input_box) {
-    if (input_box->positionCursor < strlen(input_box->history->data)) { input_box->positionCursor++; }
+    if ((long)input_box->positionCursor < (long)strlen(input_box->history->data)) { input_box->positionCursor++; }
 }
 
 #ifndef OS_APPLE // Hack to compile with MAC OS 10.9 (maverick)

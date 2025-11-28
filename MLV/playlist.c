@@ -53,6 +53,7 @@ void MLV_init_playlists() {
     MLV_data->active_playlists = NULL;
 }
 
+inline void _1(void *a, [[maybe_unused]] void *b) { MLV_close_playlist(a); }
 void MLV_close_playlists() {
     MLV_List *playlists = NULL;
     MLV_List *tmp = MLV_data->playlists;
@@ -60,7 +61,7 @@ void MLV_close_playlists() {
         playlists = MLV_prepend_list(playlists, tmp->data);
         tmp = tmp->next;
     }
-    MLV_foreach_list(playlists, (void (*)(void *, void *))MLV_close_playlist, NULL);
+    MLV_foreach_list(playlists, _1, NULL);
     MLV_free_list(MLV_data->playlists);
     MLV_free_list(MLV_data->active_playlists);
 }
@@ -106,11 +107,11 @@ void MLV_playlist_add_sheet_music(MLV_Playlist *playlist, MLV_Music *music) {
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
 }
 
-void MLV_playlist_remove(MLV_Playlist *playlist, int index) {
+void MLV_playlist_remove([[maybe_unused]] MLV_Playlist *playlist, [[maybe_unused]] int index) {
     TODO
 }
 
-void MLV_playlist_clear(MLV_Playlist *playlist) {
+void MLV_playlist_clear([[maybe_unused]] MLV_Playlist *playlist) {
     TODO
 }
 
@@ -131,6 +132,9 @@ void MLV_playlist_pause(MLV_Playlist *playlist) {
     playlist->playing = 0;
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
 }
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
 void MLV_playlist_stop(MLV_Playlist *playlist) {
     TODO
@@ -155,3 +159,5 @@ void MLV_playlist_last(MLV_Playlist *playlist) {
 void MLV_playlist_index(MLV_Playlist *playlist, int index) {
     TODO
 }
+
+#pragma GCC diagnostic pop

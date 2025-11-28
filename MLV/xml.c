@@ -304,7 +304,7 @@ int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpat
     return result;
 }
 
-MLV_Xml *MLV_get_xml_object_of_va(const MLV_Xml *xml_data, const char *xpath, va_list pile) {
+MLV_Xml *MLV_get_xml_object_of_va([[maybe_unused]] const MLV_Xml *xml_data, [[maybe_unused]] const char *xpath, [[maybe_unused]] va_list pile) {
     MLV_Xml *result = NULL;
     ERROR_FULL("Not implemented.");
     return result;
@@ -323,6 +323,6 @@ MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...) 
     return result;
 }
 
-void MLV_print_xml(const MLV_Xml *xml_data) {
+void MLV_print_xml([[maybe_unused]] const MLV_Xml *xml_data) {
     ERROR_FULL("Not implemented.");
 }

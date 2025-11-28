@@ -29,6 +29,9 @@
 
 #include "memory_management.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 int memory_debug_n;
 SDL_EventFilter memory_debug_filter;
 SDL_Event memory_debug_event;
@@ -532,3 +535,5 @@ SDL_Surface *TTF_RenderUTF8_Solid(TTF_Font *font, const char *text, SDL_Color fg
     update_memory_statistics(MEMORY_DEBUG_CREATE_SURFACE);
     return (SDL_Surface *)malloc(sizeof(SDL_Surface));
 }
+
+#pragma GCC diagnostic pop

@@ -84,7 +84,7 @@ void free_key_of_pair_key_data(PairKeyData *pair) {
     MLV_free_key(pair->key);
 }
 
-void wrapper_free_key_of_pair_key_data(void *pair, void *useless_data) {
+void wrapper_free_key_of_pair_key_data(void *pair, [[maybe_unused]] void *useless_data) {
     free_key_of_pair_key_data((PairKeyData *)pair);
 }
 

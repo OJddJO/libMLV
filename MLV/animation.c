@@ -122,14 +122,12 @@ void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **arra
     MLV_Animation *animation, uint32_t position) {
     user_is_modifying_animation(animation, position);
     if (array_of_images) {
-        int layer;
-        for (layer = 0; layer < animation->nb_layers; layer++) {
+        for (uint32_t layer = 0; layer < animation->nb_layers; layer++) {
             animation->frames[position].images[layer] = array_of_images[layer];
         }
     }
     if (array_of_sounds) {
-        int channel;
-        for (channel = 0; channel < animation->nb_channels; channel++) {
+        for (uint32_t channel = 0; channel < animation->nb_channels; channel++) {
             animation->frames[position].sounds[channel] = array_of_sounds[channel];
         }
     }
@@ -158,8 +156,9 @@ void MLV_change_frame_delay_in_animation(uint32_t delay, MLV_Animation *animatio
     animation->frames[position].delay = delay;
 }
 
-void MLV_get_frame_from_animation(MLV_Animation *animation, uint32_t position, uint32_t layer, MLV_Image **image,
-    uint32_t *delay) {
+void MLV_get_frame_from_animation([[maybe_unused]] MLV_Animation *animation,
+    [[maybe_unused]] uint32_t position, [[maybe_unused]] uint32_t layer, [[maybe_unused]] MLV_Image **image,
+    [[maybe_unused]] uint32_t *delay) {
     TODO
 }
 
@@ -227,7 +226,7 @@ void MLV_next_frame(MLV_Animation_player *animation_player) {
 }
 void MLV_previous_frame(MLV_Animation_player *animation_player) {
     /* Retour à la frame 0 si nous sommes à la dernière */
-    if (--animation_player->current_frame == -1) {
+    if (--animation_player->current_frame == -1U) {
         animation_player->current_frame = animation_player->animation->nb_frames - 1;
     }
     animation_player->counter = 0;
@@ -255,9 +254,8 @@ void MLV_update_animation_player(MLV_Animation_player *animation_player) {
                 return;
         }
         // Remise à 0 de l'état des sons qui ont déjà été joués.
-        int channel;
         if (animation_player->sounds_are_being_played) {
-            for (channel = 0; channel < animation_player->animation->nb_channels; channel++) {
+            for (uint32_t channel = 0; channel < animation_player->animation->nb_channels; channel++) {
                 animation_player->sounds_are_being_played[channel] = 0;
             }
         }
@@ -298,7 +296,7 @@ void MLV_draw_partial_image_from_animation_player_on_image(MLV_Animation_player 
 }
 
 void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animation_player, uint32_t layer, int source_x,
-    int source_y, int source_width, int source_height, MLV_Image *image, int x, int y) {
+    int source_y, int source_width, int source_height, int x, int y) {
     MLV_draw_partial_image(animation_player->animation->frames[animation_player->current_frame].images[layer], source_x,
         source_y, source_width, source_height, x, y);
 }
@@ -334,8 +332,7 @@ void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_playe
 
 void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animation_player, uint32_t *layers,
     uint32_t nb_layers) {
-    int i;
-    for (i = 0; i < nb_layers; i++) {
+    for (uint32_t i = 0; i < nb_layers; i++) {
         MLV_play_sound_from_animation_player(animation_player, layers[i]);
     }
 }
@@ -713,11 +710,9 @@ void MLV_free_animation_book(MLV_Animation_book *animation_book) {
     for (id_animation = 0; id_animation < animation_book->nb_animations; id_animation++) {
         MLV_Animation *animation;
         animation = animation_book->animations[id_animation];
-        int id_frame;
-        for (id_frame = 0; id_frame < animation->nb_frames; id_frame++) {
-            int id_layer;
+        for (uint32_t id_frame = 0; id_frame < animation->nb_frames; id_frame++) {
             MLV_Image **images = animation->frames[id_frame].images;
-            for (id_layer = 0; id_layer < animation_book->nb_layers; id_layer++) {
+            for (int id_layer = 0; id_layer < animation_book->nb_layers; id_layer++) {
                 if (images[id_layer]) { MLV_free_image(images[id_layer]); }
             }
         }

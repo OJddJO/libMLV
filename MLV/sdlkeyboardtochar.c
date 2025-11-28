@@ -244,7 +244,7 @@ int sldKeyIsACharacter(SDLKey key) {
     return result;
 }
 
-int converSdlKeyToChar(SDLKey key, SDLMod mod, char *character) {
+int converSdlKeyToChar(SDLKey key, [[maybe_unused]] SDLMod mod, char *character) {
     int result = 0;
     /*
      *     if( mod & KMOD_NUM ) printf( "NUMLOCK " );

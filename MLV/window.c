@@ -22,7 +22,6 @@
 #include "MLV_color.h"
 #include "MLV_shape.h"
 #include "MLV_window.h"
-#include "config.h"
 #include "input_box.h"
 #include "platform.h"
 #include "text.h"
