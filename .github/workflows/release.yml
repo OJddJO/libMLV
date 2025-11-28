@@ -66,7 +66,7 @@ jobs:
           mkdir -p release tmp_release tmp_release/include
           rm -rf tmp_release/* _linux/build/
           cp -R _linux/. tmp_release/
-          cp -R README.md README AUTHORS COPYING ChangeLog gpl.txt tmp_release/
+          cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
           cp -R include/MLV tmp_release/include/
           cp -R data tmp_release/bin/
           tar -czf "release/MLV-${VERSION}-linux.tar.gz" -C tmp_release .
