@@ -36,8 +36,8 @@ jobs:
         run: |
           set -euo pipefail
           API="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
-          JSON=$(jq -n --arg tag "${VERSION}" --arg name "${VERSION}" \
-            '{ tag_name: $tag, name: $name, draft: false, prerelease: ($PRE_RELEASE == "true"), generate_release_notes: true }')
+          JSON=$(jq -n --arg tag "${VERSION}" --arg name "${VERSION}" --arg pre_release "${PRE_RELEASE}"\
+            '{ tag_name: $tag, name: $name, draft: false, prerelease: (pre_release == "true"), generate_release_notes: true }')
           curl -sSL -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" \
             -d "$JSON" "$API"
         shell: bash
