@@ -98,7 +98,7 @@ jobs:
           install: >
             mingw-w64-x86_64-toolchain
             make
-            libxml2
+            mingw-w64-x86_64-libxml2
             mingw-w64-x86_64-sdl12-compat
             mingw-w64-x86_64-SDL_gfx
             mingw-w64-x86_64-SDL_ttf

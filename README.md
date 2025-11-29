@@ -56,7 +56,7 @@ sudo apt-get install libsdl1.2-compat-dev libsdl-image1.2-dev libsdl-ttf2.0-dev 
 
 Use the following command:
 ```bash
-pacman -S libxml2 mingw-w64-x86_64-sdl12-compat mingw-w64-x86_64-SDL_gfx mingw-w64-x86_64-SDL_ttf mingw-w64-x86_64-SDL_image mingw-w64-x86_64-SDL_mixer
+pacman -S mingw-w64-x86_64-libxml2 mingw-w64-x86_64-sdl12-compat mingw-w64-x86_64-SDL_gfx mingw-w64-x86_64-SDL_ttf mingw-w64-x86_64-SDL_image mingw-w64-x86_64-SDL_mixer
 ```
 
 If you have any questions/issues with the installation, please leave an issue or open a discussion.
