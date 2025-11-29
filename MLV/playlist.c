@@ -53,7 +53,7 @@ void MLV_init_playlists() {
     MLV_data->active_playlists = NULL;
 }
 
-inline void _1(void *a, [[maybe_unused]] void *b) { MLV_close_playlist(a); }
+inline static void _1(void *a, [[maybe_unused]] void *b) { MLV_close_playlist(a); }
 void MLV_close_playlists() {
     MLV_List *playlists = NULL;
     MLV_List *tmp = MLV_data->playlists;

@@ -382,10 +382,7 @@ void MLV_update_window() {
     }
 }
 
-#ifndef OS_APPLE // Hack to compile with MAC OS 10.9 (maverick)
-inline
-#endif
-    void MLV_actualise_window() {
+void MLV_actualise_window() {
     MLV_update_window();
 }
 

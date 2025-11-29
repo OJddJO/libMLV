@@ -57,7 +57,7 @@ extern OSErr CPSSetFrontProcess(CPSProcessSerNum *psn);
 static int gArgc;
 static char **gArgv;
 static BOOL gFinderLaunch;
-static BOOL gCalledAppMainline = FALSE;
+static BOOL gCalledAppMainline static = FALSE;
 
 static NSString *getApplicationName(void) {
   const NSDictionary *dict;
@@ -272,7 +272,7 @@ static void CustomApplicationMain(int argc, char **argv) {
  *
  * This message may be received multiple times to open several docs on launch.
  *
- * This message is ignored once the app's mainline has been called.
+ * This message is ignored once the app's mainline static has been called.
  */
 - (BOOL)application:(NSApplication *)theApplication
            openFile:(NSString *)filename {
@@ -284,7 +284,7 @@ static void CustomApplicationMain(int argc, char **argv) {
   if (!gFinderLaunch) /* MacOS is passing command line args. */
     return FALSE;
 
-  if (gCalledAppMainline) /* app has started, ignore this document. */
+  if (gCalledAppMainline static) /* app has started, ignore this document. */
     return FALSE;
 
   temparg = [filename UTF8String];
@@ -319,7 +319,7 @@ static void CustomApplicationMain(int argc, char **argv) {
 #endif
 
   /* Hand off to main application code */
-  gCalledAppMainline = TRUE;
+  gCalledAppMainline static = TRUE;
   status = SDL_main(gArgc, gArgv);
 
   /* We're done, thank you for playing */

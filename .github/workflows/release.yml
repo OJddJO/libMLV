@@ -27,7 +27,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           VERSION: ${{ env.VERSION }}
-          CHANGELOG: ${{ steps.make_changelog.outputs.changelog }}
         run: |
           set -euo pipefail
           API="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
@@ -61,7 +60,7 @@ jobs:
           set -e
           mkdir -p release tmp_release tmp_release/include
           rm -rf tmp_release/* _linux/build/
-          cp -R _linux/. tmp_release/
+          cp -R _linux/ tmp_release/
           cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
           cp -R include/MLV tmp_release/include/
           cp -R data tmp_release/bin/
@@ -75,40 +74,50 @@ jobs:
           files: ./release/MLV-${{ env.VERSION }}-linux.tar.gz
           tag_name: ${{ env.VERSION }}
 
-  # build-windows:
-  #   name: Build and Package for Windows
-  #   needs: create_release
-  #   runs-on: windows-latest
-  #   env:
-  #     VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
+  build-windows:
+    name: Build and Package for Windows
+    needs: create_release
+    runs-on: windows-latest
+    env:
+      VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
 
-  #   steps:
-  #     - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Set up build tools
-  #       uses: msys2/setup-msys2@v2
-  #       with:
-  #         msystem: MINGW64
-  #         update: true
-  #         install: >
-  #           mingw-w64-x86_64-toolchain
-  #           make
-  #           mingw-w64-x86_64-7zip
+      - name: Set up build tools
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >
+            mingw-w64-x86_64-toolchain
+            make
+            libxml2
+            mingw-w64-x86_64-sdl12-compat
+            mingw-w64-x86_64-SDL_gfx
+            mingw-w64-x86_64-SDL_ttf
+            mingw-w64-x86_64-SDL_image
+            mingw-w64-x86_64-SDL_mixer
+            mingw-w64-x86_64-7zip
 
-  #     - name: Build
-  #       run: make
-  #       shell: bash
+      - name: Build
+        run: make
+        shell: bash
 
-  #     - name: Package assets
-  #       run: |
-  #         mkdir -p release
-  #         rm -rf _windows/build/ _windows/build_static/
-  #         (cd _windows && 7z a -tzip "../release/MLV-${VERSION}-windows.zip" ./*)
-  #         7z a -tzip "release/MLV-${VERSION}-windows.zip" include README.md LICENSE
-  #       shell: bash
+      - name: Package assets
+        run: |
+          mkdir -p release tmp_release tmp_release/include
+          rm -rf tmp_release/* _windows/build/
+          cp -R _windows/ tmp_release/
+          cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
+          cp -R include/MLV tmp_release/include/
+          cp -R data tmp_release/bin/
+          (cd _windows && 7z a -tzip "../release/MLV-${VERSION}-windows.zip" ./*)
+          7z a -tzip "release/MLV-${VERSION}-windows.zip" include README.md LICENSE
+        shell: bash
 
-  #     - name: Upload release assets
-  #       uses: softprops/action-gh-release@v2
-  #       with:
-  #         files: ./release/MLV-${{ env.VERSION }}-windows.zip
-  #         tag_name: ${{ env.VERSION }}
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./release/MLV-${{ env.VERSION }}-windows.zip
+          tag_name: ${{ env.VERSION }}

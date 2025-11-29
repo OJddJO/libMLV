@@ -39,7 +39,7 @@ int MLV_get_random_boolean() {
     return rand() % 2;
 }
 
-inline int rand_int() {
+inline static int rand_int() {
 #if RAND_MAX == INT32_MAX
     return rand();
 #else // minimum value of RAND_MAX is 32768=0x7FFF

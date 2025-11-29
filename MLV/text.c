@@ -563,7 +563,7 @@ void MLV_draw_text_box_on_image(int x, int y, int width, int height, const char 
     va_end(pile);
 }
 
-inline int ucs4ToUtf8(int in, char *out) {
+inline static int ucs4ToUtf8(int in, char *out) {
     switch (out == NULL) {
         case (0):
             if (in <= 0x007F) {
