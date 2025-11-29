@@ -118,7 +118,7 @@ jobs:
           cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
           cp -R include/MLV tmp_release/include/
           cp -R data tmp_release/bin/
-          7z a -tzip -w tmp_release/ "release/MLV-${VERSION}-windows.zip" .
+          7z a -tzip -w tmp_release/ "../release/MLV-${VERSION}-windows.zip" .
         shell: msys2 {0}
 
       - name: Upload release assets
