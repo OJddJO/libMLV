@@ -7,8 +7,8 @@ on:
         required: true
       pre-release:
         description: 'Is this a pre-release?'
-        required: false
-        default: 'false'
+        required: true
+        type: boolean
 
 permissions:
   contents: write
@@ -18,8 +18,8 @@ jobs:
     name: Create Release
     runs-on: ubuntu-22.04
     env:
-      VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
-      PRE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs['pre-release'] || 'false' }}
+      VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version }}
+      PRE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pre-release }}
 
     steps:
       - name: Checkout repository (full history)
