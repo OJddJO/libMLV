@@ -5,6 +5,10 @@ on:
       version:
         description: 'Version to release'
         required: true
+      pre-release:
+        description: 'Is this a pre-release?'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -15,6 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.version || github.ref_name }}
+      PRE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs['pre-release'] || 'false' }}
 
     steps:
       - name: Checkout repository (full history)
@@ -27,11 +32,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           VERSION: ${{ env.VERSION }}
+          PRE_RELEASE: ${{ env.PRE_RELEASE }}
         run: |
           set -euo pipefail
           API="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
-          JSON=$(jq -n --arg tag "${VERSION}" --arg name "${VERSION}" --arg generate_release_notes true \
-            '{ tag_name: $tag, name: $name, body: $body, draft: false, prerelease: false }')
+          JSON=$(jq -n --arg tag "${VERSION}" --arg name "${VERSION}" \
+            '{ tag_name: $tag, name: $name, draft: false, prerelease: ($PRE_RELEASE == "true"), generate_release_notes: true }')
           curl -sSL -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" \
             -d "$JSON" "$API"
         shell: bash
