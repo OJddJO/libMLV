@@ -1,7 +1,7 @@
 ifeq ($(OS),Windows_NT)
 OSDIR			= _windows
 STATIC_BUILD	= $(OSDIR)/lib/libMLV.a
-DLL_BUILD		= $(OSDIR)/bin/SSGE.dll
+DLL_BUILD		= $(OSDIR)/bin/libMLV.dll
 IMPLIB_BUILD	= $(OSDIR)/lib/libMLV.dll.a
 else
 OSDIR			= _linux
