@@ -28,9 +28,10 @@ If you are not a beginner, we recommend you to use the SDL libraries (sdl, sdl-g
 
 ## Usage
 
-Currently, there's only a Linux version (should work on any `x86_64` Linux, tested on `NixOS`, `ArchLinux` and `Ubuntu`)
-
-I'm working on a Windows version. And maybe for MacOS too, though it will be hard...
+> [!NOTE]
+> Currently, only `x86_64` architecture is supported.
+> There's a version for `Linux` (any linux should be fine, tested on `NixOS`, `Ubuntu`, `Arch`) and for `Windows`.
+> `MacOS` will maybe be supported one day...
 
 Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the version you need.
 
@@ -52,7 +53,7 @@ Use the following command:
 ```bash
 sudo apt-get install libsdl1.2-compat-dev libsdl-image1.2-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev libsdl-gfx1.2-dev libxml2-dev
 ```
-#### (*WIP*) Windows (MSYS2)
+#### Windows (MSYS2)
 
 Use the following command:
 ```bash
@@ -63,6 +64,7 @@ If you have any questions/issues with the installation, please leave an issue or
 
 ## Changes compared to the official release
 
+- Working on `Windows`
 - Removed `glib2` dependency
 
 ## Have an idea for the library ?
