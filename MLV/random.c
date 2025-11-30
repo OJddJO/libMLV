@@ -31,11 +31,11 @@
 
 #include <stdlib.h>
 
-void MLV_set_seed(int32_t seed) {
+MLVAPI void MLV_set_seed(int32_t seed) {
     srand((uint32_t)seed);
 }
 
-int MLV_get_random_boolean() {
+MLVAPI int MLV_get_random_boolean() {
     return rand() % 2;
 }
 
@@ -47,10 +47,10 @@ inline static int rand_int() {
 #endif
 }
 
-int MLV_get_random_integer(int begin, int end) {
+MLVAPI int MLV_get_random_integer(int begin, int end) {
     return begin + rand_int() % (end - begin + 1);
 }
 
-double MLV_get_random_double(double begin, double end) {
+MLVAPI double MLV_get_random_double(double begin, double end) {
     return begin + ((double)rand_int() / (double)(INT32_MAX)) * (end - begin);
 }

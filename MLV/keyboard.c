@@ -31,10 +31,10 @@
 #include "memory_management.h"
 #include "warning_error.h"
 
-void MLV_wait_keyboard(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode) {
+MLVAPI void MLV_wait_keyboard(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode) {
     MLV_Button_state state;
 
-    // We remove all existing event from the queue
+    // MLVAPI We remove all existing event from the queue
     MLV_flush_event_queue();
 
     // We wait for a new keyboard event
@@ -43,12 +43,12 @@ void MLV_wait_keyboard(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int
         ;
 }
 
-MLV_Event MLV_wait_keyboard_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int milliseconds) {
     MLV_Event resultat = MLV_NONE;
     MLV_Button_state state;
 
-    // We remove all existing event from the queue
+    // MLVAPI We remove all existing event from the queue
     MLV_flush_event_queue();
 
     int time = MLV_get_time();
@@ -75,12 +75,12 @@ MLV_Event MLV_wait_keyboard_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboa
     return resultat;
 }
 
-MLV_Event MLV_wait_keyboard_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int seconds) {
     return MLV_wait_keyboard_or_milliseconds(sym, mod, unicode, seconds * 1000);
 }
 
-MLV_Keyboard_button MLV_convert_string_to_keyboard_button(const char *key_string) {
+MLVAPI MLV_Keyboard_button MLV_convert_string_to_keyboard_button(const char *key_string) {
 
     if (strcmp(key_string, "MLV_KEYBOARD_UNKNOWN") == 0) { return MLV_KEYBOARD_UNKNOWN; }
     if (strcmp(key_string, "MLV_KEYBOARD_FIRST") == 0) { return MLV_KEYBOARD_FIRST; }
@@ -417,7 +417,7 @@ MLV_Keyboard_button MLV_convert_string_to_keyboard_button(const char *key_string
     return 0;
 }
 
-const char *MLV_convert_keyboard_button_to_string(MLV_Keyboard_button key_code) {
+MLVAPI const char *MLV_convert_keyboard_button_to_string(MLV_Keyboard_button key_code) {
     switch (key_code) {
         case MLV_KEYBOARD_UNKNOWN:
             return "MLV_KEYBOARD_UNKNOWN";
@@ -890,7 +890,7 @@ const char *MLV_convert_keyboard_button_to_string(MLV_Keyboard_button key_code) 
     }
 }
 
-char *MLV_convert_keyboard_mod_to_string(MLV_Keyboard_modifier keymod_code) {
+MLVAPI char *MLV_convert_keyboard_mod_to_string(MLV_Keyboard_modifier keymod_code) {
     int text_size = 0;
     char *text;
     char *result;
@@ -1042,69 +1042,69 @@ char *MLV_convert_keyboard_mod_to_string(MLV_Keyboard_modifier keymod_code) {
     return result;
 }
 
-MLV_Button_state MLV_get_keyboard_state(MLV_Keyboard_button keyboard_code) {
+MLVAPI MLV_Button_state MLV_get_keyboard_state(MLV_Keyboard_button keyboard_code) {
     SDL_PumpEvents();
     Uint8 *keyboard_states = SDL_GetKeyState(NULL);
     if (keyboard_states[keyboard_code]) return MLV_PRESSED;
     return MLV_RELEASED;
 }
 
-int MLV_left_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_left_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_LSHIFT;
 }
 
-int MLV_right_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_right_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_RSHIFT;
 }
 
-int MLV_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & (MLV_KEYBOARD_KMOD_LSHIFT | MLV_KEYBOARD_KMOD_RSHIFT);
 }
 
-int MLV_left_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_left_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_LCTRL;
 }
 
-int MLV_right_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_right_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_RCTRL;
 }
 
-int MLV_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & (MLV_KEYBOARD_KMOD_LCTRL | MLV_KEYBOARD_KMOD_RCTRL);
 }
 
-int MLV_left_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_left_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_LALT;
 }
 
-int MLV_right_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_right_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_RALT;
 }
 
-int MLV_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & (MLV_KEYBOARD_KMOD_LALT | MLV_KEYBOARD_KMOD_RALT);
 }
 
-int MLV_left_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_left_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_LMETA;
 }
 
-int MLV_right_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_right_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_RMETA;
 }
 
-int MLV_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & (MLV_KEYBOARD_KMOD_LMETA | MLV_KEYBOARD_KMOD_RMETA);
 }
 
-int MLV_num_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_num_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_NUM;
 }
 
-int MLV_caps_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_caps_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_CAPS;
 }
 
-int MLV_mode_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
+MLVAPI int MLV_mode_key_was_pressed(MLV_Keyboard_modifier modifier_code) {
     return modifier_code & MLV_KEYBOARD_KMOD_MODE;
 }

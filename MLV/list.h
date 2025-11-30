@@ -21,6 +21,8 @@
 #ifndef __MLV__LIST_H__
 #define __MLV__LIST_H__
 
+#include "MLV_config.h"
+
 typedef struct _MLV_List MLV_List;
 
 struct _MLV_List {
@@ -29,14 +31,14 @@ struct _MLV_List {
     void *data;
 };
 
-MLV_List *MLV_prepend_list(MLV_List *list, void *data);
+MLVAPI MLV_List *MLV_prepend_list(MLV_List *list, void *data);
 
-void MLV_free_list(MLV_List *list);
+MLVAPI void MLV_free_list(MLV_List *list);
 
-void MLV_foreach_list(MLV_List *list, void (*function)(void *data, void *user_data), void *user_data);
+MLVAPI void MLV_foreach_list(MLV_List *list, void (*function)(void *data, void *user_data), void *user_data);
 
-MLV_List *MLV_find_list(MLV_List *list, void *data);
+MLVAPI MLV_List *MLV_find_list(MLV_List *list, void *data);
 
-MLV_List *MLV_remove_list(MLV_List *list, void *data);
+MLVAPI MLV_List *MLV_remove_list(MLV_List *list, void *data);
 
 #endif

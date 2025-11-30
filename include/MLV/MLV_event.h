@@ -31,6 +31,7 @@
 #ifndef __MLV__MLV_EVENT_H__
 #define __MLV__MLV_EVENT_H__
 
+#include "MLV_config.h"
 #include "MLV_device_with_buttons.h"
 #include "MLV_input_box.h"
 #include "MLV_keyboard.h"
@@ -133,7 +134,7 @@ typedef enum {
  * \param state Etat de la touche concernée par l'évènement. La valeur de ce
  *              champs est défini par l'énumération: MLV_Button_state.
  */
-MLV_Event MLV_get_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
+MLVAPI MLV_Event MLV_get_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
     MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button, MLV_Button_state *state);
 
 /** \~french
@@ -177,7 +178,7 @@ MLV_Event MLV_get_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key
  * \return La fonction renvoie un entier codant le type de l'évènement qui
  *         a été récupéré.
  */
-MLV_Event MLV_wait_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
+MLVAPI MLV_Event MLV_wait_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
     MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button, MLV_Button_state *state);
 
 /** \~french
@@ -225,7 +226,7 @@ MLV_Event MLV_wait_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *ke
  * \return La fonction renvoie un entier codant le type de l'évènement qui
  *         a été récupéré ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_event_or_seconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_event_or_seconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
     char **texte, MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button,
     MLV_Button_state *state, int seconds);
 
@@ -274,7 +275,7 @@ MLV_Event MLV_wait_event_or_seconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_m
  * \return La fonction renvoie un entier codant le type de l'évènement qui
  *         a été récupéré ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_event_or_milliseconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_event_or_milliseconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
     char **texte, MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button,
     MLV_Button_state *state, int milliseconds);
 
@@ -282,7 +283,7 @@ MLV_Event MLV_wait_event_or_milliseconds(MLV_Keyboard_button *key_sym, MLV_Keybo
  * \brief Cette fonction vide la file d'évènements.
  *
  */
-void MLV_flush_event_queue();
+MLVAPI void MLV_flush_event_queue();
 
 /** \~french
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
@@ -315,7 +316,7 @@ void MLV_flush_event_queue();
  * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY
  *         ou MLV_MOUSE_BUTTON )
  */
-MLV_Event MLV_wait_keyboard_or_mouse(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode, int *mouse_x,
+MLVAPI MLV_Event MLV_wait_keyboard_or_mouse(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode, int *mouse_x,
     int *mouse_y);
 
 /** \~french
@@ -344,7 +345,7 @@ MLV_Event MLV_wait_keyboard_or_mouse(MLV_Keyboard_button *sym, MLV_Keyboard_modi
  * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY
  *         ou MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int *mouse_x, int *mouse_y, int seconds);
 
 /** \~french
@@ -361,7 +362,7 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(MLV_Keyboard_button *sym, MLV_Ke
  * \return un entier codant le type de l'évènement qui a été récupéré (
  *         MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds);
+MLVAPI MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds);
 
 /** \~french
  *
@@ -378,7 +379,7 @@ MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds);
  * \return un entier codant le type de l'évènement qui a été récupéré (
  *         MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds);
+MLVAPI MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds);
 
 /** \~french
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
@@ -402,7 +403,7 @@ MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds);
  * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY
  *         ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_keyboard_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode, int seconds);
+MLVAPI MLV_Event MLV_wait_keyboard_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode, int seconds);
 
 /** \~french
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
@@ -426,7 +427,7 @@ MLV_Event MLV_wait_keyboard_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_mo
  * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY
  *         ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_keyboard_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int milliseconds);
 
 /** \~french
@@ -456,7 +457,7 @@ MLV_Event MLV_wait_keyboard_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboa
  * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY
  *         ou MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int *mouse_x, int *mouse_y, int milliseconds);
 
 /** \~french
@@ -465,7 +466,7 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(MLV_Keyboard_button *sym, M
  * \param event_code le code de l'évènement
  * \return La chaîne de caractères associée au code de l'évènement.
  */
-const char *MLV_convert_event_to_string(MLV_Event event_code);
+MLVAPI const char *MLV_convert_event_to_string(MLV_Event event_code);
 
 /** \~french
  * \brief Convertit le nom d'un évènement en son code associé.
@@ -473,7 +474,7 @@ const char *MLV_convert_event_to_string(MLV_Event event_code);
  * \param event_string le nom de l'évènement.
  * \return Le code de l'évènement associé à la chaîne de caractères.
  */
-MLV_Event MLV_convert_string_to_event(const char *event_string);
+MLVAPI MLV_Event MLV_convert_string_to_event(const char *event_string);
 
 /** \~french
  * \brief Convertit le code d'un état en une chaîne de caractères.
@@ -481,7 +482,7 @@ MLV_Event MLV_convert_string_to_event(const char *event_string);
  * \param state_code le code de l'état
  * \return La chaîne de caractères associée au code de l'état.
  */
-const char *MLV_convert_button_state_to_string(MLV_Button_state state_code);
+MLVAPI const char *MLV_convert_button_state_to_string(MLV_Button_state state_code);
 
 /** \~french
  * \brief Convertit le nom d'un état en son code associé.
@@ -489,7 +490,7 @@ const char *MLV_convert_button_state_to_string(MLV_Button_state state_code);
  * \param state_string le nom de l'état.
  * \return Le code de l'état associé à la chaîne de caractères.
  */
-MLV_Button_state MLV_convert_string_to_button_state(const char *state_string);
+MLVAPI MLV_Button_state MLV_convert_string_to_button_state(const char *state_string);
 
 /** \~french
  *
@@ -528,7 +529,7 @@ MLV_Button_state MLV_convert_string_to_button_state(const char *state_string);
  * \return un entier codant le type de l'évènement qui a été récupéré (
  *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_input_box_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y, int width,
+MLVAPI MLV_Event MLV_wait_input_box_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y, int width,
     int height, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     char **text, ...);
 
@@ -559,7 +560,7 @@ MLV_Event MLV_wait_input_box_or_milliseconds(int milliseconds, int top_left_corn
  * \return un entier codant le type de l'évènement qui a été récupéré (
  *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_input_box_with_font_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y,
+MLVAPI MLV_Event MLV_wait_input_box_with_font_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y,
     int width, int height, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     const char *informativeMessage, char **text, const MLV_Font *font, ...);
 
@@ -576,7 +577,7 @@ MLV_Event MLV_wait_input_box_with_font_or_milliseconds(int milliseconds, int top
  *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
  * \
  */
-MLV_Event MLV_wait_particular_input_box_or_milliseconds(int milliseconds, MLV_Input_box *input_box, char **text);
+MLVAPI MLV_Event MLV_wait_particular_input_box_or_milliseconds(int milliseconds, MLV_Input_box *input_box, char **text);
 
 /** \~french
  * \brief Cette fonction suspend l'exécution du programme jusqu'à ce que
@@ -591,7 +592,7 @@ MLV_Event MLV_wait_particular_input_box_or_milliseconds(int milliseconds, MLV_In
  *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
  * \
  */
-MLV_Event MLV_wait_particular_input_box_or_seconds(MLV_Input_box *input_box, char **text, int seconds);
+MLVAPI MLV_Event MLV_wait_particular_input_box_or_seconds(MLV_Input_box *input_box, char **text, int seconds);
 
 #ifdef __cplusplus
 }

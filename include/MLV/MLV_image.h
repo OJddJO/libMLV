@@ -31,6 +31,9 @@
 #ifndef __MLV__MLV_IMAGE_H__
 #define __MLV__MLV_IMAGE_H__
 
+#include <stdint.h>
+#include <SDL/SDL_video.h>
+#include "MLV_config.h"
 #include "MLV_color.h"
 
 #ifdef __cplusplus
@@ -73,7 +76,7 @@ typedef struct _MLV_Image MLV_Image;
  * \param file_image Chemin d'accès du fichier contenant l'image.
  * \return L'image chargée.
  */
-MLV_Image *MLV_load_image(const char *file_image);
+MLVAPI MLV_Image *MLV_load_image(const char *file_image);
 
 /** \~french
  * \brief Sauvegarde une image dans une fichier BMP.
@@ -84,7 +87,7 @@ MLV_Image *MLV_load_image(const char *file_image);
  * \param file_image Chemin d'accès du fichier contenant l'image.
  * \return 0 si c'est un succés, -1 s'il y a eut une erreur.
  */
-int MLV_save_image_as_bmp(const MLV_Image *image, const char *file_image);
+MLVAPI int MLV_save_image_as_bmp(const MLV_Image *image, const char *file_image);
 
 /** \~french
  * \brief Créer une image de composante alpha opaque.
@@ -93,14 +96,14 @@ int MLV_save_image_as_bmp(const MLV_Image *image, const char *file_image);
  * \param height Hauteur de l'image
  * \return L'image créé.
  */
-MLV_Image *MLV_create_image(int width, int height);
+MLVAPI MLV_Image *MLV_create_image(int width, int height);
 
 /** \~french
  * \brief Libère la mémoire utilisée par l'image.
  *
  * \param image Image à supprimer de la mémoire
  */
-void MLV_free_image(MLV_Image *image);
+MLVAPI void MLV_free_image(MLV_Image *image);
 
 /** \~french
  * \brief Copie une image.
@@ -112,7 +115,7 @@ void MLV_free_image(MLV_Image *image);
  * \param image L'image à copier.
  * \return La copie de l'image.
  */
-MLV_Image *MLV_copy_image(const MLV_Image *image);
+MLVAPI MLV_Image *MLV_copy_image(const MLV_Image *image);
 
 /** \~french
  * \brief Copie une partie de l'image.
@@ -128,7 +131,7 @@ MLV_Image *MLV_copy_image(const MLV_Image *image);
  * \param height Hauteur de la partie de l'image à copier
  * \return La copie de l'image.
  */
-MLV_Image *MLV_copy_partial_image(const MLV_Image *image, int x, int y, int width, int height);
+MLVAPI MLV_Image *MLV_copy_partial_image(const MLV_Image *image, int x, int y, int width, int height);
 
 /** \~french
  * \brief Retourne la taille d'une image donnée.
@@ -137,7 +140,7 @@ MLV_Image *MLV_copy_partial_image(const MLV_Image *image, int x, int y, int widt
  * \param width La largeur de l'image.
  * \param height La hauteur de l'image.
  */
-void MLV_get_image_size(const MLV_Image *image, int *width, int *height);
+MLVAPI void MLV_get_image_size(const MLV_Image *image, int *width, int *height);
 
 /** \~french
  * \brief Retourne la largeur d'une image donnée.
@@ -145,7 +148,7 @@ void MLV_get_image_size(const MLV_Image *image, int *width, int *height);
  * \param image L'image à analyser.
  * \return La largeur de l'image.
  */
-int MLV_get_image_width(const MLV_Image *image);
+MLVAPI int MLV_get_image_width(const MLV_Image *image);
 
 /** \~french
  * \brief Retourne la hauteur d'une image donnée.
@@ -153,7 +156,7 @@ int MLV_get_image_width(const MLV_Image *image);
  * \param image L'image à analyser.
  * \return La hauteur de l'image
  */
-int MLV_get_image_height(const MLV_Image *image);
+MLVAPI int MLV_get_image_height(const MLV_Image *image);
 
 /** \~french
  * \brief Redimensionne l'image en ne respectant pas les proportions de l'image
@@ -166,21 +169,21 @@ int MLV_get_image_height(const MLV_Image *image);
  * \param width La largeur de l'image.
  * \param height La hauteur de l'image.
  */
-void MLV_resize_image(MLV_Image *image, int width, int height);
+MLVAPI void MLV_resize_image(MLV_Image *image, int width, int height);
 
 /** \~french
  * \brief Modifie l'image en réalisant une réflexion verticale.
  *
  * \param image L'image à modifier.
  */
-void MLV_vertical_image_mirror(MLV_Image *image);
+MLVAPI void MLV_vertical_image_mirror(MLV_Image *image);
 
 /** \~french
  * \brief Modifie l'image en réalisant une réflexion horizontale.
  *
  * \param image L'image à modifier.
  */
-void MLV_horizontal_image_mirror(MLV_Image *image);
+MLVAPI void MLV_horizontal_image_mirror(MLV_Image *image);
 
 /** \~french
  * \brief Cette fonction redimensionne l'image en repsectant les proportions
@@ -199,7 +202,7 @@ void MLV_horizontal_image_mirror(MLV_Image *image);
  * \param width La nouvelle largeur de l'image.
  * \param height La nouvlle hauteur de l'image.
  */
-void MLV_resize_image_with_proportions(MLV_Image *image, int width, int height);
+MLVAPI void MLV_resize_image_with_proportions(MLV_Image *image, int width, int height);
 
 /** \~french
  * \brief Modifie l'image à l'aide d'une homotétie ( Étire l'image )
@@ -208,7 +211,7 @@ void MLV_resize_image_with_proportions(MLV_Image *image, int width, int height);
  * \param scalar Coefficient de proportionalité de l'homotétie ( >1 l'image est
  *               agrandie, <1 l'image est rétrécie ).
  */
-void MLV_scale_image(MLV_Image *image, double scalar);
+MLVAPI void MLV_scale_image(MLV_Image *image, double scalar);
 
 /** \~french
  * \brief Éffectue une rotation sur une image donnée.
@@ -216,7 +219,7 @@ void MLV_scale_image(MLV_Image *image, double scalar);
  * \param image L'image à modifier.
  * \param rotation L'angle de la rotation.
  */
-void MLV_rotate_image(MLV_Image *image, double rotation);
+MLVAPI void MLV_rotate_image(MLV_Image *image, double rotation);
 
 /** \~french
  * \brief Éffectue une rotation suivie d'une homotétie
@@ -225,7 +228,7 @@ void MLV_rotate_image(MLV_Image *image, double rotation);
  * \param rotation L'angle de la rotation.
  * \param scalar Le coéfficient de proportionnalité de l'homotétie.
  */
-void MLV_rotate_and_scale_image(MLV_Image *image, double rotation, double scalar);
+MLVAPI void MLV_rotate_and_scale_image(MLV_Image *image, double rotation, double scalar);
 
 /** \~french
  * \brief Étire l'image suivant l'axe X et l'axe Y avec des coefficients de
@@ -235,7 +238,7 @@ void MLV_rotate_and_scale_image(MLV_Image *image, double rotation, double scalar
  * \param scalar_x Le coéfficient de proportionnalité de l'axe X.
  * \param scalar_y Le coéfficient de proportionnalité de l'axe Y.
  */
-void MLV_scale_xy_image(MLV_Image *image, double scalar_x, double scalar_y);
+MLVAPI void MLV_scale_xy_image(MLV_Image *image, double scalar_x, double scalar_y);
 
 /** \~french
  * \brief Éffectue une rotation, puis étire l'image suivant l'axe X et l'axe Y
@@ -248,7 +251,7 @@ void MLV_scale_xy_image(MLV_Image *image, double scalar_x, double scalar_y);
  * \param scalar_y Le coéfficient de proportionnalité de l'axe Y.
  *
  */
-void MLV_rotate_and_scale_xy_image(MLV_Image *image, double rotation, double scalar_x, double scalar_y);
+MLVAPI void MLV_rotate_and_scale_xy_image(MLV_Image *image, double rotation, double scalar_x, double scalar_y);
 
 /** \~french
  * \brief Dessine une image donnée à une position donnée de la fenêtre.
@@ -259,7 +262,7 @@ void MLV_rotate_and_scale_xy_image(MLV_Image *image, double rotation, double sca
  * \param y Coordonnée en Y de la position dans la fenêtre du sommet Nord-Ouest
  *          de l'image.
  */
-void MLV_draw_image(const MLV_Image *image, int x, int y);
+MLVAPI void MLV_draw_image(const MLV_Image *image, int x, int y);
 
 /** \~french
  * \brief Dessine une partie d'une image donnée à une position donnée sur la
@@ -276,7 +279,7 @@ void MLV_draw_image(const MLV_Image *image, int x, int y);
  * \param y Coordonnée en Y de la position dans la fenêtre du sommet Nord-Ouest
  *          de la partie de l'image à afficher.
  */
-void MLV_draw_partial_image(const MLV_Image *image, int x_source, int y_source, int width_source, int height_source,
+MLVAPI void MLV_draw_partial_image(const MLV_Image *image, int x_source, int y_source, int width_source, int height_source,
     int x, int y);
 
 /** \~french
@@ -314,7 +317,7 @@ couleur final après recopie :
  * \param image L'image à modifier.
  * \param alpha La nouvelle composante alpha de l'image.
  */
-void MLV_set_alpha_on_image(MLV_Alpha alpha, MLV_Image *image);
+MLVAPI void MLV_set_alpha_on_image(MLV_Alpha alpha, MLV_Image *image);
 
 /** \~french
  *
@@ -326,7 +329,7 @@ void MLV_set_alpha_on_image(MLV_Alpha alpha, MLV_Image *image);
  * \param color La nouvelle couleur du pixel.
  * \param image  L'image à modifier.
  */
-void MLV_set_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_set_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Renvoie la couleur du pixel de l'écran pour une position donnée.
@@ -341,7 +344,7 @@ void MLV_set_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image);
  * \param blue Composante bleue du pixel.
  * \param alpha Composante alpha (transparence) du pixel.
  */
-void MLV_get_pixel(int x, int y, int *red, int *green, int *blue, int *alpha);
+MLVAPI void MLV_get_pixel(int x, int y, int *red, int *green, int *blue, int *alpha);
 
 /** \~french
  * \brief Renvoie la couleur du pixel présent à une position donnée d'une image
@@ -358,7 +361,7 @@ void MLV_get_pixel(int x, int y, int *red, int *green, int *blue, int *alpha);
  * \param blue Composante bleue du pixel.
  * \param alpha Composante alpha (transparence) du pixel.
  */
-void MLV_get_pixel_on_image(const MLV_Image *image, int x, int y, int *red, int *green, int *blue, int *alpha);
+MLVAPI void MLV_get_pixel_on_image(const MLV_Image *image, int x, int y, int *red, int *green, int *blue, int *alpha);
 
 /** \~french
  * \brief Dessine une image dans une image destination
@@ -378,7 +381,7 @@ void MLV_get_pixel_on_image(const MLV_Image *image, int x, int y, int *red, int 
  *                      Il s'agit de la futur position du sommet nord-Ouest de
  *                      la portion d'image à recopier.
  */
-void MLV_draw_partial_image_on_image(const MLV_Image *source_image, int source_x, int source_y, int width, int height,
+MLVAPI void MLV_draw_partial_image_on_image(const MLV_Image *source_image, int source_x, int source_y, int width, int height,
     MLV_Image *destination_image, int destination_x, int destination_y);
 
 /** \~french
@@ -393,7 +396,7 @@ void MLV_draw_partial_image_on_image(const MLV_Image *source_image, int source_x
  *                      Il s'agit de la futur position du sommet nord-Ouest de
  *                      la portion d'image à recopier.
  */
-void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destination_image, int destination_x,
+MLVAPI void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destination_image, int destination_x,
     int destination_y);
 
 /** \~french
@@ -417,15 +420,15 @@ void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destinati
  * int x=3, y=4;
  *
  * SDL_Surface* surface = MLV_get_image_data( image );
- * Uint32 red, blue, green, alpha;
+ * uint32_t red, blue, green, alpha;
  *
  * // Extracting color components from a 32-bit color value
  * SDL_PixelFormat *fmt;
- * Uint32 pixel;
+ * uint32_t pixel;
  *
  * SDL_LockSurface(surface);
  * fmt = surface->format;
- * pixel = *(((Uint32*) surface->pixels)+ y*surface->pitch/4 + x  );
+ * pixel = *(((uint32_t*) surface->pixels)+ y*surface->pitch/4 + x  );
  *
  * // Get Red component
  * red = pixel & fmt->Rmask;  // Isolate red component
@@ -453,28 +456,28 @@ void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destinati
  * \param image L'image dont vous souhaitez récuperer les données internes.
  * \return un pointeur vers une image de la bibliothèque SDL.
  */
-SDL_Surface *MLV_get_image_data(MLV_Image *image);
+MLVAPI SDL_Surface *MLV_get_image_data(MLV_Image *image);
 
 /** \~french
  * \brief Enregistre l'image de l'écran dans un presse papier interne à la
  *        bibliothèque MLV..
  *
  */
-void MLV_save_screen();
+MLVAPI void MLV_save_screen();
 
 /** \~french
  * \brief Renvoie l'image qui se trouve à l'écran.
  *
  * \return L'image qui est affiché à l'écran.
  */
-MLV_Image *MLV_get_screen();
+MLVAPI MLV_Image *MLV_get_screen();
 
 /** \~french
  * \brief Charge l'image présent dans le presse papier interne de la bibliothèque
  *        MLV.
  *
  */
-void MLV_load_screen();
+MLVAPI void MLV_load_screen();
 
 // TODO
 #if 0
@@ -589,9 +592,9 @@ void MLV_draw_partial_image_on_image_FAST(
 #endif
 
 /* TODO  : A Vérifier !
-void MLV_draw_rotated_image(  MLV_Image *image, int x, int y, double rotation );
-void MLV_draw_scaled_image(  MLV_Image *image, int x, int y, double scalar );
-void MLV_draw_scaled_rotated_image(  MLV_Image *image, int x, int y, double roation, double scalar );
+MLVAPI void MLV_draw_rotated_image(  MLV_Image *image, int x, int y, double rotation );
+MLVAPI void MLV_draw_scaled_image(  MLV_Image *image, int x, int y, double scalar );
+MLVAPI void MLV_draw_scaled_rotated_image(  MLV_Image *image, int x, int y, double roation, double scalar );
 */
 
 #ifdef __cplusplus

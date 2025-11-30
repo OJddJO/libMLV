@@ -40,6 +40,7 @@
 #define __MLV__MLV_XML_VA_H__
 
 #include <stdarg.h>
+#include "MLV_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,7 +59,7 @@ extern "C" {
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
-MLV_Xml_error MLV_get_string_value_from_xml_va(const MLV_Xml *xml_data, char **result, const char *xpath, va_list pile);
+MLVAPI MLV_Xml_error MLV_get_string_value_from_xml_va(const MLV_Xml *xml_data, char **result, const char *xpath, va_list pile);
 
 /** \~french
  * \brief Permet de récupérer l'entier d'un champs donné du fichier xml.
@@ -74,7 +75,7 @@ MLV_Xml_error MLV_get_string_value_from_xml_va(const MLV_Xml *xml_data, char **r
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
-MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *result, const char *xpath, va_list pile);
+MLVAPI MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *result, const char *xpath, va_list pile);
 
 /** \~french
  * \brief Permet de récupérer le reel d'un champs donné du fichier xml.
@@ -91,7 +92,7 @@ MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *re
  * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée
  * du document xml.
  */
-MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *result, const char *xpath,
+MLVAPI MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *result, const char *xpath,
     va_list pile);
 
 /** \~french
@@ -109,7 +110,7 @@ MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *
  * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée
  * du document xml.
  */
-MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *result, const char *xpath, va_list pile);
+MLVAPI MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *result, const char *xpath, va_list pile);
 
 /** \~french
  * \brief Compte le nombre d'objets présents dans le fichier xml verifiant
@@ -122,7 +123,7 @@ MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *re
  * \return Cette fonction renvoie le nombre d'objet ayant pour chemin d'accès
  *         "xpath".
  */
-int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *xpath, va_list pile);
+MLVAPI int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *xpath, va_list pile);
 
 /** \~french
  * \brief Permet de récupérer un noeud interne de l'arbre représentant le
@@ -136,7 +137,7 @@ int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *x
  *
  * \return Un noeud interne de l'arbre XML.
  */
-MLV_Xml *MLV_get_xml_object_of_va(const MLV_Xml *xml_data, const char *xpath, va_list pile);
+MLVAPI MLV_Xml *MLV_get_xml_object_of_va(const MLV_Xml *xml_data, const char *xpath, va_list pile);
 
 #ifdef __cplusplus
 }

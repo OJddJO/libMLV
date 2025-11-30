@@ -71,18 +71,18 @@ extern int vasprintf(char **, const char *, va_list);
 
 extern DataMLV *MLV_data;
 
-void MLV_get_size_of_text_va(const char *text, int *width, int *height, va_list pile) {
+MLVAPI void MLV_get_size_of_text_va(const char *text, int *width, int *height, va_list pile) {
     MLV_get_size_of_text_with_font_va(text, width, height, MLV_data->defaultFont, pile);
 }
 
-void MLV_get_size_of_text(const char *text, int *width, int *height, ...) {
+MLVAPI void MLV_get_size_of_text(const char *text, int *width, int *height, ...) {
     va_list pile;
     va_start(pile, height);
     MLV_get_size_of_text_va(text, width, height, pile);
     va_end(pile);
 }
 
-void MLV_get_size_of_text_with_font_va(const char *text, int *width, int *height, const MLV_Font *font, va_list pile) {
+MLVAPI void MLV_get_size_of_text_with_font_va(const char *text, int *width, int *height, const MLV_Font *font, va_list pile) {
     char *complete_text;
     if (vasprintf(&complete_text, text, pile) == -1) { ERROR("Unexpected Error."); }
     if (strlen(complete_text)) {
@@ -93,7 +93,7 @@ void MLV_get_size_of_text_with_font_va(const char *text, int *width, int *height
     free(complete_text);
 }
 
-void MLV_get_size_of_text_with_font(const char *text, int *width, int *height, const MLV_Font *font, ...) {
+MLVAPI void MLV_get_size_of_text_with_font(const char *text, int *width, int *height, const MLV_Font *font, ...) {
     va_list pile;
     va_start(pile, font);
     MLV_get_size_of_text_with_font_va(text, width, height, font, pile);
@@ -111,7 +111,7 @@ void quit_font() {
     TTF_Quit();
 }
 
-MLV_Font *MLV_load_font(const char *file_font, int size) {
+MLVAPI MLV_Font *MLV_load_font(const char *file_font, int size) {
     if (!MLV_data) {
         ERROR(
             "To use MLV_load_font, please initialise first the MLV_Library by calling MLV_create_window before MLV_load_font.")
@@ -127,7 +127,7 @@ MLV_Font *MLV_load_font(const char *file_font, int size) {
     return font;
 }
 
-void MLV_free_font(MLV_Font *font) {
+MLVAPI void MLV_free_font(MLV_Font *font) {
     TTF_CloseFont(font->font);
     MLV_FREE(font, MLV_Font);
 }
@@ -165,18 +165,18 @@ void drawString(SDL_Surface *textBox, int x, int y, const char *message, MLV_Col
     SDL_FreeSurface(text);
 }
 
-void MLV_draw_text_on_image_va(int x, int y, const char *text, MLV_Color color, MLV_Image *image, va_list pile) {
+MLVAPI void MLV_draw_text_on_image_va(int x, int y, const char *text, MLV_Color color, MLV_Image *image, va_list pile) {
     MLV_draw_text_with_font_on_image_va(x, y, text, MLV_data->defaultFont, color, image, pile);
 }
 
-void MLV_draw_text_on_image(int x, int y, const char *text, MLV_Color color, MLV_Image *image, ...) {
+MLVAPI void MLV_draw_text_on_image(int x, int y, const char *text, MLV_Color color, MLV_Image *image, ...) {
     va_list pile;
     va_start(pile, image);
     MLV_draw_text_on_image_va(x, y, text, color, image, pile);
     va_end(pile);
 }
 
-void MLV_draw_text_with_font_on_image_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
+MLVAPI void MLV_draw_text_with_font_on_image_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
     MLV_Image *image, va_list pile) {
     char *complete_text;
     if (vasprintf(&complete_text, text, pile) == -1) { ERROR("Unexpected Error."); }
@@ -184,7 +184,7 @@ void MLV_draw_text_with_font_on_image_va(int x, int y, const char *text, const M
     free(complete_text);
 }
 
-void MLV_draw_text_with_font_on_image(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
+MLVAPI void MLV_draw_text_with_font_on_image(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
     MLV_Image *image, ...) {
     va_list pile;
     va_start(pile, image);
@@ -192,25 +192,25 @@ void MLV_draw_text_with_font_on_image(int x, int y, const char *text, const MLV_
     va_end(pile);
 }
 
-void MLV_draw_text_va(int x, int y, const char *text, MLV_Color color, va_list pile) {
+MLVAPI void MLV_draw_text_va(int x, int y, const char *text, MLV_Color color, va_list pile) {
     MLV_draw_text_with_font_va(x, y, text, MLV_data->defaultFont, color, pile);
 }
 
-void MLV_draw_text(int x, int y, const char *text, MLV_Color color, ...) {
+MLVAPI void MLV_draw_text(int x, int y, const char *text, MLV_Color color, ...) {
     va_list pile;
     va_start(pile, color);
     MLV_draw_text_va(x, y, text, color, pile);
     va_end(pile);
 }
 
-void MLV_draw_text_with_font_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, va_list pile) {
+MLVAPI void MLV_draw_text_with_font_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, va_list pile) {
     char *complete_text;
     if (vasprintf(&complete_text, text, pile) == -1) { ERROR("Unexpected Error."); }
     drawString(MLV_data->screen, x, y, complete_text, color, font->font);
     free(complete_text);
 }
 
-void MLV_draw_text_with_font(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, ...) {
+MLVAPI void MLV_draw_text_with_font(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, ...) {
     va_list pile;
     va_start(pile, color);
     MLV_draw_text_with_font_va(x, y, text, font, color, pile);
@@ -311,7 +311,7 @@ void internal_draw_adapted_text_box_with_font_on_image(int x, int y, const char 
     MLV_FREE(copy, char);
 }
 
-void MLV_draw_adapted_text_box_with_font_va(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI void MLV_draw_adapted_text_box_with_font_va(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     va_list pile) {
     char *complete_message;
@@ -321,13 +321,13 @@ void MLV_draw_adapted_text_box_with_font_va(int x, int y, const char *message, c
     free(complete_message);
 }
 
-void MLV_draw_adapted_text_box_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, va_list pile) {
     MLV_draw_adapted_text_box_with_font_va(x, y, message, MLV_data->defaultFont, sizeInterligne, borderColor, textColor,
         backgroundColor, text_justification, pile);
 }
 
-void MLV_draw_adapted_text_box(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, ...) {
     va_list pile;
     va_start(pile, text_justification);
@@ -336,7 +336,7 @@ void MLV_draw_adapted_text_box(int x, int y, const char *message, int sizeInterl
     va_end(pile);
 }
 
-void MLV_draw_adapted_text_box_with_font_on_image_va(int x, int y, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_adapted_text_box_with_font_on_image_va(int x, int y, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Image *image, va_list pile) {
     char *complete_message;
@@ -346,14 +346,14 @@ void MLV_draw_adapted_text_box_with_font_on_image_va(int x, int y, const char *m
     free(complete_message);
 }
 
-void MLV_draw_adapted_text_box_on_image_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box_on_image_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, MLV_Image *image,
     va_list pile) {
     MLV_draw_adapted_text_box_with_font_on_image_va(x, y, message, MLV_data->defaultFont, sizeInterligne, borderColor,
         textColor, backgroundColor, text_justification, image, pile);
 }
 
-void MLV_draw_adapted_text_box_on_image(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box_on_image(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, MLV_Image *image, ...) {
     va_list pile;
     va_start(pile, image);
@@ -362,7 +362,7 @@ void MLV_draw_adapted_text_box_on_image(int x, int y, const char *message, int s
     va_end(pile);
 }
 
-int MLV_get_size_of_adapted_text_box_with_font_va(const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI int MLV_get_size_of_adapted_text_box_with_font_va(const char *message, const MLV_Font *font, int sizeInterligne,
     int *result_width, int *result_height, va_list pile) {
     char *complete_message;
     if (vasprintf(&complete_message, message, pile) == -1) { ERROR("Unexpected Error."); }
@@ -375,13 +375,13 @@ int MLV_get_size_of_adapted_text_box_with_font_va(const char *message, const MLV
     return result;
 }
 
-int MLV_get_size_of_adapted_text_box_va(const char *message, int sizeInterligne, int *result_width, int *result_height,
+MLVAPI int MLV_get_size_of_adapted_text_box_va(const char *message, int sizeInterligne, int *result_width, int *result_height,
     va_list pile) {
     return MLV_get_size_of_adapted_text_box_with_font_va(message, MLV_data->defaultFont, sizeInterligne, result_width,
         result_height, pile);
 }
 
-int MLV_get_size_of_adapted_text_box(const char *message, int sizeInterligne, int *result_width, int *result_height,
+MLVAPI int MLV_get_size_of_adapted_text_box(const char *message, int sizeInterligne, int *result_width, int *result_height,
     ...) {
     int result;
     va_list pile;
@@ -391,7 +391,7 @@ int MLV_get_size_of_adapted_text_box(const char *message, int sizeInterligne, in
     return result;
 }
 
-void MLV_draw_adapted_text_box_with_font(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI void MLV_draw_adapted_text_box_with_font(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     ...) {
     va_list pile;
@@ -401,7 +401,7 @@ void MLV_draw_adapted_text_box_with_font(int x, int y, const char *message, cons
     va_end(pile);
 }
 
-void MLV_draw_adapted_text_box_with_font_on_image(int x, int y, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_adapted_text_box_with_font_on_image(int x, int y, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Image *image, ...) {
     va_list pile;
@@ -411,7 +411,7 @@ void MLV_draw_adapted_text_box_with_font_on_image(int x, int y, const char *mess
     va_end(pile);
 }
 
-int MLV_get_size_of_adapted_text_box_with_font(const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI int MLV_get_size_of_adapted_text_box_with_font(const char *message, const MLV_Font *font, int sizeInterligne,
     int *result_width, int *result_height, ...) {
     int result;
     va_list pile;
@@ -483,7 +483,7 @@ void internal_draw_text_box_with_font_on_image(int x, int y, int width, int heig
     MLV_FREE(copy, char);
 }
 
-void MLV_draw_text_box_with_font_va(int x, int y, int width, int height, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font_va(int x, int y, int width, int height, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, va_list pile) {
@@ -494,14 +494,14 @@ void MLV_draw_text_box_with_font_va(int x, int y, int width, int height, const c
     free(complete_message);
 }
 
-void MLV_draw_text_box_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, va_list pile) {
     MLV_draw_text_box_with_font_va(x, y, width, height, message, MLV_data->defaultFont, sizeInterligne, borderColor,
         textColor, backgroundColor, text_justification, horizontal_position, vertical_position, pile);
 }
 
-void MLV_draw_text_box(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, ...) {
     va_list pile;
@@ -511,7 +511,7 @@ void MLV_draw_text_box(int x, int y, int width, int height, const char *message,
     va_end(pile);
 }
 
-void MLV_draw_text_box_with_font(int x, int y, int width, int height, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font(int x, int y, int width, int height, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, ...) {
@@ -522,7 +522,7 @@ void MLV_draw_text_box_with_font(int x, int y, int width, int height, const char
     va_end(pile);
 }
 
-void MLV_draw_text_box_with_font_on_image_va(int x, int y, int width, int height, const char *message, MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font_on_image_va(int x, int y, int width, int height, const char *message, MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, MLV_Image *image, va_list pile) {
@@ -533,7 +533,7 @@ void MLV_draw_text_box_with_font_on_image_va(int x, int y, int width, int height
     free(complete_message);
 }
 
-void MLV_draw_text_box_with_font_on_image(int x, int y, int width, int height, const char *message, MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font_on_image(int x, int y, int width, int height, const char *message, MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, MLV_Image *image, ...) {
@@ -544,7 +544,7 @@ void MLV_draw_text_box_with_font_on_image(int x, int y, int width, int height, c
     va_end(pile);
 }
 
-void MLV_draw_text_box_on_image_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box_on_image_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, MLV_Image *image,
     va_list pile) {
@@ -553,7 +553,7 @@ void MLV_draw_text_box_on_image_va(int x, int y, int width, int height, const ch
         pile);
 }
 
-void MLV_draw_text_box_on_image(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box_on_image(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, MLV_Image *image, ...) {
     va_list pile;
@@ -600,7 +600,7 @@ inline static int ucs4ToUtf8(int in, char *out) {
     return 0; // Should never be reached
 }
 
-char *MLV_convert_unicode_to_string(int unicode) {
+MLVAPI char *MLV_convert_unicode_to_string(int unicode) {
     // gunichar v = unicode;
     char *message;
 

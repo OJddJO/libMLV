@@ -47,14 +47,14 @@ extern int vasprintf(char **, const char *, va_list);
 
 extern DataMLV *MLV_data;
 
-void MLV_wait_particular_input_box(MLV_Input_box *input_box, char **text) {
+MLVAPI void MLV_wait_particular_input_box(MLV_Input_box *input_box, char **text) {
     MLV_Input_box *tmp_input_box = NULL;
     (*text) = NULL;
 
-    // We activate the input_box
+    // MLVAPI We activate the input_box
     MLV_activate_input_box(input_box);
 
-    // We first flush the event queue
+    // MLVAPI We first flush the event queue
     MLV_flush_event_queue();
 
     // We wait for a input_box event
@@ -70,15 +70,15 @@ void MLV_wait_particular_input_box(MLV_Input_box *input_box, char **text) {
     }
 }
 
-MLV_Event MLV_wait_particular_input_box_or_milliseconds(int milliseconds, MLV_Input_box *input_box, char **text) {
+MLVAPI MLV_Event MLV_wait_particular_input_box_or_milliseconds(int milliseconds, MLV_Input_box *input_box, char **text) {
     MLV_Event resultat = MLV_NONE;
     MLV_Input_box *tmp_input_box = NULL;
     (*text) = NULL;
 
-    // We activate the input_box
+    // MLVAPI We activate the input_box
     MLV_activate_input_box(input_box);
 
-    // We first flush the event queue
+    // MLVAPI We first flush the event queue
     MLV_flush_event_queue();
 
     int time = MLV_get_time();
@@ -143,7 +143,7 @@ MLV_Event wait_input_box_with_font_or_milliseconds(int milliseconds, int top_lef
     return resultat;
 }
 
-void MLV_wait_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI void MLV_wait_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text,
     const MLV_Font *font, va_list pile) {
     char *complete_informative_message;
@@ -153,7 +153,7 @@ void MLV_wait_input_box_with_font_va(int top_left_corner_X, int top_left_corner_
     free(complete_informative_message);
 }
 
-MLV_Event MLV_wait_input_box_with_font_or_milliseconds_va(int milliseconds, int top_left_corner_X,
+MLVAPI MLV_Event MLV_wait_input_box_with_font_or_milliseconds_va(int milliseconds, int top_left_corner_X,
     int top_left_corner_Y, int width, int height, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     const char *informativeMessage, char **text, const MLV_Font *font, va_list pile) {
     MLV_Event resultat;
@@ -165,7 +165,7 @@ MLV_Event MLV_wait_input_box_with_font_or_milliseconds_va(int milliseconds, int 
     return resultat;
 }
 
-void MLV_wait_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI void MLV_wait_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text,
     const MLV_Font *font, ...) {
     va_list pile;
@@ -175,7 +175,7 @@ void MLV_wait_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, 
     va_end(pile);
 }
 
-MLV_Event MLV_wait_input_box_with_font_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y,
+MLVAPI MLV_Event MLV_wait_input_box_with_font_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y,
     int width, int height, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     const char *informativeMessage, char **text, const MLV_Font *font, ...) {
     MLV_Event resultat;
@@ -187,20 +187,20 @@ MLV_Event MLV_wait_input_box_with_font_or_milliseconds(int milliseconds, int top
     return resultat;
 }
 
-void MLV_wait_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
+MLVAPI void MLV_wait_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text, va_list pile) {
     MLV_wait_input_box_with_font_va(top_left_corner_X, top_left_corner_Y, width, height, borderColor, textColor,
         backgroundColor, informativeMessage, text, MLV_data->defaultFont, pile);
 }
 
-MLV_Event MLV_wait_input_box_or_milliseconds_va(int milliseconds, int top_left_corner_X, int top_left_corner_Y,
+MLVAPI MLV_Event MLV_wait_input_box_or_milliseconds_va(int milliseconds, int top_left_corner_X, int top_left_corner_Y,
     int width, int height, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     const char *informativeMessage, char **text, va_list pile) {
     return MLV_wait_input_box_with_font_or_milliseconds_va(milliseconds, top_left_corner_X, top_left_corner_Y, width,
         height, borderColor, textColor, backgroundColor, informativeMessage, text, MLV_data->defaultFont, pile);
 }
 
-void MLV_wait_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
+MLVAPI void MLV_wait_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text, ...) {
     va_list pile;
     va_start(pile, text);
@@ -209,7 +209,7 @@ void MLV_wait_input_box(int top_left_corner_X, int top_left_corner_Y, int width,
     va_end(pile);
 }
 
-MLV_Event MLV_wait_input_box_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y, int width,
+MLVAPI MLV_Event MLV_wait_input_box_or_milliseconds(int milliseconds, int top_left_corner_X, int top_left_corner_Y, int width,
     int height, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     char **text, ...) {
     MLV_Event resultat = MLV_NONE;

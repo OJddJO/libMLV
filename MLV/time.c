@@ -46,19 +46,19 @@
 
 extern DataMLV *MLV_data;
 
-void MLV_wait_milliseconds(int milliseconds) {
+MLVAPI void MLV_wait_milliseconds(int milliseconds) {
     SDL_Delay(milliseconds);
 }
 
-void MLV_wait_seconds(int seconds) {
+MLVAPI void MLV_wait_seconds(int seconds) {
     SDL_Delay(seconds * 1000);
 }
 
-int MLV_get_time() {
+MLVAPI int MLV_get_time() {
     return SDL_GetTicks();
 }
 
-int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, int *year, int *day_of_the_week) {
+MLVAPI int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, int *year, int *day_of_the_week) {
     time_t current_time;
     time(&current_time);
     struct tm *timeinfo = localtime(&current_time);
@@ -73,14 +73,14 @@ int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, i
     return timeinfo->tm_isdst;
 }
 
-void MLV_change_frame_rate(int rate) {
+MLVAPI void MLV_change_frame_rate(int rate) {
     SDL_setFramerate(&(MLV_data->frame_rate_manager), rate);
 }
 
-int MLV_get_frame_rate() {
+MLVAPI int MLV_get_frame_rate() {
     return (SDL_getFramerate(&(MLV_data->frame_rate_manager)));
 }
 
-void MLV_delay_according_to_frame_rate() {
+MLVAPI void MLV_delay_according_to_frame_rate() {
     SDL_framerateDelay(&(MLV_data->frame_rate_manager));
 }

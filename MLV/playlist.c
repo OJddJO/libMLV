@@ -48,13 +48,13 @@ struct _MLV_Playlist {
     int loop;
 };
 
-void MLV_init_playlists() {
+MLVAPI void MLV_init_playlists() {
     MLV_data->playlists = NULL;
     MLV_data->active_playlists = NULL;
 }
 
 inline static void _1(void *a, [[maybe_unused]] void *b) { MLV_close_playlist(a); }
-void MLV_close_playlists() {
+MLVAPI void MLV_close_playlists() {
     MLV_List *playlists = NULL;
     MLV_List *tmp = MLV_data->playlists;
     while (tmp) {
@@ -66,7 +66,7 @@ void MLV_close_playlists() {
     MLV_free_list(MLV_data->active_playlists);
 }
 
-MLV_Playlist *MLV_create_playlist(int loop) {
+MLVAPI MLV_Playlist *MLV_create_playlist(int loop) {
     MLV_Playlist *playlist = MLV_MALLOC(1, MLV_Playlist);
     playlist->music_items = NULL;
     playlist->semaphore = SDL_CreateSemaphore(1);
@@ -79,7 +79,7 @@ MLV_Playlist *MLV_create_playlist(int loop) {
     return playlist;
 }
 
-void MLV_close_playlist(MLV_Playlist *playlist) {
+MLVAPI void MLV_close_playlist(MLV_Playlist *playlist) {
     if (SDL_SemWait(MLV_data->audio_semaphore)) { ERROR_FULL("Probleme de semaphore"); }
     MLV_data->playlists = MLV_remove_list(MLV_data->playlists, playlist);
     if (SDL_SemPost(MLV_data->audio_semaphore)) { ERROR_FULL("Probleme de semaphore"); }
@@ -88,7 +88,7 @@ void MLV_close_playlist(MLV_Playlist *playlist) {
     SDL_DestroySemaphore(playlist->semaphore);
 }
 
-void MLV_playlist_add(MLV_Playlist *playlist, const char *file_music) {
+MLVAPI void MLV_playlist_add(MLV_Playlist *playlist, const char *file_music) {
     Music_item *item = MLV_MALLOC(1, Music_item);
     item->interne = 1;
     item->music = MLV_load_music(file_music);
@@ -98,7 +98,7 @@ void MLV_playlist_add(MLV_Playlist *playlist, const char *file_music) {
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
 }
 
-void MLV_playlist_add_sheet_music(MLV_Playlist *playlist, MLV_Music *music) {
+MLVAPI void MLV_playlist_add_sheet_music(MLV_Playlist *playlist, MLV_Music *music) {
     Music_item *item = MLV_MALLOC(1, Music_item);
     item->interne = 0;
     item->music = music;
@@ -107,27 +107,27 @@ void MLV_playlist_add_sheet_music(MLV_Playlist *playlist, MLV_Music *music) {
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
 }
 
-void MLV_playlist_remove([[maybe_unused]] MLV_Playlist *playlist, [[maybe_unused]] int index) {
+MLVAPI void MLV_playlist_remove([[maybe_unused]] MLV_Playlist *playlist, [[maybe_unused]] int index) {
     TODO
 }
 
-void MLV_playlist_clear([[maybe_unused]] MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_clear([[maybe_unused]] MLV_Playlist *playlist) {
     TODO
 }
 
-void MLV_playlist_volume(MLV_Playlist *playlist, double volume) {
+MLVAPI void MLV_playlist_volume(MLV_Playlist *playlist, double volume) {
     if (SDL_SemWait(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
     playlist->volume = volume;
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
 }
 
-void MLV_playlist_play(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_play(MLV_Playlist *playlist) {
     if (SDL_SemWait(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
     playlist->playing = 1;
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
 }
 
-void MLV_playlist_pause(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_pause(MLV_Playlist *playlist) {
     if (SDL_SemWait(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
     playlist->playing = 0;
     if (SDL_SemPost(playlist->semaphore)) { ERROR_FULL("Probleme de semaphore"); }
@@ -136,27 +136,27 @@ void MLV_playlist_pause(MLV_Playlist *playlist) {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-void MLV_playlist_stop(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_stop(MLV_Playlist *playlist) {
     TODO
 }
 
-void MLV_playlist_next(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_next(MLV_Playlist *playlist) {
     TODO
 }
 
-void MLV_playlist_previous(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_previous(MLV_Playlist *playlist) {
     TODO
 }
 
-void MLV_playlist_first(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_first(MLV_Playlist *playlist) {
     TODO
 }
 
-void MLV_playlist_last(MLV_Playlist *playlist) {
+MLVAPI void MLV_playlist_last(MLV_Playlist *playlist) {
     TODO
 }
 
-void MLV_playlist_index(MLV_Playlist *playlist, int index) {
+MLVAPI void MLV_playlist_index(MLV_Playlist *playlist, int index) {
     TODO
 }
 

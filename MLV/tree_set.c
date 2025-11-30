@@ -27,7 +27,7 @@
 /*
  * Renvoie la hauteur d'un arbre
  */
-int MLV_get_height_tree_set(MLV_TreeSet *tree_set) {
+MLVAPI int MLV_get_height_tree_set(MLV_TreeSet *tree_set) {
     if (tree_set == NULL) { return 0; }
     return tree_set->height;
 }
@@ -68,7 +68,7 @@ MLV_TreeSet *substitute_in_father_tree_Set(MLV_TreeSet *node, MLV_TreeSet *new_n
 /*
  * Renvoie le noeud de l'arbre de valeur de clé maximale.
  */
-MLV_TreeSet *MLV_get_maximal_node_of_tree_set(MLV_TreeSet *tree_set) {
+MLVAPI MLV_TreeSet *MLV_get_maximal_node_of_tree_set(MLV_TreeSet *tree_set) {
     MLV_TreeSet *result = NULL;
     while (tree_set) {
         result = tree_set;
@@ -130,7 +130,7 @@ MLV_TreeSet *destroy_node_and_his_data_of_tree_set(MLV_TreeSet *tree_set) {
  * Cette fonction cherche un noeud ayant une donnée particulière.
  * Cette fonction rencoie le noeud associé à cette donnée.
  */
-MLV_TreeSet *MLV_find_tree_set(void *data, MLV_TreeSet *tree_set) {
+MLVAPI MLV_TreeSet *MLV_find_tree_set(void *data, MLV_TreeSet *tree_set) {
     if (tree_set == NULL) { return NULL; }
     int comparaison = tree_set->sorting_function(data, tree_set->data);
     if (comparaison == 0) {
@@ -322,7 +322,7 @@ MLV_TreeSet *equilibrate_localy_the_tree_set(MLV_TreeSet *tree_set) {
 /*
  * Algorithme d'insertion d'une nouvelle (cle, data) dans un arbre.
  */
-MLV_TreeSet *MLV_add_data_in_tree_set(void *data, void (*data_destroying_function)(void *data),
+MLVAPI MLV_TreeSet *MLV_add_data_in_tree_set(void *data, void (*data_destroying_function)(void *data),
     int (*sorting_function)(void *data1, void *data2), MLV_TreeSet *tree_set) {
     if (tree_set == NULL) {
         return create_node_tree_set(NULL, NULL, NULL, data, data_destroying_function, sorting_function, 1);
@@ -376,7 +376,7 @@ MLV_TreeSet *MLV_add_data_in_tree_set(void *data, void (*data_destroying_functio
 /*
  * Execute un fonction sur chaque clé et donné de l'arbre.
  */
-void MLV_foreach_data_tree_set(void (*data_function)(void *data, void *data_user), void *data_user,
+MLVAPI void MLV_foreach_data_tree_set(void (*data_function)(void *data, void *data_user), void *data_user,
     MLV_TreeSet *tree_set) {
     if (tree_set) {
         if (tree_set->left_son) { MLV_foreach_data_tree_set(data_function, data_user, tree_set->left_son); }
@@ -432,7 +432,7 @@ void free_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_data) {
 /*
  * Cette fonction supprime tous les noeuds de l'abre sans détruire les données.
  */
-void MLV_init_tree_set(MLV_TreeSet *tree_set) {
+MLVAPI void MLV_init_tree_set(MLV_TreeSet *tree_set) {
     foreach_node_tree_set(free_tree_set, NULL, tree_set);
 }
 
@@ -445,7 +445,7 @@ void deep_free_tree_set(MLV_TreeSet *tree_set, [[maybe_unused]] void *useless_da
  * Cette fonction supprime tous les noeuds de l'abre et détruit les données
  * associé à l'arbre.
  */
-void MLV_clear_tree_set(MLV_TreeSet *tree_set) {
+MLVAPI void MLV_clear_tree_set(MLV_TreeSet *tree_set) {
     foreach_node_tree_set(deep_free_tree_set, NULL, tree_set);
 }
 
@@ -453,7 +453,7 @@ void MLV_clear_tree_set(MLV_TreeSet *tree_set) {
  * Enlève une donnée de l'esemble.
  * La donnée n'est pas supprimée.
  */
-MLV_TreeSet *MLV_remove_data_from_tree_set(void *data, MLV_TreeSet *tree_set) {
+MLVAPI MLV_TreeSet *MLV_remove_data_from_tree_set(void *data, MLV_TreeSet *tree_set) {
     MLV_TreeSet *node = MLV_find_tree_set(data, tree_set);
     return destroy_node_of_tree_set(node);
 }
@@ -462,7 +462,7 @@ MLV_TreeSet *MLV_remove_data_from_tree_set(void *data, MLV_TreeSet *tree_set) {
  * Supprime une donnée de l'ensemble.
  * La donnée est supprimée.
  */
-MLV_TreeSet *MLV_remove_data_and_data_from_tree_set(void *data, MLV_TreeSet *tree_set) {
+MLVAPI MLV_TreeSet *MLV_remove_data_and_data_from_tree_set(void *data, MLV_TreeSet *tree_set) {
     MLV_TreeSet *node = MLV_find_tree_set(data, tree_set);
     destroy_node_data_of_tree_set(node);
     return destroy_node_and_his_data_of_tree_set(node);
@@ -472,6 +472,6 @@ MLV_TreeSet *MLV_remove_data_and_data_from_tree_set(void *data, MLV_TreeSet *tre
  * Supprime une donnée de l'ensemble.
  * La donnée est supprimée.
  */
-int MLV_is_in_tree_set(void *data, MLV_TreeSet *tree_set) {
+MLVAPI int MLV_is_in_tree_set(void *data, MLV_TreeSet *tree_set) {
     return MLV_find_tree_set(data, tree_set) != NULL;
 }

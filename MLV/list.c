@@ -21,7 +21,7 @@
 #include "list.h"
 #include "memory_management.h"
 
-MLV_List *MLV_prepend_list(MLV_List *list, void *data) {
+MLVAPI MLV_List *MLV_prepend_list(MLV_List *list, void *data) {
     MLV_List *result = MLV_MALLOC(1, MLV_List);
     if (list) { list->previous = result; }
     result->previous = NULL;
@@ -30,21 +30,21 @@ MLV_List *MLV_prepend_list(MLV_List *list, void *data) {
     return result;
 }
 
-void MLV_free_list(MLV_List *list) {
+MLVAPI void MLV_free_list(MLV_List *list) {
     if (list) {
         MLV_free_list(list->next);
         MLV_FREE(list, MLV_List);
     }
 }
 
-void MLV_foreach_list(MLV_List *list, void (*function)(void *data, void *user_data), void *user_data) {
+MLVAPI void MLV_foreach_list(MLV_List *list, void (*function)(void *data, void *user_data), void *user_data) {
     while (list) {
         function(list->data, user_data);
         list = list->next;
     }
 }
 
-MLV_List *MLV_find_list(MLV_List *list, void *data) {
+MLVAPI MLV_List *MLV_find_list(MLV_List *list, void *data) {
     while (list) {
         if (list->data == data) { break; }
         list = list->next;
@@ -52,7 +52,7 @@ MLV_List *MLV_find_list(MLV_List *list, void *data) {
     return list;
 }
 
-MLV_List *MLV_remove_list(MLV_List *list, void *data) {
+MLVAPI MLV_List *MLV_remove_list(MLV_List *list, void *data) {
     MLV_List *result;
     MLV_List *elem = MLV_find_list(list, data);
     if (elem->previous) { elem->previous->next = elem->next; }

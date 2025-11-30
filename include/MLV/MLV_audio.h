@@ -32,11 +32,7 @@
 #ifndef __MLV__MLV_AUDIO_H__
 #define __MLV__MLV_AUDIO_H__
 
-#ifndef MEMORY_DEBUG
-    #include <SDL/SDL.h>
-#else
-    #include "memory_debug.h"
-#endif
+#include "MLV_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,12 +55,12 @@ typedef struct _MLV_Sound MLV_Sound;
  *  \return Renvoie 0 si l'infrastructure audio a été correctement initialisé,
  *          renvoie -1 sinon.
  */
-int MLV_init_audio();
+MLVAPI int MLV_init_audio();
 
 /** \~french
  * \brief Ferme proprement les différents périphériques audios.
  */
-void MLV_free_audio();
+MLVAPI void MLV_free_audio();
 
 /** \~french
  * \brief Change la taille du buffer audio. La taille doit être une puissance
@@ -93,7 +89,7 @@ void MLV_free_audio();
  *  \return Renvoie 0 si l'infrastructure audio a été correctement initialisé,
  *          renvoie -1 sinon.
  */
-int MLV_change_audio_buffer_size(int buffer_size);
+MLVAPI int MLV_change_audio_buffer_size(int buffer_size);
 
 /** \~french
  * \brief Change le nombre d'écahantillons sonores qui peuvent être joués en
@@ -101,7 +97,7 @@ int MLV_change_audio_buffer_size(int buffer_size);
  *
  * \param n Le nombre d'échantillons sonores.
  */
-void MLV_change_number_of_parallel_sounds(unsigned int n);
+MLVAPI void MLV_change_number_of_parallel_sounds(unsigned int n);
 
 /** \~french
  * \brief Charge un ficher contenant de la musique en mémoire.
@@ -117,14 +113,14 @@ void MLV_change_number_of_parallel_sounds(unsigned int n);
  * \return Un pointeur vers la musique chargée en mémoire, ou NULL si la
  *         bibliothèque n'a pas réussi à charger la musique en mémoire.
  */
-MLV_Music *MLV_load_music(const char *file_music);
+MLVAPI MLV_Music *MLV_load_music(const char *file_music);
 
 /** \~french
  * \brief Ferme un morceau de musique chargé en mémoire.
  *
  * \param music Le morceau de musique à fermer
  */
-void MLV_free_music(MLV_Music *music);
+MLVAPI void MLV_free_music(MLV_Music *music);
 
 /** \~french
  * \brief Joue un morceau de musique qui est chargée en mémoire.
@@ -134,12 +130,12 @@ void MLV_free_music(MLV_Music *music);
  * \param loop Le nombre de fois que le morceau doit être joué. Si loop est
  *        strictement négatif, le morceau sera joué indéfiniment.
  */
-void MLV_play_music(const MLV_Music *music, float volume, int loop);
+MLVAPI void MLV_play_music(const MLV_Music *music, float volume, int loop);
 
 /** \~french
  * \brief Arrête toutes les musiques.
  */
-void MLV_stop_music();
+MLVAPI void MLV_stop_music();
 
 /** \~french
  * \brief Charge un ficher contenant un échantillon sonore en mémoire.
@@ -156,14 +152,14 @@ void MLV_stop_music();
  * \return Null si le fichier n'a pas pu être chargé en mémoire. Un pointeur vers
  *         l'échantllon sonore sinon.
  */
-MLV_Sound *MLV_load_sound(const char *file_sound);
+MLVAPI MLV_Sound *MLV_load_sound(const char *file_sound);
 
 /** \~french
  * \brief Ferme un échantillon sonore chargé en mémoire.
  *
  * \param sound L'échantillon sonore à fermer
  */
-void MLV_free_sound(MLV_Sound *sound);
+MLVAPI void MLV_free_sound(MLV_Sound *sound);
 
 /** \~french
  * \brief Joue un échantillon sonore chargé en mémoire.
@@ -171,12 +167,12 @@ void MLV_free_sound(MLV_Sound *sound);
  * \param sound L'échantillon sonore à jouer.
  * \param volume Le volume sonore.
  */
-void MLV_play_sound(const MLV_Sound *sound, float volume);
+MLVAPI void MLV_play_sound(const MLV_Sound *sound, float volume);
 
 /** \~french
  * \brief Arrête tous les échantillons sonores.
  */
-void MLV_stop_all_sounds();
+MLVAPI void MLV_stop_all_sounds();
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 /*
  *   This file is part of the MLV Library.
  *
- *   Copyright (C) 2012 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2025 OJddJO
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -18,23 +18,27 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MLV__KEY_H__
-#define __MLV__KEY_H__
+#ifndef __MLV_CONFIG_H__
+#define __MLV_CONFIG_H__
 
-#include "MLV_config.h"
-
-typedef struct _MLV_Key MLV_Key;
-
-MLVAPI MLV_Key *MLV_create_key(void *value, void (*value_destroying_function)(void *value),
-    int (*compare_values)(void *value1, void *value2));
-
-MLVAPI void MLV_free_key(MLV_Key *key);
-
-MLVAPI int MLV_compare_keys(MLV_Key *key1, MLV_Key *key2);
-
-MLVAPI MLV_Key *MLV_string_to_key(const char *text);
-MLVAPI MLV_Key *MLV_integer_to_key(int integer);
-
-MLVAPI void *MLV_get_value_from_key(MLV_Key *key);
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
+    #define MLVDECL __declspec(dllexport)
+    #define MLVIMPORT __declspec(dllimport)
+#else
+    #define MLVDECL
+    #define MLVIMPORT
 #endif
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
+    #define MLVCALL __cdecl
+#else
+    #define MLVCALL
+#endif
+
+#ifdef MLV_BUILD
+    #define MLVAPI MLVDECL MLVCALL
+#else
+    #define MLVAPI MLVIMPORT MLVCALL
+#endif
+
+#endif // __MLV_CONFIG_H__

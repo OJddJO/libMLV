@@ -33,6 +33,7 @@
 #ifndef __MLV__MLV_INPUT_BOX_H__
 #define __MLV__MLV_INPUT_BOX_H__
 
+#include "MLV_config.h"
 #include "MLV_color.h"
 #include "MLV_text.h"
 
@@ -79,7 +80,7 @@ typedef struct _MLV_Input_box MLV_Input_box;
  * \param text                  L'addresse où sera placé la réponse donnée par
  *                              l'utilisateur.
  */
-void MLV_wait_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
+MLVAPI void MLV_wait_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text, ...);
 
 /** \~french
@@ -106,7 +107,7 @@ void MLV_wait_input_box(int top_left_corner_X, int top_left_corner_Y, int width,
  *                            l'utilisateur.
  * \param font                La font du texte à utiliser.
  */
-void MLV_wait_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI void MLV_wait_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text,
     const MLV_Font *font, ...);
 
@@ -118,7 +119,7 @@ void MLV_wait_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, 
  * \param input_box La boîte de saisie qui doit être observée.
  * \param text Le texte récupéré par la boîte de saisie.
  */
-void MLV_wait_particular_input_box(MLV_Input_box *input_box, char **text);
+MLVAPI void MLV_wait_particular_input_box(MLV_Input_box *input_box, char **text);
 
 /** \~french
  * \brief Cette fonction créé une boîte de saisie.
@@ -147,7 +148,7 @@ void MLV_wait_particular_input_box(MLV_Input_box *input_box, char **text);
  * \param backgroundColor La couleur du fond.
  * \param informativeMessage La message d'entête de la boîte de saisie.
  */
-MLV_Input_box *MLV_create_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, ...);
 
 /** \~french
@@ -163,7 +164,7 @@ MLV_Input_box *MLV_create_input_box(int top_left_corner_X, int top_left_corner_Y
  * \param informativeMessage Le message d'entête de la boîte de saisie.
  * \param font La font à utiliser pour le texte.
  */
-MLV_Input_box *MLV_create_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     const MLV_Font *font, ...);
 
@@ -174,7 +175,7 @@ MLV_Input_box *MLV_create_input_box_with_font(int top_left_corner_X, int top_lef
  *
  * \param input_box La boîte de saisie à fermer.
  */
-void MLV_free_input_box(MLV_Input_box *input_box);
+MLVAPI void MLV_free_input_box(MLV_Input_box *input_box);
 
 /** \~french
  * \brief Cette fonction change le message d'entête d'une boîte de saisie.
@@ -182,28 +183,28 @@ void MLV_free_input_box(MLV_Input_box *input_box);
  * \param input_box La boîte de saisie à modifier.
  * \param message Le message d'entête.
  */
-void MLV_change_informative_message_of_input_box(MLV_Input_box *input_box, const char *message, ...);
+MLVAPI void MLV_change_informative_message_of_input_box(MLV_Input_box *input_box, const char *message, ...);
 
 /** \~french
  * \brief Cette fonction dessine une boîte de saisie particulière.
  *
  * \param input_box La boîte de saisie à dessiner.
  */
-void MLV_draw_input_box(MLV_Input_box *input_box);
+MLVAPI void MLV_draw_input_box(MLV_Input_box *input_box);
 
 /** \~french
  * \brief Cette fonction dessine tous les boîtes de saisies.
  *
 
  */
-void MLV_draw_all_input_boxes();
+MLVAPI void MLV_draw_all_input_boxes();
 
 /** \~french
  * \brief Cette fonction supprime l'historique d'une boîte de saisie.
  *
  * \param input_box La boîte de saisie dont l'histoirque doit être supprimé
  */
-void MLV_suppress_history(MLV_Input_box *input_box);
+MLVAPI void MLV_suppress_history(MLV_Input_box *input_box);
 
 /** \~french
  * \brief Cette fonction change la taille et la position d'une boîte de saisie donnée en paramètre.
@@ -216,7 +217,7 @@ void MLV_suppress_history(MLV_Input_box *input_box);
  * \param width La nouvelle largeur de la boîte de saisie.
  * \param height La nouvelle hauteur de la boîte de saisie.
  */
-void MLV_change_input_box_geometry(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y, int width,
+MLVAPI void MLV_change_input_box_geometry(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y, int width,
     int height);
 
 /** \~french
@@ -226,7 +227,7 @@ void MLV_change_input_box_geometry(MLV_Input_box *input_box, int top_left_corner
  * \param width La nouvelle largeur de la boîte de saisie.
  * \param height La nouvelle hauteur de la boîte de saisie.
  */
-void MLV_change_input_box_size(MLV_Input_box *input_box, int width, int height);
+MLVAPI void MLV_change_input_box_size(MLV_Input_box *input_box, int width, int height);
 
 /** \~french
  * \brief Cette fonction change la position d'une boîte de saisie donnée en paramètre.
@@ -237,7 +238,7 @@ void MLV_change_input_box_size(MLV_Input_box *input_box, int width, int height);
  * \param top_left_corner_Y La nouvelle coordonnée en Y de la position du sommet
  *                          Nord-Ouest de la boîte de saisie.
  */
-void MLV_change_input_box_position(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y);
+MLVAPI void MLV_change_input_box_position(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y);
 
 /** \~french
  * \brief Cette fonction change les différentes couleurs d'une boîte de saisie donnée
@@ -247,7 +248,7 @@ void MLV_change_input_box_position(MLV_Input_box *input_box, int top_left_corner
  * \param textColor La nouvelle couleur du texte de la boîte de saisie.
  * \param backgroundColor La nouvelle couleur de fond de la boîte de saisie.
  */
-void MLV_change_input_box_colors(MLV_Input_box *input_box, MLV_Color borderColor, MLV_Color textColor,
+MLVAPI void MLV_change_input_box_colors(MLV_Input_box *input_box, MLV_Color borderColor, MLV_Color textColor,
     MLV_Color backgroundColor);
 
 /** \~french
@@ -264,14 +265,14 @@ void MLV_change_input_box_colors(MLV_Input_box *input_box, MLV_Color borderColor
  *
  * \param input_box La boîte de saisie à activer.
  */
-void MLV_activate_input_box(MLV_Input_box *input_box);
+MLVAPI void MLV_activate_input_box(MLV_Input_box *input_box);
 
 /** \~french
  * \brief Cette fonction désactive la boîte de saisie qui est active.
  *
  * Si il n'y a pas de boîte de saisie active, cette fonction ne fait rien.
  */
-void MLV_desactivate_input_box();
+MLVAPI void MLV_desactivate_input_box();
 
 #ifdef __cplusplus
 }

@@ -45,7 +45,7 @@
     #define MLV_DIR_SEPARATOR       "/"
 #endif
 
-char *MLV_get_base_name(const char *path) {
+MLVAPI char *MLV_get_base_name(const char *path) {
     // return g_path_get_basename( path );
 
     if (!path) return NULL;
@@ -71,7 +71,7 @@ char *MLV_get_base_name(const char *path) {
     return result;
 }
 
-char *MLV_get_directory_name(const char *path) {
+MLVAPI char *MLV_get_directory_name(const char *path) {
     // return g_path_get_dirname( path );
 
     if (!path) return NULL;
@@ -90,7 +90,7 @@ char *MLV_get_directory_name(const char *path) {
     return result;
 }
 
-int MLV_path_is_absolute(const char *path) {
+MLVAPI int MLV_path_is_absolute(const char *path) {
     // return g_path_is_absolute( path );
     if (path == NULL) return 0;
 
@@ -106,11 +106,11 @@ int MLV_path_is_absolute(const char *path) {
     return 0;
 }
 
-int MLV_path_is_relative(const char *path) {
+MLVAPI int MLV_path_is_relative(const char *path) {
     return !MLV_path_is_absolute(path);
 }
 
-char *MLV_build_path_v(char **elements) {
+MLVAPI char *MLV_build_path_v(char **elements) {
     // gchar* tmp_res = g_build_filenamev( elements );
     // char* result = strdup( tmp_res );
     // g_free( tmp_res ); // tmp_res have to be freed with g_free (
@@ -141,7 +141,7 @@ char *MLV_build_path_v(char **elements) {
     return result;
 }
 
-char *MLV_build_path(const char *first_element, ...) {
+MLVAPI char *MLV_build_path(const char *first_element, ...) {
     char *result;
 
     if (!first_element) return NULL;
@@ -181,14 +181,14 @@ char *MLV_build_path(const char *first_element, ...) {
     return result;
 }
 
-int MLV_path_is_a_directory(const char *path) {
+MLVAPI int MLV_path_is_a_directory(const char *path) {
     if (!path) return 0;
     DIR *dir = opendir(path);
     if (dir) closedir(dir);
     return dir != NULL;
 }
 
-int MLV_path_is_a_file(const char *path) {
+MLVAPI int MLV_path_is_a_file(const char *path) {
     if (!path) return 0;
     DIR *dir = opendir(path);
     if (dir) {
@@ -200,14 +200,14 @@ int MLV_path_is_a_file(const char *path) {
     return file != NULL;
 }
 
-int MLV_path_exists(const char *path) {
+MLVAPI int MLV_path_exists(const char *path) {
     if (!path) return 0;
     FILE *file = fopen(path, "r");
     if (file) fclose(file);
     return file != NULL;
 }
 
-char *MLV_get_current_directory() {
+MLVAPI char *MLV_get_current_directory() {
 #if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
     return _getcwd(NULL, 0);
 #else
@@ -215,7 +215,7 @@ char *MLV_get_current_directory() {
 #endif
 }
 
-const char *MLV_get_temporary_directory() {
+MLVAPI const char *MLV_get_temporary_directory() {
 #if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
     DWORD size = GetTempPathA(0, NULL) + 1;
     LPSTR path = (LPSTR)MLV_MALLOC(size, CHAR);
@@ -229,7 +229,7 @@ const char *MLV_get_temporary_directory() {
 #endif
 }
 
-const char *MLV_get_home_directory() {
+MLVAPI const char *MLV_get_home_directory() {
 #if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__)
     char *path = getenv("HOMEPATH");
 #else

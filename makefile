@@ -17,7 +17,7 @@ INCLUDE = -I ./include -I ./include/MLV -I ./include/SDL -I ./include/glib  -I .
 LIB 	= -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_gfx -lxml2
 CCARGS	= -Wall -Wextra -Werror -O2 -fPIC -std=c17 -flto=auto -fno-strict-aliasing
 
-EXTRA	= -D_GNU_SOURCE
+EXTRA	= -D_GNU_SOURCE -DMLV_BUILD
 
 all: createDirs $(OBJ)
 	@printf "Building dynamic library... "

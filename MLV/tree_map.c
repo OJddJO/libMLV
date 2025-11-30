@@ -60,19 +60,19 @@ int compare_pairs_key_data(PairKeyData *pair1, PairKeyData *pair2) {
     return MLV_compare_keys(pair1->key, pair2->key);
 }
 
-MLV_TreeMap *MLV_create_tree_map() {
+MLVAPI MLV_TreeMap *MLV_create_tree_map() {
     MLV_TreeMap *result = MLV_MALLOC(1, MLV_TreeMap);
     result->set = NULL;
     return result;
 }
 
-void MLV_add_data_in_tree_map(MLV_Key *key, void *data, void (*data_destroying_function)(void *data),
+MLVAPI void MLV_add_data_in_tree_map(MLV_Key *key, void *data, void (*data_destroying_function)(void *data),
     MLV_TreeMap *tree_map) {
     tree_map->set = MLV_add_data_in_tree_set(create_pair_key_data(key, data, data_destroying_function),
         (void (*)(void *))free_pair_key_data, (int (*)(void *, void *))compare_pairs_key_data, tree_map->set);
 }
 
-void *MLV_get_data_from_tree_map(MLV_Key *key, MLV_TreeMap *tree_map) {
+MLVAPI void *MLV_get_data_from_tree_map(MLV_Key *key, MLV_TreeMap *tree_map) {
     PairKeyData *key_data = create_pair_key_data(key, NULL, NULL);
     MLV_TreeSet *elem = MLV_find_tree_set(key_data, tree_map->set);
     PairKeyData *founded_key_data = (PairKeyData *)elem->data;
@@ -88,8 +88,8 @@ void wrapper_free_key_of_pair_key_data(void *pair, [[maybe_unused]] void *useles
     free_key_of_pair_key_data((PairKeyData *)pair);
 }
 
-void MLV_init_tree_map(MLV_TreeMap *tree_map) {
-    // On supprime les clés
+MLVAPI void MLV_init_tree_map(MLV_TreeMap *tree_map) {
+    // On supprime les cléMLVAPI s
     MLV_foreach_data_tree_set(wrapper_free_key_of_pair_key_data, NULL, tree_map->set);
     // On réinitialise la table
     MLV_init_tree_set(tree_map->set);
@@ -120,7 +120,7 @@ void wrapper_key_data_function(void *data, void *data_user) {
     }
 }
 
-void MLV_foreach_key_data_tree_map(void (*key_data_function)(MLV_Key *key, void *data, void *data_user),
+MLVAPI void MLV_foreach_key_data_tree_map(void (*key_data_function)(MLV_Key *key, void *data, void *data_user),
     void *data_user, MLV_TreeMap *tree_map) {
 
     Wrapper_data_user *wrapper_data = create_wrapper_data_user(data_user, key_data_function);
@@ -128,16 +128,16 @@ void MLV_foreach_key_data_tree_map(void (*key_data_function)(MLV_Key *key, void 
     free_wrapper_data_user(wrapper_data);
 }
 
-void MLV_clear_tree_map(MLV_TreeMap *tree_map) {
+MLVAPI void MLV_clear_tree_map(MLV_TreeMap *tree_map) {
     MLV_clear_tree_set(tree_map->set);
 }
 
-void MLV_free_tree_map(MLV_TreeMap *tree_map) {
+MLVAPI void MLV_free_tree_map(MLV_TreeMap *tree_map) {
     MLV_clear_tree_map(tree_map);
     MLV_FREE(tree_map, MLV_TreeMap);
 }
 
-void MLV_superficial_free_tree_map(MLV_TreeMap *tree_map) {
+MLVAPI void MLV_superficial_free_tree_map(MLV_TreeMap *tree_map) {
     MLV_init_tree_map(tree_map);
     MLV_FREE(tree_map, MLV_TreeMap);
 }

@@ -23,6 +23,8 @@
 
 #include "platform.h"
 
+#include "MLV_config.h"
+
 #if defined(__MLV_ANDROID__)
     #define MLV_16_BPP 16
 #else

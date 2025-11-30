@@ -34,6 +34,7 @@
 #define __MLV__MLV_RANDOM_H__
 
 #include <stdint.h>
+#include "MLV_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -54,14 +55,14 @@ extern "C" {
  * \param seed La graine (entier sur 32 bits).
  *
  */
-void MLV_set_seed(int32_t seed);
+MLVAPI void MLV_set_seed(int32_t seed);
 
 /** \~french
  * \brief Renvoie 0 ou 1 aléatoirement.
  *
  * \return 0 ou 1 aléatoirement.
  */
-int MLV_get_random_boolean();
+MLVAPI int MLV_get_random_boolean();
 
 /** \~french
  * \brief Renvoie un entier aléatoire choisi dans un intervalle donné en
@@ -71,7 +72,7 @@ int MLV_get_random_boolean();
  * \param end Borne supérieur de l'intervalle ( inclusif )
  * \return  Un entier aléatoire choisi dans l'intervalle [begin, end].
  */
-int MLV_get_random_integer(int begin, int end);
+MLVAPI int MLV_get_random_integer(int begin, int end);
 
 /** \~french
  * \brief Renvoie un réel aléatoire choisi dans un intervalle donné en
@@ -81,7 +82,7 @@ int MLV_get_random_integer(int begin, int end);
  * \param end Borne supérieur de l'intervalle ( inclusif )
  * \return Un réel aléatoire choisi dans l'intervalle [begin, end].
  */
-double MLV_get_random_double(double begin, double end);
+MLVAPI double MLV_get_random_double(double begin, double end);
 
 #ifdef __cplusplus
 }

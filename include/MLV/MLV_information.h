@@ -31,6 +31,8 @@
 #ifndef __MLV__MLV_INFORMATIONS_H__
 #define __MLV__MLV_INFORMATIONS_H__
 
+#include "MLV_config.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -40,14 +42,14 @@ extern "C" {
  *
  * \return Le nom de la bibliothèque.
  */
-const char *MLV_get_package_name();
+MLVAPI const char *MLV_get_package_name();
 
 /** \~french
  * \brief Renvoie le nom de la licence de la bibliothèque.
  *
  * \return Le nom de la licence de la bibliothèque.
  */
-const char *MLV_get_licence();
+MLVAPI const char *MLV_get_licence();
 
 #ifdef __cplusplus
 }

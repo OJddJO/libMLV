@@ -34,6 +34,7 @@
 #ifndef __MLV__MLV_ANIMATION_H__
 #define __MLV__MLV_ANIMATION_H__
 
+#include "MLV_config.h"
 #include "MLV_audio.h"
 #include "MLV_image.h"
 
@@ -118,14 +119,14 @@ typedef struct _MLV_Animation MLV_Animation;
  * \param nb_channels Nombre de canaux sonore de l'animation.
  * \return Un pointeur vers une animation.
  */
-MLV_Animation *MLV_create_animation(unsigned int nb_frames, unsigned int nb_layers, unsigned int nb_channels);
+MLVAPI MLV_Animation *MLV_create_animation(unsigned int nb_frames, unsigned int nb_layers, unsigned int nb_channels);
 
 /** \~french
  * \brief Cette fonction libère les données allouées pour l'animation
  *
  * \param animation L'animation à fermer.
  */
-void MLV_free_animation(MLV_Animation *animation);
+MLVAPI void MLV_free_animation(MLV_Animation *animation);
 
 /** \~french
  * \brief Change un animation en remplacant une image et son temps d'affichage
@@ -140,7 +141,7 @@ void MLV_free_animation(MLV_Animation *animation);
  * \param animation Animation à modifier
  * \param position position de l'image dans l'animation
  */
-void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, unsigned int delay,
+MLVAPI void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, unsigned int delay,
     MLV_Animation *animation, unsigned int position);
 
 /** \~french
@@ -153,7 +154,7 @@ void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **arra
  * \param position position de l'image dans l'animation
  * \param layer     Couche de l'image.
  */
-void MLV_change_frame_image_in_animation(MLV_Image *image, MLV_Animation *animation, unsigned int position,
+MLVAPI void MLV_change_frame_image_in_animation(MLV_Image *image, MLV_Animation *animation, unsigned int position,
     unsigned int layer);
 
 /** \~french
@@ -166,7 +167,7 @@ void MLV_change_frame_image_in_animation(MLV_Image *image, MLV_Animation *animat
  * \param position  position de l'image dans l'animation
  * \param channel   Canal du son.
  */
-void MLV_change_frame_sound_in_animation(MLV_Sound *sound, MLV_Animation *animation, unsigned int position,
+MLVAPI void MLV_change_frame_sound_in_animation(MLV_Sound *sound, MLV_Animation *animation, unsigned int position,
     unsigned int channel);
 
 /** \~french
@@ -176,7 +177,7 @@ void MLV_change_frame_sound_in_animation(MLV_Sound *sound, MLV_Animation *animat
  * \param animation Animation à modifier
  * \param position position de l'image dans l'animation
  */
-void MLV_change_frame_delay_in_animation(unsigned int delay, MLV_Animation *animation, unsigned int position);
+MLVAPI void MLV_change_frame_delay_in_animation(unsigned int delay, MLV_Animation *animation, unsigned int position);
 
 /** \~french
  * \brief Recupère l'image et le temps présents à une position et une couche
@@ -188,7 +189,7 @@ void MLV_change_frame_delay_in_animation(unsigned int delay, MLV_Animation *anim
  * \param image image a ajouter dans l'animation
  * \param delay temps d'affichage de l'image
  */
-void MLV_get_frame_from_animation(MLV_Animation *animation, unsigned int position, unsigned int layer,
+MLVAPI void MLV_get_frame_from_animation(MLV_Animation *animation, unsigned int position, unsigned int layer,
     MLV_Image **image, unsigned int *delay);
 
 /** \~french
@@ -200,7 +201,7 @@ void MLV_get_frame_from_animation(MLV_Animation *animation, unsigned int positio
  *
  * \return le temps d'affichage de l'image
  */
-int MLV_get_frame_delay_from_animation(MLV_Animation *animation, unsigned int position);
+MLVAPI int MLV_get_frame_delay_from_animation(MLV_Animation *animation, unsigned int position);
 
 /** \~french
  * \brief Renvoie l'image présente à une position et une couche donnée d'une
@@ -212,7 +213,7 @@ int MLV_get_frame_delay_from_animation(MLV_Animation *animation, unsigned int po
  *
  * \return l'image extraite.
  */
-MLV_Image *MLV_get_frame_image_from_animation(MLV_Animation *animation, unsigned int position, unsigned int layer);
+MLVAPI MLV_Image *MLV_get_frame_image_from_animation(MLV_Animation *animation, unsigned int position, unsigned int layer);
 
 ////////////////////////////////////////////////
 //    Animation engine
@@ -274,35 +275,35 @@ typedef struct _MLV_Animation_player MLV_Animation_player;
  *
  * \return L'animateur créé.
  */
-MLV_Animation_player *MLV_create_animation_player(MLV_Animation *animation);
+MLVAPI MLV_Animation_player *MLV_create_animation_player(MLV_Animation *animation);
 
 /** \~french
  * \brief Libère l'espace mémoire alloué pour un animateur donné.
  *
  * \param animation_player Le lecteur d'animation à suprimer
  */
-void MLV_free_animation_player(MLV_Animation_player *animation_player);
+MLVAPI void MLV_free_animation_player(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Demare la lecture de l'animation lu par le lecteur d'animation.
  *
  * \param animation_player Le lecteur d'animation
  */
-void MLV_play_animation_player(MLV_Animation_player *animation_player);
+MLVAPI void MLV_play_animation_player(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Demande à un lecteur d'animation donné de jouer l'animation à l'envers.
  *
  * \param animation_player Le lecteur d'animation
  */
-void MLV_play_revert_animation_player(MLV_Animation_player *animation_player);
+MLVAPI void MLV_play_revert_animation_player(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Met en pause la lecture d'un lecteur d'animation donné.
  *
  * \param animation_player Le lecteur d'animation
  */
-void MLV_stop_animation_player(MLV_Animation_player *animation_player);
+MLVAPI void MLV_stop_animation_player(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Demande à l'animateur de reprendre la lecture de l'animation depuis le
@@ -310,21 +311,21 @@ void MLV_stop_animation_player(MLV_Animation_player *animation_player);
  *
  * \param animation_player Le lecteur d'animation
  */
-void MLV_rewind_animation_player(MLV_Animation_player *animation_player);
+MLVAPI void MLV_rewind_animation_player(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Force le lecteur d'animation à passer à l'image suivante.
  *
  * \param animation_player Le lecteur d'animation
  */
-void MLV_next_frame(MLV_Animation_player *animation_player);
+MLVAPI void MLV_next_frame(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Force l'animateur à revenir sur l'image précédente.
  *
  * \param animation_player Le lecteur d'animation
  */
-void MLV_previous_frame(MLV_Animation_player *animation_player);
+MLVAPI void MLV_previous_frame(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Met a jour un lecteur d'animation.
@@ -337,7 +338,7 @@ void MLV_previous_frame(MLV_Animation_player *animation_player);
  *
  * \param animation_player Le lecteur d'animation à mettre à jour
  */
-void MLV_update_animation_player(MLV_Animation_player *animation_player);
+MLVAPI void MLV_update_animation_player(MLV_Animation_player *animation_player);
 
 /** \~french
  * \brief Change le volume sonore d'un bruitage.
@@ -346,7 +347,7 @@ void MLV_update_animation_player(MLV_Animation_player *animation_player);
  * \param channel Le canal concerné.
  * \param volume le nouveau volume sonore.
  */
-void MLV_change_sound_volume_of_animation_player(MLV_Animation_player *animation_player, unsigned int channel,
+MLVAPI void MLV_change_sound_volume_of_animation_player(MLV_Animation_player *animation_player, unsigned int channel,
     float volume);
 
 /** \~french
@@ -355,7 +356,7 @@ void MLV_change_sound_volume_of_animation_player(MLV_Animation_player *animation
  * \param animation_player L'animateur concerné.
  * \param channel Le canal concerné.
  */
-void MLV_turn_on_sound_of_animation_player(MLV_Animation_player *animation_player, unsigned int channel);
+MLVAPI void MLV_turn_on_sound_of_animation_player(MLV_Animation_player *animation_player, unsigned int channel);
 
 /** \~french
  * \brief Désactive le son du canal d'une animation donnée.
@@ -363,7 +364,7 @@ void MLV_turn_on_sound_of_animation_player(MLV_Animation_player *animation_playe
  * \param animation_player L'animateur concerné.
  * \param channel Le canal concerné.
  */
-void MLV_turn_off_sound_of_animation_player(MLV_Animation_player *animation_player, unsigned int channel);
+MLVAPI void MLV_turn_off_sound_of_animation_player(MLV_Animation_player *animation_player, unsigned int channel);
 
 ////////////////////////////////////////////////
 //    Drawing animation
@@ -380,7 +381,7 @@ void MLV_turn_off_sound_of_animation_player(MLV_Animation_player *animation_play
  * \param y         Coordonnée en Y de la position du sommet Nord-Ouest de
  *                  l'image à afficher.
  */
-void MLV_draw_image_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer, int x, int y);
+MLVAPI void MLV_draw_image_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer, int x, int y);
 
 /** \~french
  * \brief Joue le son d'une couche sonore donnée correspondant à l'image en
@@ -391,7 +392,7 @@ void MLV_draw_image_from_animation_player(MLV_Animation_player *animation_player
  * \param animation_player Le lecteur de l'animation à aficher.
  * \param layer     Couche du son.
  */
-void MLV_play_sound_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer);
+MLVAPI void MLV_play_sound_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer);
 
 /** \~french
  * \brief Même chose que MLV_play_sound_from_animation_player() sauf que cette
@@ -415,7 +416,7 @@ void MLV_play_sound_from_animation_player(MLV_Animation_player *animation_player
  * \param animation_player Le lecteur de l'animation à aficher.
  * \param ... la liste des couches sonores, dont la veleure finale doit toujours être -1.
  */
-void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_player, ...);
+MLVAPI void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_player, ...);
 
 /** \~french
  * \brief Même chose que MLV_play_sound_from_animation_player() sauf que cette
@@ -426,7 +427,7 @@ void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_playe
  * \param nb_layers Nombre de couches dans le tableau.
  * \
  */
-void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animation_player, unsigned int *layers,
+MLVAPI void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animation_player, unsigned int *layers,
     unsigned int nb_layers);
 
 /** \~french
@@ -445,7 +446,7 @@ void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animati
  * \param y        Coordonnée en Y de la position du sommet Nord-Ouest de
  *                 l'image à afficher.
  */
-void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer,
+MLVAPI void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animation_player, unsigned int layer,
     int source_x, int source_y, int source_width, int source_height, int x, int y);
 
 /** \~french
@@ -460,7 +461,7 @@ void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animatio
  * \param y        Coordonnée en Y de la position du sommet Nord-Ouest de
  *                 l'image à afficher.
  */
-void MLV_draw_image_from_animation_player_on_image(MLV_Animation_player *animation_player, unsigned int layer,
+MLVAPI void MLV_draw_image_from_animation_player_on_image(MLV_Animation_player *animation_player, unsigned int layer,
     MLV_Image *image, int x, int y);
 
 /** \~french
@@ -480,7 +481,7 @@ void MLV_draw_image_from_animation_player_on_image(MLV_Animation_player *animati
  * \param y        Coordonnée en Y de la position du sommet Nord-Ouest de
  *                 l'image à afficher.
  */
-void MLV_draw_partial_image_from_animation_player_on_image(MLV_Animation_player *animation_player, unsigned int layer,
+MLVAPI void MLV_draw_partial_image_from_animation_player_on_image(MLV_Animation_player *animation_player, unsigned int layer,
     int source_x, int source_y, int source_width, int source_height, MLV_Image *image, int x, int y);
 
 ////////////////////////////////////////////////
@@ -510,7 +511,7 @@ typedef struct _MLV_Animation_book MLV_Animation_book;
  *        configuration du livre d'animation.
  * \return L'adresse de la sructure de données contenant toutes les animations.
  */
-MLV_Animation_book *MLV_load_animation_book(const char *xml_file, const char *image_directory,
+MLVAPI MLV_Animation_book *MLV_load_animation_book(const char *xml_file, const char *image_directory,
     const char *sound_directory);
 
 /** \~french
@@ -518,7 +519,7 @@ MLV_Animation_book *MLV_load_animation_book(const char *xml_file, const char *im
  *
  * \param animation_book Le livre d'animation.
  */
-void MLV_free_animation_book(MLV_Animation_book *animation_book);
+MLVAPI void MLV_free_animation_book(MLV_Animation_book *animation_book);
 
 /** \~french
  * \brief Détermine le nombre d'animations contenus par le livre d'animation.
@@ -526,7 +527,7 @@ void MLV_free_animation_book(MLV_Animation_book *animation_book);
  * \param animation_book Le livre d'animation.
  * \return le nombre d'animations contenus par le livre d'animation.
  */
-int MLV_get_number_of_animations(MLV_Animation_book *animation_book);
+MLVAPI int MLV_get_number_of_animations(MLV_Animation_book *animation_book);
 
 /** \~french
  * \brief Renvoie une animation donnée contenue dans le livre d'animation.
@@ -535,7 +536,7 @@ int MLV_get_number_of_animations(MLV_Animation_book *animation_book);
  * \param id L'identifiant
  * \return La séquence d'animation.
  */
-MLV_Animation *MLV_get_animation_from_id(MLV_Animation_book *animation_book, int id);
+MLVAPI MLV_Animation *MLV_get_animation_from_id(MLV_Animation_book *animation_book, int id);
 
 /** \~french
  * \brief Renvoie une animation donnée contenue dans le livre d'animation.
@@ -544,7 +545,7 @@ MLV_Animation *MLV_get_animation_from_id(MLV_Animation_book *animation_book, int
  * \param name Le nom de l'animation
  * \return La séquence d'animation.
  */
-MLV_Animation *MLV_get_animation_from_name(MLV_Animation_book *animation_book, const char *name);
+MLVAPI MLV_Animation *MLV_get_animation_from_name(MLV_Animation_book *animation_book, const char *name);
 
 /** \~french
  * \brief Renvoie le nom d'un animation à partir de son identifiant dans le
@@ -554,7 +555,7 @@ MLV_Animation *MLV_get_animation_from_name(MLV_Animation_book *animation_book, c
  * \param id_animation L'identifiant de l'animation dans le livre.
  * \return Le nom de l'animation.
  */
-const char *MLV_get_name_from_id_animation(MLV_Animation_book *animation_book, int id_animation);
+MLVAPI const char *MLV_get_name_from_id_animation(MLV_Animation_book *animation_book, int id_animation);
 
 /** \~french
  * \brief Ajoute un image dans la séquence d'animation.
@@ -570,7 +571,7 @@ const char *MLV_get_name_from_id_animation(MLV_Animation_book *animation_book, i
  * \param delay le temps d'afficahge d'une image.
  * \param animation  La sequence d'animation à moifier.
  */
-void MLV_add_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, unsigned int delay,
+MLVAPI void MLV_add_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, unsigned int delay,
     MLV_Animation *animation);
 
 #ifdef __cplusplus

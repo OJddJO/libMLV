@@ -189,12 +189,12 @@ void initialise_size_of_desktop() {
     }
 }
 
-void MLV_register_a_post_producter(void (*post_producter)(MLV_Image *)) {
+MLVAPI void MLV_register_a_post_producter(void (*post_producter)(MLV_Image *)) {
     if (!MLV_data->post_screen) { intialize_post_production_images(); }
     MLV_data->post_producters = MLV_prepend_list(MLV_data->post_producters, (void *)post_producter);
 }
 
-void MLV_unregister_a_post_producter(void (*post_producter)(MLV_Image *)) {
+MLVAPI void MLV_unregister_a_post_producter(void (*post_producter)(MLV_Image *)) {
     assert(MLV_data->post_producters);
     MLV_data->post_producters = MLV_remove_list(MLV_data->post_producters, (void *)post_producter);
     if (!MLV_data->post_producters) { free_post_production_images(); }
@@ -213,7 +213,7 @@ void init_post_producter_infrastructure() {
     MLV_data->post_production_image = NULL;
 }
 
-void MLV_create_window_with_default_font(const char *window_name, const char *icone_name, unsigned int width,
+MLVAPI void MLV_create_window_with_default_font(const char *window_name, const char *icone_name, unsigned int width,
     unsigned int height, const char *path_to_font, unsigned int size_font) {
     if (MLV_data) { ERROR("The MLV library has yet been initialised."); }
     /**************************************************************************/
@@ -281,66 +281,66 @@ void MLV_create_window_with_default_font(const char *window_name, const char *ic
     SDL_SetEventFilter(events_filter);
 }
 
-void MLV_create_window(const char *window_name, const char *icone_name, unsigned int width, unsigned int height) {
+MLVAPI void MLV_create_window(const char *window_name, const char *icone_name, unsigned int width, unsigned int height) {
     MLV_create_window_with_default_font(window_name, icone_name, width, height, "data/font/DejaVuSerif-Bold.ttf",
         SIZE_DEFAULT_FONT);
 }
 
-void MLV_change_default_font(const char *path_to_font, unsigned int size_font) {
+MLVAPI void MLV_change_default_font(const char *path_to_font, unsigned int size_font) {
     free_default_font();
     initialize_default_font(path_to_font, size_font);
 }
 
-void MLV_enable_full_screen() {
+MLVAPI void MLV_enable_full_screen() {
     initialise_graphic_window(MLV_data->width, MLV_data->height, 1);
 }
 
-void MLV_create_full_screen_window(const char *window_name, const char *icone_name, unsigned int width,
+MLVAPI void MLV_create_full_screen_window(const char *window_name, const char *icone_name, unsigned int width,
     unsigned int height) {
     MLV_create_window(window_name, icone_name, width, height);
     MLV_enable_full_screen();
 }
 
-void MLV_create_full_screen_window_with_default_font(const char *window_name, const char *icone_name,
+MLVAPI void MLV_create_full_screen_window_with_default_font(const char *window_name, const char *icone_name,
     unsigned int width, unsigned int height, const char *path_to_font, unsigned int size_font) {
     MLV_create_window_with_default_font(window_name, icone_name, width, height, path_to_font, size_font);
     MLV_enable_full_screen();
 }
 
-void MLV_disable_full_screen() {
+MLVAPI void MLV_disable_full_screen() {
     initialise_graphic_window(MLV_data->width, MLV_data->height, 0);
 }
 
-int MLV_is_full_screen() {
+MLVAPI int MLV_is_full_screen() {
     return MLV_data->full_screen_is_enable;
 }
 
-void MLV_change_window_size(unsigned int with, unsigned int height) {
+MLVAPI void MLV_change_window_size(unsigned int with, unsigned int height) {
     initialise_graphic_window(with, height, MLV_data->full_screen_is_enable);
 }
 
-void MLV_change_window_caption(const char *window_name, const char *icone_name) {
+MLVAPI void MLV_change_window_caption(const char *window_name, const char *icone_name) {
     SDL_WM_SetCaption(window_name, icone_name);
 }
 
-void MLV_get_window_size(unsigned int *width, unsigned int *height) {
+MLVAPI void MLV_get_window_size(unsigned int *width, unsigned int *height) {
     *width = MLV_data->width;
     *height = MLV_data->height;
 }
 
-int MLV_get_window_height() {
+MLVAPI int MLV_get_window_height() {
     return MLV_data->height;
 }
 
-int MLV_get_window_width() {
+MLVAPI int MLV_get_window_width() {
     return MLV_data->width;
 }
 
-void MLV_clear_window(MLV_Color color) {
+MLVAPI void MLV_clear_window(MLV_Color color) {
     MLV_draw_filled_rectangle(0, 0, MLV_get_window_width(), MLV_get_window_height(), color);
 }
 
-void MLV_free_window() {
+MLVAPI void MLV_free_window() {
     if (!MLV_data) { ERROR("No window has been created."); }
     free_leonardo_turtle();
     unregister_all_producters();
@@ -369,7 +369,7 @@ void prepare_post_production_image() {
     MLV_foreach_list(MLV_data->post_producters, draw_producter, MLV_data->post_production_image);
 }
 
-void MLV_update_window() {
+MLVAPI void MLV_update_window() {
     if ((!MLV_data) || (!MLV_data->screen)) { ERROR("A window can't be displayed whitout being created."); }
     if (!MLV_data->post_producters) {
         SDL_Flip(MLV_data->screen);
@@ -382,11 +382,11 @@ void MLV_update_window() {
     }
 }
 
-void MLV_actualise_window() {
+MLVAPI void MLV_actualise_window() {
     MLV_update_window();
 }
 
-void MLV_execute_at_exit(void (*function)(void *), void *data) {
+MLVAPI void MLV_execute_at_exit(void (*function)(void *), void *data) {
     if (MLV_data) {
         ERROR(
             "The mlv window is yet initialized. The function execute_at_exit() must be executed before the create_window() function.");
@@ -396,18 +396,18 @@ void MLV_execute_at_exit(void (*function)(void *), void *data) {
     MLV_call_back_data = data;
 }
 
-void MLV_get_desktop_size(unsigned int *width, unsigned int *height) {
+MLVAPI void MLV_get_desktop_size(unsigned int *width, unsigned int *height) {
     initialise_size_of_desktop();
     *width = mlv_width_of_desktop;
     *height = mlv_height_of_desktop;
 }
 
-int MLV_get_desktop_height() {
+MLVAPI int MLV_get_desktop_height() {
     initialise_size_of_desktop();
     return mlv_height_of_desktop;
 }
 
-int MLV_get_desktop_width() {
+MLVAPI int MLV_get_desktop_width() {
     initialise_size_of_desktop();
     return mlv_width_of_desktop;
 }

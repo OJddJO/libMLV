@@ -40,6 +40,7 @@
 #define __MLV__MLV_XML_H__
 
 #include <stdarg.h>
+#include "MLV_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,14 +60,14 @@ typedef struct _MLV_Xml MLV_Xml;
  * \param xml_file_path Chemin d'accès du fichier xml.
  * \return Le fichier xml lu, analysé et chargé.
  */
-MLV_Xml *MLV_load_xml(const char *xml_file_path);
+MLVAPI MLV_Xml *MLV_load_xml(const char *xml_file_path);
 
 /** \~french
  * \brief Libère la mémoire utilisée par les données du fichier xml.
  *
  * \param xml_data Les données xml a supprimer.
  */
-void MLV_free_xml(MLV_Xml *xml_data);
+MLVAPI void MLV_free_xml(MLV_Xml *xml_data);
 
 /** \~french
  * \brief Énumère les différents codes d'erreurs que l'on peut rencontrer
@@ -118,7 +119,7 @@ typedef enum {
  * \param xpath Le chemin d'accès.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
-MLV_Xml_error MLV_get_string_value_from_xml(const MLV_Xml *xml_data, char **result, const char *xpath, ...);
+MLVAPI MLV_Xml_error MLV_get_string_value_from_xml(const MLV_Xml *xml_data, char **result, const char *xpath, ...);
 
 /** \~french
  * \brief Permet de récupérer l'entier d'un champs donné du fichier xml.
@@ -133,7 +134,7 @@ MLV_Xml_error MLV_get_string_value_from_xml(const MLV_Xml *xml_data, char **resu
  * \param xpath Le chemin d'accès.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
-MLV_Xml_error MLV_get_integer_value_from_xml(const MLV_Xml *xml_data, int *result, const char *xpath, ...);
+MLVAPI MLV_Xml_error MLV_get_integer_value_from_xml(const MLV_Xml *xml_data, int *result, const char *xpath, ...);
 
 /** \~french
  * \brief Permet de récupérer le reel d'un champs donné du fichier xml.
@@ -149,7 +150,7 @@ MLV_Xml_error MLV_get_integer_value_from_xml(const MLV_Xml *xml_data, int *resul
  * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée
  * du document xml.
  */
-MLV_Xml_error MLV_get_double_value_from_xml(const MLV_Xml *xml_data, double *result, const char *xpath, ...);
+MLVAPI MLV_Xml_error MLV_get_double_value_from_xml(const MLV_Xml *xml_data, double *result, const char *xpath, ...);
 
 /** \~french
  * \brief Permet de récupérer le réel d'un champs donné du fichier xml.
@@ -165,7 +166,7 @@ MLV_Xml_error MLV_get_double_value_from_xml(const MLV_Xml *xml_data, double *res
  * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée
  * du document xml.
  */
-MLV_Xml_error MLV_get_float_value_from_xml(const MLV_Xml *xml_data, float *result, const char *xpath, ...);
+MLVAPI MLV_Xml_error MLV_get_float_value_from_xml(const MLV_Xml *xml_data, float *result, const char *xpath, ...);
 
 /** \~french
  * \brief Compte le nombre d'objets présents dans le fichier xml verifiant
@@ -178,7 +179,7 @@ MLV_Xml_error MLV_get_float_value_from_xml(const MLV_Xml *xml_data, float *resul
  * \return Cette fonction renvoie le nombre d'objet ayant pour chemin d'accès
  *         "xpath".
  */
-int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpath, ...);
+MLVAPI int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpath, ...);
 
 /** \~french
  * \brief Permet de récupérer un noeud interne de l'arbre représentant le
@@ -192,7 +193,7 @@ int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpat
  *
  * \return Un noeud interne de l'arbre XML.
  */
-MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...);
+MLVAPI MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...);
 
 /** \~french
  * \brief Écrit sur le terminal le contenu d'un fichier xml.
@@ -202,7 +203,7 @@ MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...);
  * \param xml_data Les données xml.
  * \param ... Les paramètres de la fonction.
  */
-void MLV_print_xml(const MLV_Xml *xml_data);
+MLVAPI void MLV_print_xml(const MLV_Xml *xml_data);
 
 #ifdef __cplusplus
 }

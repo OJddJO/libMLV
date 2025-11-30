@@ -32,12 +32,9 @@
 #ifndef __MLV__MLV_MOUSE_H__
 #define __MLV__MLV_MOUSE_H__
 
-#ifndef MEMORY_DEBUG
-    #include <SDL/SDL.h>
-#else
-    #include "memory_debug.h"
-#endif
 
+#include <SDL/SDL_mouse.h>
+#include "MLV_config.h"
 #include "MLV_device_with_buttons.h"
 
 #ifdef __cplusplus
@@ -65,7 +62,7 @@ typedef enum {
  * \param x Coordonnée en X de la position de la souris dans la fenêtre.
  * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
  */
-void MLV_wait_mouse(int *x, int *y);
+MLVAPI void MLV_wait_mouse(int *x, int *y);
 
 /** \~french
  * \brief Convertit le code associé à un boutton de la souris (MLV_Mouse_button) en
@@ -75,7 +72,7 @@ void MLV_wait_mouse(int *x, int *y);
  * \return La chaîne de caratères correspondant au code du boutton de la
  *          souris passé en paramètre.
  */
-const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code);
+MLVAPI const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code);
 
 /** \~french
  * \brief Convertit une chaîne de caractères en un code bouton.
@@ -83,7 +80,7 @@ const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code);
  * \param button_string La chaîne de caractères à convertir.
  * \return Le code bouton associé à la chaîne de caractères.
  */
-MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string);
+MLVAPI MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string);
 
 /** \~french
  *
@@ -92,7 +89,7 @@ MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string);
  * \param x Coordonnée en X de la position de la souris dans la fenêtre.
  * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
  */
-void MLV_get_mouse_position(int *x, int *y);
+MLVAPI void MLV_get_mouse_position(int *x, int *y);
 
 /** \~french
  *
@@ -101,7 +98,7 @@ void MLV_get_mouse_position(int *x, int *y);
  * \param mouse_button Le code du bouton de la souris
  * \return L'état du bouton.
  */
-MLV_Button_state MLV_get_mouse_button_state(MLV_Mouse_button mouse_button);
+MLVAPI MLV_Button_state MLV_get_mouse_button_state(MLV_Mouse_button mouse_button);
 
 #ifdef __cplusplus
 }

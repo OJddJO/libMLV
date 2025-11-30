@@ -20,10 +20,10 @@
 
 #include "MLV_information.h"
 
-const char *MLV_get_package_name() {
+MLVAPI const char *MLV_get_package_name() {
     return "libMLV";
 }
 
-const char *MLV_get_licence() {
+MLVAPI const char *MLV_get_licence() {
     return "GPL V3";
 }

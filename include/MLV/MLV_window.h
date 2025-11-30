@@ -31,6 +31,7 @@
 #ifndef __MLV__MLV_WINDOW_H__
 #define __MLV__MLV_WINDOW_H__
 
+#include "MLV_config.h"
 #include "MLV_color.h"
 #include "MLV_image.h"
 
@@ -77,7 +78,7 @@ extern "C" {
  * \param width La largeur de la fenêtre.
  * \param height La hauteur de la fenêtre.
  */
-void MLV_create_window(const char *window_name, const char *icone_name, unsigned int width, unsigned int height);
+MLVAPI void MLV_create_window(const char *window_name, const char *icone_name, unsigned int width, unsigned int height);
 
 /** \~french
  * \brief Même chose que MLV_create_window(), mais en utilisant une fonte
@@ -93,7 +94,7 @@ void MLV_create_window(const char *window_name, const char *icone_name, unsigned
  *        'TrueType' (fichiers d'extension .ttf).
  * \param size_font La taille de la fonte de caractères. la hauteur de la fenêtre.
  */
-void MLV_create_window_with_default_font(const char *window_name, const char *icone_name, unsigned int width,
+MLVAPI void MLV_create_window_with_default_font(const char *window_name, const char *icone_name, unsigned int width,
     unsigned int height, const char *path_to_font, unsigned int size_font);
 
 /** \~french
@@ -112,7 +113,7 @@ void MLV_create_window_with_default_font(const char *window_name, const char *ic
  *                     standard "TrueType" (fichiers d'extension .ttf).
  * \param size_font La taille de la fonte de caractères.
  */
-void MLV_change_default_font(const char *path_to_font, unsigned int size_font);
+MLVAPI void MLV_change_default_font(const char *path_to_font, unsigned int size_font);
 
 /** \~french
  * \brief Même chose que MLV_create_window(), mais configure la fenêtre en
@@ -127,7 +128,7 @@ void MLV_change_default_font(const char *path_to_font, unsigned int size_font);
  * \param height La hauteur de la fenêtre ( en mode plein écran, cela
  *               correspond à la coordonnée en Y de la résolution de l'image ).
  */
-void MLV_create_full_screen_window(const char *window_name, const char *icone_name, unsigned int width,
+MLVAPI void MLV_create_full_screen_window(const char *window_name, const char *icone_name, unsigned int width,
     unsigned int height);
 
 /** \~french
@@ -146,7 +147,7 @@ void MLV_create_full_screen_window(const char *window_name, const char *icone_na
  *                     standard "TrueType" (fichiers d'extension .ttf).
  * \param size_font La taille de la fonte de caractères.
  */
-void MLV_create_full_screen_window_with_default_font(const char *window_name, const char *icone_name,
+MLVAPI void MLV_create_full_screen_window_with_default_font(const char *window_name, const char *icone_name,
     unsigned int width, unsigned int height, const char *path_to_font, unsigned int size_font);
 
 /** \~french
@@ -156,19 +157,19 @@ void MLV_create_full_screen_window_with_default_font(const char *window_name, co
  * Pour que l'application soit en plein écran, il faut que la taille de la
  * fenêtre soit compatible avec la résolution de l'écran.
  */
-void MLV_enable_full_screen();
+MLVAPI void MLV_enable_full_screen();
 
 /** \~french
  * \brief Désactve le mode plein écran de la fenêtre.
  */
-void MLV_disable_full_screen();
+MLVAPI void MLV_disable_full_screen();
 
 /** \~french
  * \brief Test si l'affichage est en mode plein écran ou en mode fenêtre.
  *
  * \return Renvoie 1 si l'affichage est en mode plein écran, 0 sinon.
  */
-int MLV_is_full_screen();
+MLVAPI int MLV_is_full_screen();
 
 /** \~french
  * \brief Change la taille de la fenêtre.
@@ -183,7 +184,7 @@ int MLV_is_full_screen();
  * \param width la largeur de la fenêtre
  * \param height la hauteur de la fenêtre
  */
-void MLV_change_window_size(unsigned int width, unsigned int height);
+MLVAPI void MLV_change_window_size(unsigned int width, unsigned int height);
 
 /** \~french
  * \brief Change les intitulés de la fenêtre principale.
@@ -191,7 +192,7 @@ void MLV_change_window_size(unsigned int width, unsigned int height);
  * \param window_name Intitulé apparaissaissant sur la barre de la fenêtre.
  * \param icone_name  Intitulé apparaissaissant dans la barre des tâches.
  */
-void MLV_change_window_caption(const char *window_name, const char *icone_name);
+MLVAPI void MLV_change_window_caption(const char *window_name, const char *icone_name);
 
 /** \~french
  * \brief Renvoie dans les paramètres, la hauteur et la largeur de la fentre.
@@ -199,17 +200,17 @@ void MLV_change_window_caption(const char *window_name, const char *icone_name);
  * \param width La largeur de la fenêtre.
  * \param height La hauteur de la fenêtre.
  */
-void MLV_get_window_size(unsigned int *width, unsigned int *height);
+MLVAPI void MLV_get_window_size(unsigned int *width, unsigned int *height);
 
 /** \~french
  * \brief Retourne la hauteur de la fenêtre.
  */
-int MLV_get_window_height();
+MLVAPI int MLV_get_window_height();
 
 /** \~french
  * \brief Retourne la largeur de la fenêtre.
  */
-int MLV_get_window_width();
+MLVAPI int MLV_get_window_width();
 
 /** \~french
  * \brief Éfface la fenêtre et la remplace par un monochrome de la couleur
@@ -217,7 +218,7 @@ int MLV_get_window_width();
  *
  * \param color La couleur du fond de la fênetre.
  */
-void MLV_clear_window(MLV_Color color);
+MLVAPI void MLV_clear_window(MLV_Color color);
 
 /** \~french
  * \brief Ferme la fenêtre de la bibliothèque MLV.
@@ -226,7 +227,7 @@ void MLV_clear_window(MLV_Color color);
  * bibliothèque MLV
  *
  */
-void MLV_free_window();
+MLVAPI void MLV_free_window();
 
 /** \~french
  * \brief Actualise l'affichage de la fenêtre.
@@ -237,7 +238,7 @@ void MLV_free_window();
  * effectués ne sont pas visibles. Pour les afficher vous devez utiliser cette
  * fonction.
  */
-void MLV_actualise_window();
+MLVAPI void MLV_actualise_window();
 
 /** \~french
  * \brief Met à jour l'affichage de la fenêtre.
@@ -246,7 +247,7 @@ void MLV_actualise_window();
  * effectués ne sont pas visibles. Pour les afficher vous devez utiliser cette
  * fonction.
  */
-void MLV_update_window();
+MLVAPI void MLV_update_window();
 
 /** \~french
  * \brief Exécute la fonction de call back donnée en paramètre lorsque le système
@@ -262,7 +263,7 @@ void MLV_update_window();
  * \param data La Donnée à passer en paramètre à la fonction de call back lors de
  *             son exécution.
  */
-void MLV_execute_at_exit(void (*function)(void *), void *data);
+MLVAPI void MLV_execute_at_exit(void (*function)(void *), void *data);
 
 /** \~french
  * \brief Renvoie dans les paramètres, la hauteur et la largeur de
@@ -271,17 +272,17 @@ void MLV_execute_at_exit(void (*function)(void *), void *data);
  * \param width La largeur du bureau.
  * \param height La hauteur du bureau.
  */
-void MLV_get_desktop_size(unsigned int *width, unsigned int *height);
+MLVAPI void MLV_get_desktop_size(unsigned int *width, unsigned int *height);
 
 /** \~french
  * \brief Renvoie la hauteur de l'environement de bureau de l'ordinateur.
  */
-int MLV_get_desktop_height();
+MLVAPI int MLV_get_desktop_height();
 
 /** \~french
  * \brief Renvoie la largeur de l'environement de bureau de l'ordinateur.
  */
-int MLV_get_desktop_width();
+MLVAPI int MLV_get_desktop_width();
 
 #ifdef __cplusplus
 }

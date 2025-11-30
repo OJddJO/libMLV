@@ -32,12 +32,9 @@
 #ifndef __MLV__MLV_KEYBOARD_H__
 #define __MLV__MLV_KEYBOARD_H__
 
-#ifndef MEMORY_DEBUG
-    #include <SDL/SDL.h>
-#else
-    #include "memory_debug.h"
-#endif
+#include <SDL/SDL_keyboard.h>
 
+#include "MLV_config.h"
 #include "MLV_device_with_buttons.h"
 
 #ifdef __cplusplus
@@ -333,7 +330,7 @@ typedef enum {
  * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
  *                   le code et le mode précédent.
  */
-void MLV_wait_keyboard(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode);
+MLVAPI void MLV_wait_keyboard(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode);
 
 /** \~french
  * \brief Renvoie le code de la touche clavier correspondant au type clavier
@@ -343,7 +340,7 @@ void MLV_wait_keyboard(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int
  *
  * \return Le code de la touche clavier.
  */
-MLV_Keyboard_button MLV_convert_string_to_keyboard_button(const char *key_string);
+MLVAPI MLV_Keyboard_button MLV_convert_string_to_keyboard_button(const char *key_string);
 
 /** \~french
  * \brief Renvoie la chaîne de caractères correspondant au code de la touche
@@ -353,7 +350,7 @@ MLV_Keyboard_button MLV_convert_string_to_keyboard_button(const char *key_string
  *
  * \return La chaine de caractères codant le code de la touche.
  */
-const char *MLV_convert_keyboard_button_to_string(MLV_Keyboard_button key_code);
+MLVAPI const char *MLV_convert_keyboard_button_to_string(MLV_Keyboard_button key_code);
 
 /** \~french
  * \brief Renvoie la chaîne de caractères correspondant au mode du clavier
@@ -363,7 +360,7 @@ const char *MLV_convert_keyboard_button_to_string(MLV_Keyboard_button key_code);
  *
  * \return La chaine de caractères codant le mode du clavier.
  */
-char *MLV_convert_keyboard_mod_to_string(MLV_Keyboard_modifier keymod_code);
+MLVAPI char *MLV_convert_keyboard_mod_to_string(MLV_Keyboard_modifier keymod_code);
 
 /** \~french
  *
@@ -372,7 +369,7 @@ char *MLV_convert_keyboard_mod_to_string(MLV_Keyboard_modifier keymod_code);
  * \param keyboard_code Le code de la touche dont il faut renvoyer l'état.
  * \return L'état de la touche.
  */
-MLV_Button_state MLV_get_keyboard_state(MLV_Keyboard_button keyboard_code);
+MLVAPI MLV_Button_state MLV_get_keyboard_state(MLV_Keyboard_button keyboard_code);
 
 /** \~french
  *
@@ -382,7 +379,7 @@ MLV_Button_state MLV_get_keyboard_state(MLV_Keyboard_button keyboard_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison shift a été appuyée.
  */
-int MLV_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -392,7 +389,7 @@ int MLV_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison shift gauche a été appuyée.
  */
-int MLV_left_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_left_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -402,7 +399,7 @@ int MLV_left_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison shift droit a été appuyée.
  */
-int MLV_right_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_right_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -412,7 +409,7 @@ int MLV_right_shift_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison ctrl gauche a été appuyée.
  */
-int MLV_left_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_left_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -422,7 +419,7 @@ int MLV_left_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison ctrl droit a été appuyée.
  */
-int MLV_right_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_right_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -432,7 +429,7 @@ int MLV_right_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison ctrl a été appuyée.
  */
-int MLV_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -442,7 +439,7 @@ int MLV_ctrl_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison alt gauche a été appuyée.
  */
-int MLV_left_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_left_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -452,7 +449,7 @@ int MLV_left_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison alt droit a été appuyée.
  */
-int MLV_right_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_right_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -462,7 +459,7 @@ int MLV_right_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison alt a été appuyée.
  */
-int MLV_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -472,7 +469,7 @@ int MLV_alt_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison meta gauche a été appuyée.
  */
-int MLV_left_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_left_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -482,7 +479,7 @@ int MLV_left_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison meta droit a été appuyée.
  */
-int MLV_right_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_right_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -492,7 +489,7 @@ int MLV_right_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison meta a été appuyée.
  */
-int MLV_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -502,7 +499,7 @@ int MLV_meta_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison num a été appuyée.
  */
-int MLV_num_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_num_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -512,7 +509,7 @@ int MLV_num_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison caps a été appuyée.
  */
-int MLV_caps_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_caps_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 /** \~french
  *
@@ -522,7 +519,7 @@ int MLV_caps_key_was_pressed(MLV_Keyboard_modifier modifier_code);
  * \param modifier_code Le code de la touche de combinaison.
  * \return Vrai, si la touche de cobinaison mode a été appuyée.
  */
-int MLV_mode_key_was_pressed(MLV_Keyboard_modifier modifier_code);
+MLVAPI int MLV_mode_key_was_pressed(MLV_Keyboard_modifier modifier_code);
 
 #ifdef __cplusplus
 }

@@ -18,11 +18,12 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <string.h>
+#include <stdint.h>
+
 #include "MLV_color.h"
 #include "memory_management.h"
 #include "warning_error.h"
-
-#include <string.h>
 
 
 /******************************************************************************/
@@ -37,20 +38,20 @@
 /*                                                                            */
 /* MLV_Color                              Couleur codee sur un entier 32 bits */
 /* rgba (                                                                     */
-/*    Uint8 red,                    Composante rouge de la couleur            */
-/*    Uint8 greene,                 Composante verte de la couleur            */
-/*    Uint8 blue,                   Composante bleu de la couleur             */
-/*    Uint8 alpha)                  Transparence de la couleur                */
+/*    uint8_t red,                    Composante rouge de la couleur          */
+/*    uint8_t greene,                 Composante verte de la couleur          */
+/*    uint8_t blue,                   Composante bleu de la couleur           */
+/*    uint8_t alpha)                  Transparence de la couleur              */
 /******************************************************************************/
-MLV_Color MLV_rgba(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+MLVAPI MLV_Color MLV_rgba(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     return (((((((MLV_Color)red) << 8) + green) << 8) + blue) << 8) + alpha;
 }
 
-MLV_Color MLV_convert_rgba_to_color(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+MLVAPI MLV_Color MLV_convert_rgba_to_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     return MLV_rgba(red, green, blue, alpha);
 }
 
-void MLV_convert_color_to_rgba(MLV_Color color, Uint8 *red, Uint8 *green, Uint8 *blue, Uint8 *alpha) {
+MLVAPI void MLV_convert_color_to_rgba(MLV_Color color, uint8_t *red, uint8_t *green, uint8_t *blue, uint8_t *alpha) {
     *alpha = color;
     color = color >> 8;
     *blue = color;
@@ -60,7 +61,7 @@ void MLV_convert_color_to_rgba(MLV_Color color, Uint8 *red, Uint8 *green, Uint8 
     *red = color;
 }
 
-const char *MLV_convert_color_to_string(MLV_Color color) {
+MLVAPI const char *MLV_convert_color_to_string(MLV_Color color) {
     if (color == MLV_COLOR_SNOW) { return "MLV_COLOR_SNOW"; }
     if (color == MLV_COLOR_GHOST_WHITE) { return "MLV_COLOR_GHOST_WHITE"; }
     if (color == MLV_COLOR_GHOSTWHITE) { return "MLV_COLOR_GHOSTWHITE"; }
@@ -817,7 +818,7 @@ const char *MLV_convert_color_to_string(MLV_Color color) {
     return NULL;
 }
 
-MLV_Color MLV_convert_string_to_color(const char *color_name) {
+MLVAPI MLV_Color MLV_convert_string_to_color(const char *color_name) {
     if (strcmp(color_name, "MLV_COLOR_SNOW") == 0) { return MLV_COLOR_SNOW; }
     if (strcmp(color_name, "MLV_COLOR_GHOST_WHITE") == 0) { return MLV_COLOR_GHOST_WHITE; }
     if (strcmp(color_name, "MLV_COLOR_GHOSTWHITE") == 0) { return MLV_COLOR_GHOSTWHITE; }

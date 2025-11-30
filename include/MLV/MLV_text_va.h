@@ -31,6 +31,7 @@
 #ifndef __MLV__MLV_TEXT_VA_H__
 #define __MLV__MLV_TEXT_VA_H__
 
+#include "MLV_config.h"
 #include "MLV_color.h"
 #include "MLV_image.h"
 #include "MLV_text.h"
@@ -55,7 +56,7 @@ extern "C" {
  * \param color couleur du tracé
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_va(int x, int y, const char *text, MLV_Color color, va_list pile);
+MLVAPI void MLV_draw_text_va(int x, int y, const char *text, MLV_Color color, va_list pile);
 
 /** \~french
  * \brief Écrit du texte sur l'écran en utilisant une couleur et une fonte de
@@ -75,7 +76,7 @@ void MLV_draw_text_va(int x, int y, const char *text, MLV_Color color, va_list p
  * \param font La fonte de caractères utilisée pour dessiner le texte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_with_font_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, va_list pile);
+MLVAPI void MLV_draw_text_with_font_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, va_list pile);
 
 /** \~french
  * \brief Écrit du texte sur une image en utilisant une couleur et une fonte de
@@ -97,7 +98,7 @@ void MLV_draw_text_with_font_va(int x, int y, const char *text, const MLV_Font *
  * \param image L'image sur laquel le texte doit être ecrit.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_with_font_on_image_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
+MLVAPI void MLV_draw_text_with_font_on_image_va(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
     MLV_Image *image, va_list pile);
 
 /** \~french
@@ -117,7 +118,7 @@ void MLV_draw_text_with_font_on_image_va(int x, int y, const char *text, const M
  * \param height La hauteur du texte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_get_size_of_text_va(const char *text, int *width, int *height, va_list pile);
+MLVAPI void MLV_get_size_of_text_va(const char *text, int *width, int *height, va_list pile);
 
 /** \~french
  * \brief Cette fonction calcule la taille du texte qui sera affiché sur
@@ -137,7 +138,7 @@ void MLV_get_size_of_text_va(const char *text, int *width, int *height, va_list 
  * \param font La fonte de caractères utilisée pour afficher le texte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_get_size_of_text_with_font_va(const char *text, int *width, int *height, const MLV_Font *font, va_list pile);
+MLVAPI void MLV_get_size_of_text_with_font_va(const char *text, int *width, int *height, const MLV_Font *font, va_list pile);
 
 /** \~french
  * \brief Même chose que MLV_draw_adapted_text_box() mis à part que le texte est
@@ -162,7 +163,7 @@ void MLV_get_size_of_text_with_font_va(const char *text, int *width, int *height
  * \param text_justification La justification du texte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_adapted_text_box_with_font_va(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI void MLV_draw_adapted_text_box_with_font_va(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     va_list pile);
 
@@ -187,7 +188,7 @@ void MLV_draw_adapted_text_box_with_font_va(int x, int y, const char *message, c
  * \param text_justification La justification du texte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_adapted_text_box_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, va_list pile);
 
 /** \~french
@@ -213,7 +214,7 @@ void MLV_draw_adapted_text_box_va(int x, int y, const char *message, int sizeInt
  * \param image L'image sur laquel le texte doit être ecrit.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_adapted_text_box_on_image_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box_on_image_va(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, MLV_Image *image,
     va_list pile);
 
@@ -241,7 +242,7 @@ void MLV_draw_adapted_text_box_on_image_va(int x, int y, const char *message, in
  * \param image L'image sur laquel le texte doit être ecrit.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_adapted_text_box_with_font_on_image_va(int x, int y, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_adapted_text_box_with_font_on_image_va(int x, int y, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Image *image, va_list pile);
 
@@ -268,7 +269,7 @@ void MLV_draw_adapted_text_box_with_font_on_image_va(int x, int y, const char *m
  *
  * \return La fonction renvoie la taille de la boîte de texte.
  */
-int MLV_get_size_of_adapted_text_box_va(const char *message, int sizeInterligne, int *result_width, int *result_height,
+MLVAPI int MLV_get_size_of_adapted_text_box_va(const char *message, int sizeInterligne, int *result_width, int *result_height,
     va_list pile);
 
 /** \~french
@@ -296,7 +297,7 @@ int MLV_get_size_of_adapted_text_box_va(const char *message, int sizeInterligne,
  *
  * \return La fonction renvoie la taille de la boîte de texte.
  */
-int MLV_get_size_of_adapted_text_box_with_font_va(const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI int MLV_get_size_of_adapted_text_box_with_font_va(const char *message, const MLV_Font *font, int sizeInterligne,
     int *result_width, int *result_height, va_list pile);
 
 /** \~french
@@ -327,7 +328,7 @@ int MLV_get_size_of_adapted_text_box_with_font_va(const char *message, const MLV
  * \param vertical_position La position verticale du texte dans la boîte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_box_with_font_va(int x, int y, int width, int height, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font_va(int x, int y, int width, int height, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, va_list pile);
@@ -359,7 +360,7 @@ void MLV_draw_text_box_with_font_va(int x, int y, int width, int height, const c
  * \param vertical_position La position verticale du texte dans la boîte.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_box_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, va_list pile);
 
@@ -392,7 +393,7 @@ void MLV_draw_text_box_va(int x, int y, int width, int height, const char *messa
  * \param image L'image sur laquel le texte doit être ecrit.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_box_with_font_on_image_va(int x, int y, int width, int height, const char *message, MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font_on_image_va(int x, int y, int width, int height, const char *message, MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, MLV_Image *image, va_list pile);
@@ -424,7 +425,7 @@ void MLV_draw_text_box_with_font_on_image_va(int x, int y, int width, int height
  * \param image L'image sur laquel le texte doit être ecrit.
  * \param pile Une liste d'arguments supplémentaires
  */
-void MLV_draw_text_box_on_image_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box_on_image_va(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, MLV_Image *image,
     va_list pile);

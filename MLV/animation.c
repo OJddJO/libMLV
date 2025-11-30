@@ -27,6 +27,7 @@
 extern int asprintf(char **, const char *, ...);
 #endif
 
+#include <string.h>
 #include "MLV_animation.h"
 #include "MLV_path.h"
 #include "MLV_xml.h"
@@ -66,7 +67,7 @@ struct _MLV_Animation_player {
 //    Animation data
 ///////////////////////////////////////////////
 
-MLV_Animation *MLV_create_animation(uint32_t max_frames, uint32_t nb_layers, uint32_t nb_channels) {
+MLVAPI MLV_Animation *MLV_create_animation(uint32_t max_frames, uint32_t nb_layers, uint32_t nb_channels) {
     MLV_Animation *result = MLV_MALLOC(1, MLV_Animation);
     result->nb_frames = 0;
     result->max_frames = max_frames;
@@ -94,7 +95,7 @@ MLV_Animation *MLV_create_animation(uint32_t max_frames, uint32_t nb_layers, uin
     return result;
 }
 
-void MLV_free_animation(MLV_Animation *animation) {
+MLVAPI void MLV_free_animation(MLV_Animation *animation) {
     for (uint32_t i = 0; i < animation->nb_frames; i++) {
         MLV_FREE(animation->frames[i].images, MLV_Image *);
         MLV_FREE(animation->frames[i].sounds, MLV_Image *);
@@ -118,7 +119,7 @@ void user_is_modifying_animation(MLV_Animation *animation, uint32_t position) {
     }
 }
 
-void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, uint32_t delay,
+MLVAPI void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, uint32_t delay,
     MLV_Animation *animation, uint32_t position) {
     user_is_modifying_animation(animation, position);
     if (array_of_images) {
@@ -134,39 +135,39 @@ void MLV_change_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **arra
     animation->frames[position].delay = delay;
 }
 
-void MLV_add_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, uint32_t delay,
+MLVAPI void MLV_add_frame_in_animation(MLV_Image **array_of_images, MLV_Sound **array_of_sounds, uint32_t delay,
     MLV_Animation *animation) {
     MLV_change_frame_in_animation(array_of_images, array_of_sounds, delay, animation, animation->nb_frames);
 }
 
-void MLV_change_frame_image_in_animation(MLV_Image *image, MLV_Animation *animation, uint32_t position,
+MLVAPI void MLV_change_frame_image_in_animation(MLV_Image *image, MLV_Animation *animation, uint32_t position,
     uint32_t layer) {
     user_is_modifying_animation(animation, position);
     animation->frames[position].images[layer] = image;
 }
 
-void MLV_change_frame_sound_in_animation(MLV_Sound *sound, MLV_Animation *animation, uint32_t position,
+MLVAPI void MLV_change_frame_sound_in_animation(MLV_Sound *sound, MLV_Animation *animation, uint32_t position,
     uint32_t channel) {
     user_is_modifying_animation(animation, position);
     animation->frames[position].sounds[channel] = sound;
 }
 
-void MLV_change_frame_delay_in_animation(uint32_t delay, MLV_Animation *animation, uint32_t position) {
+MLVAPI void MLV_change_frame_delay_in_animation(uint32_t delay, MLV_Animation *animation, uint32_t position) {
     user_is_modifying_animation(animation, position);
     animation->frames[position].delay = delay;
 }
 
-void MLV_get_frame_from_animation([[maybe_unused]] MLV_Animation *animation,
+MLVAPI void MLV_get_frame_from_animation([[maybe_unused]] MLV_Animation *animation,
     [[maybe_unused]] uint32_t position, [[maybe_unused]] uint32_t layer, [[maybe_unused]] MLV_Image **image,
     [[maybe_unused]] uint32_t *delay) {
     TODO
 }
 
-int MLV_get_frame_delay_from_animation(MLV_Animation *animation, uint32_t position) {
+MLVAPI int MLV_get_frame_delay_from_animation(MLV_Animation *animation, uint32_t position) {
     return animation->frames[position].delay;
 }
 
-MLV_Image *MLV_get_frame_image_from_animation(MLV_Animation *animation, uint32_t position, uint32_t layer) {
+MLVAPI MLV_Image *MLV_get_frame_image_from_animation(MLV_Animation *animation, uint32_t position, uint32_t layer) {
     return animation->frames[position].images[layer];
 }
 
@@ -174,7 +175,7 @@ MLV_Image *MLV_get_frame_image_from_animation(MLV_Animation *animation, uint32_t
 //    Animation engine
 ///////////////////////////////////////////////
 
-MLV_Animation_player *MLV_create_animation_player(MLV_Animation *animation) {
+MLVAPI MLV_Animation_player *MLV_create_animation_player(MLV_Animation *animation) {
     int nb_channels = animation->nb_channels;
     MLV_Animation_player *result = MLV_MALLOC(1, MLV_Animation_player);
     if (nb_channels > 0) {
@@ -196,35 +197,35 @@ MLV_Animation_player *MLV_create_animation_player(MLV_Animation *animation) {
     MLV_rewind_animation_player(result);
     return result;
 }
-void MLV_free_animation_player(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_free_animation_player(MLV_Animation_player *animation_player) {
     MLV_FREE(animation_player->volume, float);
     MLV_FREE(animation_player->state_sound, int);
     MLV_FREE(animation_player->sounds_are_being_played, int);
     MLV_FREE(animation_player, MLV_Animation_player);
 }
 
-void MLV_play_animation_player(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_play_animation_player(MLV_Animation_player *animation_player) {
     animation_player->status = PLAY;
 }
-void MLV_play_revert_animation_player(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_play_revert_animation_player(MLV_Animation_player *animation_player) {
     animation_player->status = PLAY_REVERT;
 }
-void MLV_stop_animation_player(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_stop_animation_player(MLV_Animation_player *animation_player) {
     animation_player->status = STOP;
 }
-void MLV_rewind_animation_player(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_rewind_animation_player(MLV_Animation_player *animation_player) {
     animation_player->current_frame = 0;
     animation_player->counter = 0;
     MLV_stop_animation_player(animation_player);
 }
-void MLV_next_frame(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_next_frame(MLV_Animation_player *animation_player) {
     /* Retour à la frame 0 si nous sommes à la dernière */
     if (++animation_player->current_frame == animation_player->animation->nb_frames) {
         animation_player->current_frame = 0;
     }
     animation_player->counter = 0;
 }
-void MLV_previous_frame(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_previous_frame(MLV_Animation_player *animation_player) {
     /* Retour à la frame 0 si nous sommes à la dernière */
     if (--animation_player->current_frame == -1U) {
         animation_player->current_frame = animation_player->animation->nb_frames - 1;
@@ -232,7 +233,7 @@ void MLV_previous_frame(MLV_Animation_player *animation_player) {
     animation_player->counter = 0;
 }
 
-void MLV_update_animation_player(MLV_Animation_player *animation_player) {
+MLVAPI void MLV_update_animation_player(MLV_Animation_player *animation_player) {
     const Animation_frame *frame;
 
     if (animation_player->status == STOP) return;
@@ -262,16 +263,16 @@ void MLV_update_animation_player(MLV_Animation_player *animation_player) {
     }
 }
 
-void MLV_change_sound_volume_of_animation_player(MLV_Animation_player *animation_player, uint32_t channel,
+MLVAPI void MLV_change_sound_volume_of_animation_player(MLV_Animation_player *animation_player, uint32_t channel,
     float volume) {
     animation_player->volume[channel] = volume;
 }
 
-void MLV_turn_off_sound_of_animation_player(MLV_Animation_player *animation_player, uint32_t channel) {
+MLVAPI void MLV_turn_off_sound_of_animation_player(MLV_Animation_player *animation_player, uint32_t channel) {
     animation_player->state_sound[channel] = 0;
 }
 
-void MLV_turn_on_sound_of_animation_player(MLV_Animation_player *animation_player, uint32_t channel) {
+MLVAPI void MLV_turn_on_sound_of_animation_player(MLV_Animation_player *animation_player, uint32_t channel) {
     animation_player->state_sound[channel] = 1;
 }
 
@@ -279,23 +280,23 @@ void MLV_turn_on_sound_of_animation_player(MLV_Animation_player *animation_playe
 //    Drawing animation
 ///////////////////////////////////////////////
 
-void MLV_draw_image_from_animation_player(MLV_Animation_player *animation_player, uint32_t layer, int x, int y) {
+MLVAPI void MLV_draw_image_from_animation_player(MLV_Animation_player *animation_player, uint32_t layer, int x, int y) {
     MLV_draw_image(animation_player->animation->frames[animation_player->current_frame].images[layer], x, y);
 }
 
-void MLV_draw_image_from_animation_player_on_image(MLV_Animation_player *animation_player, uint32_t layer,
+MLVAPI void MLV_draw_image_from_animation_player_on_image(MLV_Animation_player *animation_player, uint32_t layer,
     MLV_Image *image, int x, int y) {
     MLV_draw_image_on_image(animation_player->animation->frames[animation_player->current_frame].images[layer], image,
         x, y);
 }
 
-void MLV_draw_partial_image_from_animation_player_on_image(MLV_Animation_player *animation_player, uint32_t layer,
+MLVAPI void MLV_draw_partial_image_from_animation_player_on_image(MLV_Animation_player *animation_player, uint32_t layer,
     int source_x, int source_y, int source_width, int source_height, MLV_Image *image, int x, int y) {
     MLV_draw_partial_image_on_image(animation_player->animation->frames[animation_player->current_frame].images[layer],
         source_x, source_y, source_width, source_height, image, x, y);
 }
 
-void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animation_player, uint32_t layer, int source_x,
+MLVAPI void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animation_player, uint32_t layer, int source_x,
     int source_y, int source_width, int source_height, int x, int y) {
     MLV_draw_partial_image(animation_player->animation->frames[animation_player->current_frame].images[layer], source_x,
         source_y, source_width, source_height, x, y);
@@ -305,7 +306,7 @@ void MLV_draw_partial_image_from_animation_player(MLV_Animation_player *animatio
 //    Playing sounds of animation
 ///////////////////////////////////////////////
 
-void MLV_play_sound_from_animation_player(MLV_Animation_player *animation_player, uint32_t channel) {
+MLVAPI void MLV_play_sound_from_animation_player(MLV_Animation_player *animation_player, uint32_t channel) {
     const Animation_frame *frame = &animation_player->animation->frames[animation_player->current_frame];
     if (animation_player->sounds_are_being_played && !animation_player->sounds_are_being_played[channel]) {
         MLV_Sound *sound = frame->sounds[channel];
@@ -316,7 +317,7 @@ void MLV_play_sound_from_animation_player(MLV_Animation_player *animation_player
     }
 }
 
-void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_player, ...) {
+MLVAPI void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_player, ...) {
     va_list pile;
     va_start(pile, animation_player);
 
@@ -330,7 +331,7 @@ void MLV_play_sounds_from_animation_player(MLV_Animation_player *animation_playe
     va_end(pile);
 }
 
-void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animation_player, uint32_t *layers,
+MLVAPI void MLV_play_list_of_sounds_from_animation_player(MLV_Animation_player *animation_player, uint32_t *layers,
     uint32_t nb_layers) {
     for (uint32_t i = 0; i < nb_layers; i++) {
         MLV_play_sound_from_animation_player(animation_player, layers[i]);
@@ -381,7 +382,7 @@ struct _MLV_Animation_book {
     MLV_Animation **animations;
 };
 
-int MLV_get_number_of_animations(MLV_Animation_book *animation_book) {
+MLVAPI int MLV_get_number_of_animations(MLV_Animation_book *animation_book) {
     return animation_book->nb_animations;
 }
 
@@ -396,7 +397,7 @@ void insert_data_in_map(MLV_TreeMap *map, char *name, int identifiant) {
     MLV_add_data_in_tree_map(MLV_string_to_key(name), id, destroy_int, map);
 }
 
-MLV_Animation_book *MLV_load_animation_book(const char *xml_file, const char *image_directory,
+MLVAPI MLV_Animation_book *MLV_load_animation_book(const char *xml_file, const char *image_directory,
     const char *sound_directory) {
     int i;
     MLV_Animation_book *result;
@@ -701,7 +702,7 @@ MLV_Animation_book *MLV_load_animation_book(const char *xml_file, const char *im
     return result;
 }
 
-void MLV_free_animation_book(MLV_Animation_book *animation_book) {
+MLVAPI void MLV_free_animation_book(MLV_Animation_book *animation_book) {
     if (!animation_book) return;
 
     int i;
@@ -775,11 +776,11 @@ void MLV_free_animation_book(MLV_Animation_book *animation_book) {
     MLV_FREE(animation_book, MLV_Animation_book);
 }
 
-MLV_Animation *MLV_get_animation_from_id(MLV_Animation_book *animation_book, int id) {
+MLVAPI MLV_Animation *MLV_get_animation_from_id(MLV_Animation_book *animation_book, int id) {
     return animation_book->animations[id];
 }
 
-MLV_Animation *MLV_get_animation_from_name(MLV_Animation_book *animation_book, const char *name) {
+MLVAPI MLV_Animation *MLV_get_animation_from_name(MLV_Animation_book *animation_book, const char *name) {
     MLV_Key *key = MLV_string_to_key(name);
     int *id_ptr = (int *)MLV_get_data_from_tree_map(key, animation_book->animation_name_to_id);
     MLV_free_key(key);
@@ -787,6 +788,6 @@ MLV_Animation *MLV_get_animation_from_name(MLV_Animation_book *animation_book, c
     return MLV_get_animation_from_id(animation_book, *id_ptr);
 }
 
-const char *MLV_get_name_from_id_animation(MLV_Animation_book *animation_book, int id_animation) {
+MLVAPI const char *MLV_get_name_from_id_animation(MLV_Animation_book *animation_book, int id_animation) {
     return animation_book->animation_names[id_animation];
 }

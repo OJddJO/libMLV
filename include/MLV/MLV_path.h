@@ -33,6 +33,7 @@
 #define __MLV__MLV_PATH_H__
 
 #include <stdarg.h>
+#include "MLV_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,7 +48,7 @@ extern "C" {
  * \param path Le chemin à analyser.
  * \return Une chaîne de caractères.
  */
-char *MLV_get_base_name(const char *path);
+MLVAPI char *MLV_get_base_name(const char *path);
 
 /** \~french
  *
@@ -59,7 +60,7 @@ char *MLV_get_base_name(const char *path);
  * \param path Le chemin à analyser.
  * \return Une chaîne de caractères.
  */
-char *MLV_get_directory_name(const char *path);
+MLVAPI char *MLV_get_directory_name(const char *path);
 
 /** \~french
  * \brief Teste si un chemin est absolu.
@@ -67,7 +68,7 @@ char *MLV_get_directory_name(const char *path);
  * \param path Le chemin
  * \return Renvoie 1 si le chemin est absolue, 0 sinon.
  */
-int MLV_path_is_absolute(const char *path);
+MLVAPI int MLV_path_is_absolute(const char *path);
 
 /** \~french
  * \brief Teste si un chemin est relatif.
@@ -75,7 +76,7 @@ int MLV_path_is_absolute(const char *path);
  * \param path Le chemin
  * \return Renoie 1 si le chemin est relatif, 0 sinon.
  */
-int MLV_path_is_relative(const char *path);
+MLVAPI int MLV_path_is_relative(const char *path);
 
 /** \~french
  *
@@ -86,7 +87,7 @@ int MLV_path_is_relative(const char *path);
  * \return Renvoie 1 si le chemin est associé à un dossier ou à un fichier
  *         existant, 0 sinon.
  */
-int MLV_path_exists(const char *path);
+MLVAPI int MLV_path_exists(const char *path);
 
 /** \~french
  * \brief Vérifie si un chemin est associé à un répertoire.
@@ -94,7 +95,7 @@ int MLV_path_exists(const char *path);
  * \param path Le chemin
  * \return Renvoie 1 si le chemin est associé à un dossier, 0 sinon.
  */
-int MLV_path_is_a_directory(const char *path);
+MLVAPI int MLV_path_is_a_directory(const char *path);
 
 /** \~french
  * \brief Vérifie si un chemin est associé à un fichier.
@@ -102,7 +103,7 @@ int MLV_path_is_a_directory(const char *path);
  * \param path Le chemin
  * \return Renvoie 1 si le chemin est associé à un fichier, 0 sinon.
  */
-int MLV_path_is_a_file(const char *path);
+MLVAPI int MLV_path_is_a_file(const char *path);
 
 /** \~french
  * \brief Construit en concaténant différents textes, une chaîne de caractères
@@ -121,7 +122,7 @@ int MLV_path_is_a_file(const char *path);
  * \param ... Les autres éléments à concaténer.
  * \return Le chemin vérifiant les normes de la plateforme hôte.
  */
-char *MLV_build_path(const char *first_element, ...);
+MLVAPI char *MLV_build_path(const char *first_element, ...);
 
 /** \~french
  * \brief Même chose que MLV_build_path
@@ -132,7 +133,7 @@ char *MLV_build_path(const char *first_element, ...);
  * \return Le chemin vérifiant les normes de la plateforme qui va exécuter
  *         le programme.
  */
-char *MLV_build_path_v(char **elements);
+MLVAPI char *MLV_build_path_v(char **elements);
 
 /** \~french
  * \brief Détermine le répertoire courant.
@@ -141,7 +142,7 @@ char *MLV_build_path_v(char **elements);
  *
  * \return Le chemin du répertoire courant.
  */
-char *MLV_get_current_directory();
+MLVAPI char *MLV_get_current_directory();
 
 /** \~french
  * \brief Détermine le répertoire temporaire.
@@ -154,7 +155,7 @@ char *MLV_get_current_directory();
  *
  * \return Le chemin du répertoire temporaire.
  */
-const char *MLV_get_temporary_directory();
+MLVAPI const char *MLV_get_temporary_directory();
 
 /** \~french
  * \brief Détermine le répertoire personnel de l'utilisateur courant.
@@ -163,7 +164,7 @@ const char *MLV_get_temporary_directory();
  *
  * \return Le chemin du répertoire personnel.
  */
-const char *MLV_get_home_directory();
+MLVAPI const char *MLV_get_home_directory();
 
 #ifdef __cplusplus
 }

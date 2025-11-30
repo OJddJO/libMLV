@@ -31,11 +31,11 @@
 #include "memory_management.h"
 #include "warning_error.h"
 
-void MLV_wait_mouse(int *x, int *y) {
+MLVAPI void MLV_wait_mouse(int *x, int *y) {
     MLV_Button_state state;
     MLV_Mouse_button mouse_button;
 
-    // We remove all existing event from the queue
+    // MLVAPI We remove all existing event from the queue
     MLV_flush_event_queue();
 
     // We wait for a new mouse event
@@ -44,12 +44,12 @@ void MLV_wait_mouse(int *x, int *y) {
         ;
 }
 
-MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds) {
+MLVAPI MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds) {
     MLV_Event resultat = MLV_NONE;
     MLV_Button_state state;
     MLV_Mouse_button mouse_button;
 
-    // We remove all existing event from the queue
+    // MLVAPI We remove all existing event from the queue
     MLV_flush_event_queue();
 
     int time = MLV_get_time();
@@ -70,11 +70,11 @@ MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds) {
     return resultat;
 }
 
-MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds) {
+MLVAPI MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds) {
     return MLV_wait_mouse_or_milliseconds(x, y, seconds * 1000);
 }
 
-const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code) {
+MLVAPI const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code) {
     switch (button_code) {
         case MLV_BUTTON_LEFT:
             return "MLV_BUTTON_LEFT";
@@ -88,7 +88,7 @@ const char *MLV_convert_mouse_button_to_string(MLV_Mouse_button button_code) {
     return NULL;
 }
 
-MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string) {
+MLVAPI MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string) {
     if (strcmp(button_string, "MLV_BUTTON_LEFT") == 0) { return MLV_BUTTON_LEFT; }
     if (strcmp(button_string, "MLV_BUTTON_MIDDLE") == 0) { return MLV_BUTTON_MIDDLE; }
     if (strcmp(button_string, "MLV_BUTTON_RIGHT") == 0) { return MLV_BUTTON_RIGHT; }
@@ -96,12 +96,12 @@ MLV_Mouse_button MLV_convert_string_to_mouse_button(const char *button_string) {
     return -1;
 }
 
-void MLV_get_mouse_position(int *x, int *y) {
+MLVAPI void MLV_get_mouse_position(int *x, int *y) {
     SDL_PumpEvents();
     SDL_GetMouseState(x, y);
 }
 
-MLV_Button_state MLV_get_mouse_button_state(MLV_Mouse_button mouse_button) {
+MLVAPI MLV_Button_state MLV_get_mouse_button_state(MLV_Mouse_button mouse_button) {
     SDL_PumpEvents();
     if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(mouse_button)) { return MLV_PRESSED; }
     return MLV_RELEASED;

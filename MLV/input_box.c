@@ -291,7 +291,7 @@ inline static
     recalculateTextPositions_NTS(input_box);
 }
 
-void MLV_change_position_input_box(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y) {
+MLVAPI void MLV_change_position_input_box(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y) {
     lock_input_box(input_box);
     change_position_input_box_NTS(input_box, top_left_corner_X, top_left_corner_Y);
     unlock_input_box(input_box);
@@ -316,7 +316,7 @@ inline static
     recalculateTextPositions_NTS(input_box);
 }
 
-void MLV_change_input_box_size(MLV_Input_box *input_box, int width, int height) {
+MLVAPI void MLV_change_input_box_size(MLV_Input_box *input_box, int width, int height) {
     lock_input_box(input_box);
     change_size_input_box_NTS(input_box, width, height);
     unlock_input_box(input_box);
@@ -331,7 +331,7 @@ inline static
     change_position_input_box_NTS(input_box, top_left_corner_X, top_left_corner_Y);
 }
 
-void MLV_change_input_box_geometry(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y, int width,
+MLVAPI void MLV_change_input_box_geometry(MLV_Input_box *input_box, int top_left_corner_X, int top_left_corner_Y, int width,
     int height) {
     lock_input_box(input_box);
     change_geometry_input_box_NTS(input_box, top_left_corner_X, top_left_corner_Y, width, height);
@@ -348,7 +348,7 @@ inline static
     input_box->backgroundColor = backgroundColor;
 }
 
-void MLV_change_input_box_colors(MLV_Input_box *input_box, MLV_Color borderColor, MLV_Color textColor,
+MLVAPI void MLV_change_input_box_colors(MLV_Input_box *input_box, MLV_Color borderColor, MLV_Color textColor,
         MLV_Color backgroundColor) {
     lock_input_box(input_box);
     change_colors_input_box_NTS(input_box, borderColor, textColor, backgroundColor);
@@ -365,7 +365,7 @@ inline static
     }
 }
 
-void MLV_desactivate_input_box() {
+MLVAPI void MLV_desactivate_input_box() {
     lock_input_box_information();
     desactivate_input_box_NTS();
     unlock_input_box_information();
@@ -380,7 +380,7 @@ inline static
     input_box_information.input_box_activated = input_box;
 }
 
-void MLV_activate_input_box(MLV_Input_box *input_box) {
+MLVAPI void MLV_activate_input_box(MLV_Input_box *input_box) {
     lock_input_box_information();
     lock_input_box(input_box);
     activate_imput_box_NTS(input_box);
@@ -517,7 +517,7 @@ MLV_Input_box *create_input_box_with_font(int top_left_corner_X, int top_left_co
     return input_box;
 }
 
-MLV_Input_box *MLV_create_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     const MLV_Font *font, va_list pile) {
     char *complete_informative_message;
@@ -528,7 +528,7 @@ MLV_Input_box *MLV_create_input_box_with_font_va(int top_left_corner_X, int top_
     return result;
 }
 
-MLV_Input_box *MLV_create_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box_with_font(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     const MLV_Font *font, ...) {
     va_list pile;
@@ -539,14 +539,14 @@ MLV_Input_box *MLV_create_input_box_with_font(int top_left_corner_X, int top_lef
     return result;
 }
 
-MLV_Input_box *MLV_create_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     va_list pile) {
     return MLV_create_input_box_with_font_va(top_left_corner_X, top_left_corner_Y, width, height, borderColor,
         textColor, backgroundColor, informativeMessage, MLV_data->defaultFont, pile);
 }
 
-MLV_Input_box *MLV_create_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, ...) {
     va_list pile;
     va_start(pile, informativeMessage);
@@ -570,13 +570,13 @@ inline static
     MLV_free_list(input_box->history);
 }
 
-void MLV_suppress_history(MLV_Input_box *input_box) {
+MLVAPI void MLV_suppress_history(MLV_Input_box *input_box) {
     lock_input_box(input_box);
     suppressHistory_NTS(input_box);
     unlock_input_box(input_box);
 }
 
-void MLV_free_input_box(MLV_Input_box *input_box) {
+MLVAPI void MLV_free_input_box(MLV_Input_box *input_box) {
     lock_input_box_information();
     lock_input_box(input_box);
     input_box_unregister_NTS(input_box);
@@ -608,21 +608,21 @@ void change_informative_message_of_input_box(MLV_Input_box *input_box, const cha
     unlock_input_box(input_box);
 }
 
-void MLV_change_informative_message_of_input_box_va(MLV_Input_box *input_box, const char *message, va_list pile) {
+MLVAPI void MLV_change_informative_message_of_input_box_va(MLV_Input_box *input_box, const char *message, va_list pile) {
     char *complete_message;
     if (vasprintf(&complete_message, message, pile) == -1) { ERROR("Unexpected Error."); }
     change_informative_message_of_input_box(input_box, complete_message);
     free(complete_message);
 }
 
-void MLV_change_informative_message_of_input_box(MLV_Input_box *input_box, const char *message, ...) {
+MLVAPI void MLV_change_informative_message_of_input_box(MLV_Input_box *input_box, const char *message, ...) {
     va_list pile;
     va_start(pile, message);
     MLV_change_informative_message_of_input_box_va(input_box, message, pile);
     va_end(pile);
 }
 
-void MLV_draw_input_box(MLV_Input_box *input_box) {
+MLVAPI void MLV_draw_input_box(MLV_Input_box *input_box) {
     lock_input_box(input_box);
     construct_input_box_NTS(input_box);
     SDL_BlitSurface(input_box->apparence, NULL, MLV_data->screen, &(input_box->rectangle));
@@ -630,7 +630,7 @@ void MLV_draw_input_box(MLV_Input_box *input_box) {
 }
 
 inline static void _1 (void *a, [[maybe_unused]]void *unused) { MLV_draw_input_box(a); }
-void MLV_draw_all_input_boxes() {
+MLVAPI void MLV_draw_all_input_boxes() {
     lock_input_box_information();
     MLV_foreach_list(input_box_information.input_box_list, _1,
         MLV_data->screen);

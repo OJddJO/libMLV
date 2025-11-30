@@ -25,22 +25,22 @@
 
 typedef struct _MLV_TreeMap MLV_TreeMap;
 
-MLV_TreeMap *MLV_create_tree_map();
+MLVAPI MLV_TreeMap *MLV_create_tree_map();
 
-void MLV_free_tree_map(MLV_TreeMap *tree_map);
+MLVAPI void MLV_free_tree_map(MLV_TreeMap *tree_map);
 
-void MLV_superficial_free_tree_map(MLV_TreeMap *tree_map);
+MLVAPI void MLV_superficial_free_tree_map(MLV_TreeMap *tree_map);
 
-void MLV_add_data_in_tree_map(MLV_Key *key, void *data, void (*data_destroying_function)(void *data),
+MLVAPI void MLV_add_data_in_tree_map(MLV_Key *key, void *data, void (*data_destroying_function)(void *data),
     MLV_TreeMap *tree_map);
 
-void MLV_init_tree_map(MLV_TreeMap *tree_map);
+MLVAPI void MLV_init_tree_map(MLV_TreeMap *tree_map);
 
-void MLV_clear_tree_map(MLV_TreeMap *tree_map);
+MLVAPI void MLV_clear_tree_map(MLV_TreeMap *tree_map);
 
-void *MLV_get_data_from_tree_map(MLV_Key *key, MLV_TreeMap *tree_map);
+MLVAPI void *MLV_get_data_from_tree_map(MLV_Key *key, MLV_TreeMap *tree_map);
 
-void MLV_foreach_key_data_tree_map(void (*key_data_function)(MLV_Key *key, void *data, void *data_user),
+MLVAPI void MLV_foreach_key_data_tree_map(void (*key_data_function)(MLV_Key *key, void *data, void *data_user),
     void *data_user, MLV_TreeMap *tree_map);
 
 #endif

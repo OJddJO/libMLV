@@ -2,6 +2,13 @@ test
 test.c
 test.exe
 
+*.dll
+*.exe
+*.so
+*.dylib
+*.a
+*.o
+
 _linux/
 _windows/
 

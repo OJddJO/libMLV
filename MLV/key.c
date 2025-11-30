@@ -30,7 +30,7 @@ struct _MLV_Key {
     int (*compare_values)(void *value1, void *value2);
 };
 
-MLV_Key *MLV_create_key(void *value, void (*value_destroying_function)(void *data),
+MLVAPI MLV_Key *MLV_create_key(void *value, void (*value_destroying_function)(void *data),
     int (*compare_values)(void *value1, void *value2)) {
     MLV_Key *key = MLV_MALLOC(1, MLV_Key);
     key->value = value;
@@ -39,14 +39,14 @@ MLV_Key *MLV_create_key(void *value, void (*value_destroying_function)(void *dat
     return key;
 }
 
-void MLV_free_key(MLV_Key *key) {
+MLVAPI void MLV_free_key(MLV_Key *key) {
     if (key) {
         if (key->value_destroying_function) { key->value_destroying_function(key->value); }
         MLV_FREE(key, MLV_Key);
     }
 }
 
-int MLV_compare_keys(MLV_Key *key1, MLV_Key *key2) {
+MLVAPI int MLV_compare_keys(MLV_Key *key1, MLV_Key *key2) {
     return key1->compare_values(key1->value, key2->value);
 }
 
@@ -58,7 +58,7 @@ int compare_strings(char *text1, char *text2) {
     return strcmp(text1, text2);
 }
 
-MLV_Key *MLV_string_to_key(const char *text) {
+MLVAPI MLV_Key *MLV_string_to_key(const char *text) {
     size_t l = strlen(text);
     char *text_copy = MLV_MALLOC(l + 1, char);
     strncpy(text_copy, text, l + 1);
@@ -73,12 +73,12 @@ int compare_integers(int *int1, int *int2) {
     return (*int1) - (*int2);
 }
 
-MLV_Key *MLV_integer_to_key(int integer) {
+MLVAPI MLV_Key *MLV_integer_to_key(int integer) {
     int *value = MLV_MALLOC(1, int);
     *value = integer;
     return MLV_create_key(value, (void (*)(void *))free_integer, (int (*)(void *, void *))compare_integers);
 }
 
-void *MLV_get_value_from_key(MLV_Key *key) {
+MLVAPI void *MLV_get_value_from_key(MLV_Key *key) {
     return key->value;
 }

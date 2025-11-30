@@ -48,23 +48,23 @@ extern DataMLV *MLV_data;
 // Drawing operation on images                                               //
 ///////////////////////////////////////////////////////////////////////////////
 
-void MLV_draw_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image) {
     circleColor(image->surface, x, y, radius, color);
 }
 
-void MLV_draw_filled_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_filled_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image) {
     filledCircleColor(image->surface, x, y, radius, color);
 }
 
-void MLV_draw_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image) {
     ellipseColor(image->surface, x, y, radius_x, radius_y, color);
 }
 
-void MLV_draw_filled_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_filled_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image) {
     filledEllipseColor(image->surface, x, y, radius_x, radius_y, color);
 }
 
-void MLV_draw_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image) {
     Sint16 *tmp_vx = MLV_MALLOC(nb_points, Sint16);
     Sint16 *tmp_vy = MLV_MALLOC(nb_points, Sint16);
     int i;
@@ -77,13 +77,13 @@ void MLV_draw_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_
     MLV_FREE(tmp_vy, Sint16);
 }
 
-void MLV_draw_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color, MLV_Image *image) {
     int coordonne_x[3] = {ax, bx, cx};
     int coordonne_y[3] = {ay, by, cy};
     MLV_draw_polygon_on_image(coordonne_x, coordonne_y, 3, color, image);
 }
 
-void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image) {
     Sint16 *tmp_vx = MLV_MALLOC(nb_points, Sint16);
     Sint16 *tmp_vy = MLV_MALLOC(nb_points, Sint16);
     int i;
@@ -96,14 +96,14 @@ void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_point
     MLV_FREE(tmp_vy, Sint16);
 }
 
-void MLV_draw_filled_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
+MLVAPI void MLV_draw_filled_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
     MLV_Image *image) {
     int coordonne_x[3] = {ax, bx, cx};
     int coordonne_y[3] = {ay, by, cy};
     MLV_draw_filled_polygon_on_image(coordonne_x, coordonne_y, 3, color, image);
 }
 
-void MLV_draw_bezier_curve_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_bezier_curve_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image) {
     Sint16 *tmp_vx = MLV_MALLOC(nb_points, Sint16);
     Sint16 *tmp_vy = MLV_MALLOC(nb_points, Sint16);
     int i;
@@ -116,15 +116,15 @@ void MLV_draw_bezier_curve_on_image(const int *vx, const int *vy, int nb_points,
     MLV_FREE(tmp_vy, Sint16);
 }
 
-void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image) {
     rectangleColor(image->surface, x, y, x + width - 1, y + height - 1, color);
 }
 
-void MLV_draw_filled_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_filled_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image) {
     boxColor(image->surface, x, y, x + width - 1, y + height - 1, color);
 }
 
-void MLV_draw_line_on_image(int x1, int y1, int x2, int y2, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_line_on_image(int x1, int y1, int x2, int y2, MLV_Color color, MLV_Image *image) {
     lineColor(image->surface, x1, y1, x2, y2, color);
 }
 
@@ -182,11 +182,11 @@ void draw_pixel(MLV_Image *image, int x, int y, MLV_Color color) {
     draw_pixel_on_sdl_surface(surface, x, y, color);
 }
 
-void MLV_draw_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
     draw_pixel(image, x, y, color);
 }
 
-void MLV_draw_point_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_draw_point_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
     MLV_draw_pixel_on_image(x, y, color, image);
 }
 
@@ -194,23 +194,23 @@ void MLV_draw_point_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
 // Drawing operation on iscreen                                              //
 ///////////////////////////////////////////////////////////////////////////////
 
-void MLV_draw_circle(int x, int y, int radius, MLV_Color color) {
+MLVAPI void MLV_draw_circle(int x, int y, int radius, MLV_Color color) {
     circleColor(MLV_data->screen, x, y, radius, color);
 }
 
-void MLV_draw_filled_circle(int x, int y, int radius, MLV_Color color) {
+MLVAPI void MLV_draw_filled_circle(int x, int y, int radius, MLV_Color color) {
     filledCircleColor(MLV_data->screen, x, y, radius, color);
 }
 
-void MLV_draw_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color) {
+MLVAPI void MLV_draw_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color) {
     ellipseColor(MLV_data->screen, x, y, radius_x, radius_y, color);
 }
 
-void MLV_draw_filled_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color) {
+MLVAPI void MLV_draw_filled_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color) {
     filledEllipseColor(MLV_data->screen, x, y, radius_x, radius_y, color);
 }
 
-void MLV_draw_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color) {
+MLVAPI void MLV_draw_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color) {
     Sint16 *tmp_vx = MLV_MALLOC(nb_points, Sint16);
     Sint16 *tmp_vy = MLV_MALLOC(nb_points, Sint16);
     int i;
@@ -223,13 +223,13 @@ void MLV_draw_polygon(const int *vx, const int *vy, int nb_points, MLV_Color col
     MLV_FREE(tmp_vy, Sint16);
 }
 
-void MLV_draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color) {
+MLVAPI void MLV_draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color) {
     int coordonne_x[3] = {ax, bx, cx};
     int coordonne_y[3] = {ay, by, cy};
     MLV_draw_polygon(coordonne_x, coordonne_y, 3, color);
 }
 
-void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color) {
+MLVAPI void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color) {
     Sint16 *tmp_vx = MLV_MALLOC(nb_points, Sint16);
     Sint16 *tmp_vy = MLV_MALLOC(nb_points, Sint16);
     int i;
@@ -242,13 +242,13 @@ void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Co
     MLV_FREE(tmp_vy, Sint16);
 }
 
-void MLV_draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color) {
+MLVAPI void MLV_draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color) {
     int coordonne_x[3] = {ax, bx, cx};
     int coordonne_y[3] = {ay, by, cy};
     MLV_draw_filled_polygon(coordonne_x, coordonne_y, 3, color);
 }
 
-void MLV_draw_bezier_curve(const int *vx, const int *vy, int nb_points, MLV_Color color) {
+MLVAPI void MLV_draw_bezier_curve(const int *vx, const int *vy, int nb_points, MLV_Color color) {
     Sint16 *tmp_vx = MLV_MALLOC(nb_points, Sint16);
     Sint16 *tmp_vy = MLV_MALLOC(nb_points, Sint16);
     int i;
@@ -261,22 +261,22 @@ void MLV_draw_bezier_curve(const int *vx, const int *vy, int nb_points, MLV_Colo
     MLV_FREE(tmp_vy, Sint16);
 }
 
-void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color) {
+MLVAPI void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color) {
     rectangleColor(MLV_data->screen, x, y, x + width - 1, y + height - 1, color);
 }
 
-void MLV_draw_filled_rectangle(int x, int y, int width, int height, MLV_Color color) {
+MLVAPI void MLV_draw_filled_rectangle(int x, int y, int width, int height, MLV_Color color) {
     boxColor(MLV_data->screen, x, y, x + width - 1, y + height - 1, color);
 }
 
-void MLV_draw_line(int x1, int y1, int x2, int y2, MLV_Color color) {
+MLVAPI void MLV_draw_line(int x1, int y1, int x2, int y2, MLV_Color color) {
     lineColor(MLV_data->screen, x1, y1, x2, y2, color);
 }
 
-void MLV_draw_pixel(int x, int y, MLV_Color color) {
+MLVAPI void MLV_draw_pixel(int x, int y, MLV_Color color) {
     draw_pixel_on_sdl_surface(MLV_data->screen, x, y, color);
 }
 
-void MLV_draw_point(int x, int y, MLV_Color color) {
+MLVAPI void MLV_draw_point(int x, int y, MLV_Color color) {
     MLV_draw_pixel(x, y, color);
 }

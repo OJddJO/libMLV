@@ -31,11 +31,8 @@
 #ifndef __MLV__MLV_COLOR_H__
 #define __MLV__MLV_COLOR_H__
 
-#ifndef MEMORY_DEBUG
-    #include <SDL/SDL.h>
-#else
-    #include "memory_debug.h"
-#endif
+#include <stdint.h>
+#include "MLV_config.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,17 +48,17 @@ extern "C" {
  * - la composant Blue ( B );
  * - la composante Alpha, c'est la transparence ( A ).
  */
-typedef Uint32 MLV_Color;
+typedef uint32_t MLV_Color;
 
 /** \~french
  * \brief Énumère les valeurs de transparence et d'opacité (codés sur 8 bits )
  */
-enum { MLV_ALPHA_TRANSPARENT = SDL_ALPHA_TRANSPARENT, MLV_ALPHA_OPAQUE = SDL_ALPHA_OPAQUE };
+enum { MLV_ALPHA_TRANSPARENT = 0, MLV_ALPHA_OPAQUE = 255 };
 
 /** \~french
  * \brief Type codant la transparence dans MLV
  */
-typedef Uint8 MLV_Alpha;
+typedef uint8_t MLV_Alpha;
 
 /** \~french
  * \brief Raccourci vers MLV_Color MLV_get_color_from_rgba.
@@ -74,7 +71,7 @@ typedef Uint8 MLV_Alpha;
  * \param alpha La composante alpha (transparence) de la couleur
  * \return La couleur codée sur 32 bits.
  */
-MLV_Color MLV_rgba(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
+MLVAPI MLV_Color MLV_rgba(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 
 /** \~french
  * \brief Convertit une couleur codée sur 4 entier de 8 bits représentant les
@@ -86,7 +83,7 @@ MLV_Color MLV_rgba(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
  * \param alpha La composante alpha (transparence) de la couleur
  * \return La couleur codée sur 32 bits.
  */
-MLV_Color MLV_convert_rgba_to_color(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
+MLVAPI MLV_Color MLV_convert_rgba_to_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 
 /** \~french
  * \brief Convertit une couleur MLV en une couleur codée sur 4 entier de 8 bits
@@ -99,7 +96,7 @@ MLV_Color MLV_convert_rgba_to_color(Uint8 red, Uint8 green, Uint8 blue, Uint8 al
  * \param blue La composante bleue de la couleur
  * \param alpha La composante alpha (transparence) de la couleur
  */
-void MLV_convert_color_to_rgba(MLV_Color color, Uint8 *red, Uint8 *green, Uint8 *blue, Uint8 *alpha);
+MLVAPI void MLV_convert_color_to_rgba(MLV_Color color, uint8_t *red, uint8_t *green, uint8_t *blue, uint8_t *alpha);
 
 /** \~french
  * \brief Convertit une couleur en un chaine de caractères.
@@ -111,7 +108,7 @@ void MLV_convert_color_to_rgba(MLV_Color color, Uint8 *red, Uint8 *green, Uint8 
  * \return La chaîne associée au code de la couleur
  *
  */
-const char *MLV_convert_color_to_string(MLV_Color color);
+MLVAPI const char *MLV_convert_color_to_string(MLV_Color color);
 
 /** \~french
  * \brief Convertit un nom de couleur en son code couleur.
@@ -122,7 +119,7 @@ const char *MLV_convert_color_to_string(MLV_Color color);
  * \param color_name Le nom de la couleur
  * \return Le code couleur associée au nom passé en paramètre.
  */
-MLV_Color MLV_convert_string_to_color(const char *color_name);
+MLVAPI MLV_Color MLV_convert_string_to_color(const char *color_name);
 
 /** \~french
  * Define the SNOW color.

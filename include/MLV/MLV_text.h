@@ -31,6 +31,7 @@
 #ifndef __MLV__MLV_TEXT_H__
 #define __MLV__MLV_TEXT_H__
 
+#include "MLV_config.h"
 #include "MLV_color.h"
 #include "MLV_image.h"
 
@@ -88,7 +89,7 @@ typedef struct _MLV_Font MLV_Font;
  * \param size La taille de la fonte de caractères.
  * \return La structure de donnée MLV contenant la fonte de caractères.
  */
-MLV_Font *MLV_load_font(const char *file_font, int size);
+MLVAPI MLV_Font *MLV_load_font(const char *file_font, int size);
 
 /** \~french
  * \brief Cette fonction libère la mémoire d'une fonte de caractères
@@ -96,7 +97,7 @@ MLV_Font *MLV_load_font(const char *file_font, int size);
  *
  * \param font L'adresse de la fonte de caractères à libérer.
  */
-void MLV_free_font(MLV_Font *font);
+MLVAPI void MLV_free_font(MLV_Font *font);
 
 /** \~french
  * \brief Cette fonction calcule la taille du texte qui sera affiché sur
@@ -106,7 +107,7 @@ void MLV_free_font(MLV_Font *font);
  * \param width La largeur du texte.
  * \param height La hauteur du texte.
  */
-void MLV_get_size_of_text(const char *text, int *width, int *height, ...);
+MLVAPI void MLV_get_size_of_text(const char *text, int *width, int *height, ...);
 
 /** \~french
  * \brief Cette fonction calcule la taille du texte qui sera affiché sur
@@ -117,7 +118,7 @@ void MLV_get_size_of_text(const char *text, int *width, int *height, ...);
  * \param height La hauteur du texte.
  * \param font La fonte de caractères utilisée pour afficher le texte.
  */
-void MLV_get_size_of_text_with_font(const char *text, int *width, int *height, const MLV_Font *font, ...);
+MLVAPI void MLV_get_size_of_text_with_font(const char *text, int *width, int *height, const MLV_Font *font, ...);
 
 /** \~french
  * \brief Imprime un texte donné à une position et une couleur données.
@@ -130,7 +131,7 @@ void MLV_get_size_of_text_with_font(const char *text, int *width, int *height, c
  * \param text texte à afficher
  * \param color couleur du tracé
  */
-void MLV_draw_text(int x, int y, const char *text, MLV_Color color, ...);
+MLVAPI void MLV_draw_text(int x, int y, const char *text, MLV_Color color, ...);
 
 /** \~french
  * \brief Écrit du texte sur l'écran en utilisant une couleur et une fonte de
@@ -142,7 +143,7 @@ void MLV_draw_text(int x, int y, const char *text, MLV_Color color, ...);
  * \param color La couleur du tracé.
  * \param font La fonte de caractères utilisée pour dessiner le texte.
  */
-void MLV_draw_text_with_font(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, ...);
+MLVAPI void MLV_draw_text_with_font(int x, int y, const char *text, const MLV_Font *font, MLV_Color color, ...);
 
 /** \~french
  * \brief Écrit sur une image un texte donné à une position et une couleur
@@ -157,7 +158,7 @@ void MLV_draw_text_with_font(int x, int y, const char *text, const MLV_Font *fon
  * \param color La couleur du tracé.
  * \param image L'image sur laquel le texte doit être ecrit.
  */
-void MLV_draw_text_on_image(int x, int y, const char *text, MLV_Color color, MLV_Image *image, ...);
+MLVAPI void MLV_draw_text_on_image(int x, int y, const char *text, MLV_Color color, MLV_Image *image, ...);
 
 /** \~french
  * \brief Écrit du texte sur une image en utilisant une couleur et une fonte de
@@ -170,7 +171,7 @@ void MLV_draw_text_on_image(int x, int y, const char *text, MLV_Color color, MLV
  * \param font La fonte de caractères utilisée pour dessiner le texte.
  * \param image L'image sur laquel le texte doit être ecrit.
  */
-void MLV_draw_text_with_font_on_image(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
+MLVAPI void MLV_draw_text_with_font_on_image(int x, int y, const char *text, const MLV_Font *font, MLV_Color color,
     MLV_Image *image, ...);
 
 /** \~french
@@ -194,7 +195,7 @@ void MLV_draw_text_with_font_on_image(int x, int y, const char *text, const MLV_
  * \param backgroundColor La couleur du fond de la boîte.
  * \param text_justification La justification du texte.
  */
-void MLV_draw_adapted_text_box(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, ...);
 
 /** \~french
@@ -211,7 +212,7 @@ void MLV_draw_adapted_text_box(int x, int y, const char *message, int sizeInterl
  * \param text_justification La justification du texte.
  * \param image L'image sur laquel le texte doit être ecrit.
  */
-void MLV_draw_adapted_text_box_on_image(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
+MLVAPI void MLV_draw_adapted_text_box_on_image(int x, int y, const char *message, int sizeInterligne, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification, MLV_Image *image, ...);
 
 /** \~french
@@ -228,7 +229,7 @@ void MLV_draw_adapted_text_box_on_image(int x, int y, const char *message, int s
  *
  * \return La fonction renvoie la taille de la boîte de texte.
  */
-int MLV_get_size_of_adapted_text_box(const char *message, int sizeInterligne, int *result_width, int *result_height,
+MLVAPI int MLV_get_size_of_adapted_text_box(const char *message, int sizeInterligne, int *result_width, int *result_height,
     ...);
 
 /** \~french
@@ -245,7 +246,7 @@ int MLV_get_size_of_adapted_text_box(const char *message, int sizeInterligne, in
  * \param backgroundColor La couleur du fond de la boîte.
  * \param text_justification La justification du texte.
  */
-void MLV_draw_adapted_text_box_with_font(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI void MLV_draw_adapted_text_box_with_font(int x, int y, const char *message, const MLV_Font *font, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     ...);
 
@@ -264,7 +265,7 @@ void MLV_draw_adapted_text_box_with_font(int x, int y, const char *message, cons
  * \param text_justification La justification du texte.
  * \param image L'image sur laquel le texte doit être ecrit.
  */
-void MLV_draw_adapted_text_box_with_font_on_image(int x, int y, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_adapted_text_box_with_font_on_image(int x, int y, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Image *image, ...);
 
@@ -284,7 +285,7 @@ void MLV_draw_adapted_text_box_with_font_on_image(int x, int y, const char *mess
  *
  * \return La fonction renvoie la taille de la boîte de texte.
  */
-int MLV_get_size_of_adapted_text_box_with_font(const char *message, const MLV_Font *font, int sizeInterligne,
+MLVAPI int MLV_get_size_of_adapted_text_box_with_font(const char *message, const MLV_Font *font, int sizeInterligne,
     int *result_width, int *result_height, ...);
 
 /** \~french
@@ -319,7 +320,7 @@ int MLV_get_size_of_adapted_text_box_with_font(const char *message, const MLV_Fo
  * \param horizontal_position La position horizontale du texte dans la boîte.
  * \param vertical_position La position verticale du texte dans la boîte.
  */
-void MLV_draw_text_box(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, ...);
 
@@ -341,7 +342,7 @@ void MLV_draw_text_box(int x, int y, int width, int height, const char *message,
  * \param vertical_position La position verticale du texte dans la boîte.
  * \param image L'image sur laquel le texte doit être ecrit.
  */
-void MLV_draw_text_box_on_image(int x, int y, int width, int height, const char *message, int sizeInterligne,
+MLVAPI void MLV_draw_text_box_on_image(int x, int y, int width, int height, const char *message, int sizeInterligne,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, MLV_Text_justification text_justification,
     MLV_Horizontal_position horizontal_position, MLV_Vertical_position vertical_position, MLV_Image *image, ...);
 
@@ -364,7 +365,7 @@ void MLV_draw_text_box_on_image(int x, int y, int width, int height, const char 
  * \param horizontal_position La position horizontale du texte dans la boîte.
  * \param vertical_position La position verticale du texte dans la boîte.
  */
-void MLV_draw_text_box_with_font(int x, int y, int width, int height, const char *message, const MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font(int x, int y, int width, int height, const char *message, const MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, ...);
@@ -389,7 +390,7 @@ void MLV_draw_text_box_with_font(int x, int y, int width, int height, const char
  * \param vertical_position La position verticale du texte dans la boîte.
  * \param image L'image sur laquel le texte doit être ecrit.
  */
-void MLV_draw_text_box_with_font_on_image(int x, int y, int width, int height, const char *message, MLV_Font *font,
+MLVAPI void MLV_draw_text_box_with_font_on_image(int x, int y, int width, int height, const char *message, MLV_Font *font,
     int sizeInterligne, MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor,
     MLV_Text_justification text_justification, MLV_Horizontal_position horizontal_position,
     MLV_Vertical_position vertical_position, MLV_Image *image, ...);
@@ -405,7 +406,7 @@ void MLV_draw_text_box_with_font_on_image(int x, int y, int width, int height, c
  * \param unicode Le caractère en format unicode.
  * \return Un pointeur vers une nouvelle chaîne de caractères.
  */
-char *MLV_convert_unicode_to_string(int unicode);
+MLVAPI char *MLV_convert_unicode_to_string(int unicode);
 
 #ifdef __cplusplus
 }

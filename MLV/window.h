@@ -21,9 +21,11 @@
 #ifndef __MLV__WINDOW_H__
 #define __MLV__WINDOW_H__
 
+#include "MLV_config.h"
 #include "MLV_image.h"
 
-void MLV_register_a_post_producter(void (*post_producter)(MLV_Image *));
-void MLV_unregister_a_post_producter(void (*post_producter)(MLV_Image *));
+
+MLVAPI void MLV_register_a_post_producter(void (*post_producter)(MLV_Image *));
+MLVAPI void MLV_unregister_a_post_producter(void (*post_producter)(MLV_Image *));
 
 #endif

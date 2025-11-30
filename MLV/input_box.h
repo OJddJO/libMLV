@@ -21,6 +21,8 @@
 #ifndef __MLV__INPUT_BOX_H__
 #define __MLV__INPUT_BOX_H__
 
+#include "MLV_config.h"
+
 #ifndef MEMORY_DEBUG
     #include <SDL/SDL.h>
 #else

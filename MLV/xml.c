@@ -58,7 +58,7 @@ struct _MLV_Xml {
     //	xmlNodePtr cur;
 };
 
-MLV_Xml *MLV_load_xml(const char *xml_file_path) {
+MLVAPI MLV_Xml *MLV_load_xml(const char *xml_file_path) {
     MLV_Xml *result = MLV_MALLOC(1, MLV_Xml);
 
     result->doc = xmlParseFile(xml_file_path);
@@ -81,7 +81,7 @@ MLV_Xml *MLV_load_xml(const char *xml_file_path) {
     return result;
 }
 
-void MLV_free_xml(MLV_Xml *xml_data) {
+MLVAPI void MLV_free_xml(MLV_Xml *xml_data) {
     if (xml_data) {
         if (xml_data->doc) { xmlFreeDoc(xml_data->doc); }
         MLV_FREE(xml_data, MLV_Xml);
@@ -132,14 +132,14 @@ char *internal_get_string_value_from_xml(const MLV_Xml *xml_data, int i, const c
     return result;
 }
 
-MLV_Xml_error MLV_get_string_value_from_xml_va(const MLV_Xml *xml_data, char **result, const char *xpath,
+MLVAPI MLV_Xml_error MLV_get_string_value_from_xml_va(const MLV_Xml *xml_data, char **result, const char *xpath,
     va_list pile) {
     *result = internal_get_string_value_from_xml(xml_data, 0, xpath, pile);
     if (*result == NULL) { return MLV_XML_THE_FIELD_DOESNT_EXIST; }
     return MLV_XML_NONE;
 }
 
-MLV_Xml_error MLV_get_string_value_from_xml(const MLV_Xml *xml_data, char **result, const char *xpath, ...) {
+MLVAPI MLV_Xml_error MLV_get_string_value_from_xml(const MLV_Xml *xml_data, char **result, const char *xpath, ...) {
     MLV_Xml_error error;
 
     va_list pile;
@@ -152,7 +152,7 @@ MLV_Xml_error MLV_get_string_value_from_xml(const MLV_Xml *xml_data, char **resu
     return error;
 }
 
-MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *result, const char *xpath, va_list pile) {
+MLVAPI MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *result, const char *xpath, va_list pile) {
     long int value;
     char *text;
     MLV_Xml_error error;
@@ -181,7 +181,7 @@ MLV_Xml_error MLV_get_integer_value_from_xml_va(const MLV_Xml *xml_data, int *re
     return error;
 }
 
-MLV_Xml_error MLV_get_integer_value_from_xml(const MLV_Xml *xml_data, int *result, const char *xpath, ...) {
+MLVAPI MLV_Xml_error MLV_get_integer_value_from_xml(const MLV_Xml *xml_data, int *result, const char *xpath, ...) {
     MLV_Xml_error error;
 
     va_list pile;
@@ -193,7 +193,7 @@ MLV_Xml_error MLV_get_integer_value_from_xml(const MLV_Xml *xml_data, int *resul
     return error;
 }
 
-MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *result, const char *xpath,
+MLVAPI MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *result, const char *xpath,
     va_list pile) {
     double value;
     char *text;
@@ -223,7 +223,7 @@ MLV_Xml_error MLV_get_double_value_from_xml_va(const MLV_Xml *xml_data, double *
     return error;
 }
 
-MLV_Xml_error MLV_get_double_value_from_xml(const MLV_Xml *xml_data, double *result, const char *xpath, ...) {
+MLVAPI MLV_Xml_error MLV_get_double_value_from_xml(const MLV_Xml *xml_data, double *result, const char *xpath, ...) {
     MLV_Xml_error error;
 
     va_list pile;
@@ -236,7 +236,7 @@ MLV_Xml_error MLV_get_double_value_from_xml(const MLV_Xml *xml_data, double *res
     return error;
 }
 
-MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *result, const char *xpath, va_list pile) {
+MLVAPI MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *result, const char *xpath, va_list pile) {
     float value;
     char *text;
     MLV_Xml_error error;
@@ -265,7 +265,7 @@ MLV_Xml_error MLV_get_float_value_from_xml_va(const MLV_Xml *xml_data, float *re
     return error;
 }
 
-MLV_Xml_error MLV_get_float_value_from_xml(const MLV_Xml *xml_data, float *result, const char *xpath, ...) {
+MLVAPI MLV_Xml_error MLV_get_float_value_from_xml(const MLV_Xml *xml_data, float *result, const char *xpath, ...) {
     MLV_Xml_error error;
 
     va_list pile;
@@ -278,7 +278,7 @@ MLV_Xml_error MLV_get_float_value_from_xml(const MLV_Xml *xml_data, float *resul
     return error;
 }
 
-int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *xpath, va_list pile) {
+MLVAPI int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *xpath, va_list pile) {
     int result;
 
     xmlXPathObjectPtr result_search;
@@ -291,7 +291,7 @@ int MLV_get_number_of_objects_from_xml_va(const MLV_Xml *xml_data, const char *x
     return result;
 }
 
-int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpath, ...) {
+MLVAPI int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpath, ...) {
     int result;
 
     va_list pile;
@@ -304,13 +304,13 @@ int MLV_get_number_of_objects_from_xml(const MLV_Xml *xml_data, const char *xpat
     return result;
 }
 
-MLV_Xml *MLV_get_xml_object_of_va([[maybe_unused]] const MLV_Xml *xml_data, [[maybe_unused]] const char *xpath, [[maybe_unused]] va_list pile) {
+MLVAPI MLV_Xml *MLV_get_xml_object_of_va([[maybe_unused]] const MLV_Xml *xml_data, [[maybe_unused]] const char *xpath, [[maybe_unused]] va_list pile) {
     MLV_Xml *result = NULL;
     ERROR_FULL("Not implemented.");
     return result;
 }
 
-MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...) {
+MLVAPI MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...) {
     MLV_Xml *result;
 
     va_list pile;
@@ -323,6 +323,6 @@ MLV_Xml *MLV_get_xml_object_of(const MLV_Xml *xml_data, const char *xpath, ...) 
     return result;
 }
 
-void MLV_print_xml([[maybe_unused]] const MLV_Xml *xml_data) {
+MLVAPI void MLV_print_xml([[maybe_unused]] const MLV_Xml *xml_data) {
     ERROR_FULL("Not implemented.");
 }

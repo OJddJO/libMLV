@@ -54,7 +54,7 @@ int init_audio(int buffer_size) {
     return result;
 }
 
-void MLV_change_number_of_parallel_sounds(unsigned int n) {
+MLVAPI void MLV_change_number_of_parallel_sounds(unsigned int n) {
     if (!n) {
         fprintf(stderr,
             "Incorrect parameter for MLV_change_number_playing_parallel_sounds. The number of parrallel sound can't be null.");
@@ -63,25 +63,25 @@ void MLV_change_number_of_parallel_sounds(unsigned int n) {
     Mix_AllocateChannels(n);
 }
 
-int MLV_init_audio() {
+MLVAPI int MLV_init_audio() {
     return init_audio(MLV_AUDIO_BUFFER_SIZE); // If the sound are not well
                                               // former, increse this value.
                                               // If the sound have some lags, the you have
                                               // to decrease this value.
 }
 
-int MLV_change_audio_buffer_size(int buffer_size) {
+MLVAPI int MLV_change_audio_buffer_size(int buffer_size) {
     MLV_free_audio();
     return init_audio(buffer_size);
 }
 
-void MLV_free_audio() {
+MLVAPI void MLV_free_audio() {
     Mix_HaltChannel(-1);
     Mix_HaltMusic();
     Mix_CloseAudio();
 }
 
-MLV_Music *MLV_load_music(const char *file_music) {
+MLVAPI MLV_Music *MLV_load_music(const char *file_music) {
     MLV_Music *result = MLV_MALLOC(1, MLV_Music);
     result->music = Mix_LoadMUS(file_music);
     if (!result->music) {
@@ -91,24 +91,24 @@ MLV_Music *MLV_load_music(const char *file_music) {
     return result;
 }
 
-void MLV_free_music(MLV_Music *music) {
+MLVAPI void MLV_free_music(MLV_Music *music) {
     if (music) {
         Mix_FreeMusic(music->music);
         MLV_FREE(music, MLV_Music);
     }
 }
 
-void MLV_play_music(const MLV_Music *music, float volume, int loop) {
+MLVAPI void MLV_play_music(const MLV_Music *music, float volume, int loop) {
     Mix_VolumeMusic(volume * MIX_MAX_VOLUME);
     MLV_stop_music();
     if (loop) Mix_PlayMusic(music->music, loop - 1);
 }
 
-void MLV_stop_music() {
+MLVAPI void MLV_stop_music() {
     Mix_HaltMusic();
 }
 
-MLV_Sound *MLV_load_sound(const char *file_sound) {
+MLVAPI MLV_Sound *MLV_load_sound(const char *file_sound) {
     MLV_Sound *result = MLV_MALLOC(1, MLV_Sound);
     result->sample = Mix_LoadWAV(file_sound);
     if (!result->sample) {
@@ -120,18 +120,18 @@ MLV_Sound *MLV_load_sound(const char *file_sound) {
     return result;
 }
 
-void MLV_free_sound(MLV_Sound *sound) {
+MLVAPI void MLV_free_sound(MLV_Sound *sound) {
     if (sound) {
         Mix_FreeChunk(sound->sample);
         MLV_FREE(sound, MLV_Sound);
     }
 }
 
-void MLV_play_sound(const MLV_Sound *sound, float volume) {
+MLVAPI void MLV_play_sound(const MLV_Sound *sound, float volume) {
     int channel = Mix_PlayChannel(-1, sound->sample, 0);
     Mix_Volume(channel, volume * MIX_MAX_VOLUME);
 }
 
-void MLV_stop_all_sounds() {
+MLVAPI void MLV_stop_all_sounds() {
     Mix_HaltChannel(-1);
 }

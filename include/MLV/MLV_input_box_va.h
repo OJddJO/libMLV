@@ -33,6 +33,8 @@
 #ifndef __MLV__MLV_INPUT_BOX_VA_H__
 #define __MLV__MLV_INPUT_BOX_VA_H__
 
+#include <stdarg.h>
+#include "MLV_config.h"
 #include "MLV_color.h"
 #include "MLV_input_box.h"
 #include "MLV_text.h"
@@ -75,7 +77,7 @@ extern "C" {
  *                              l'utilisateur.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
-void MLV_wait_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
+MLVAPI void MLV_wait_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height, MLV_Color borderColor,
     MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text, va_list pile);
 
 /** \~french
@@ -103,7 +105,7 @@ void MLV_wait_input_box_va(int top_left_corner_X, int top_left_corner_Y, int wid
  * \param font                La font du texte à utiliser.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
-void MLV_wait_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI void MLV_wait_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage, char **text,
     const MLV_Font *font, va_list pile);
 
@@ -135,7 +137,7 @@ void MLV_wait_input_box_with_font_va(int top_left_corner_X, int top_left_corner_
  * \param informativeMessage La message d'entête de la boîte de saisie.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
-MLV_Input_box *MLV_create_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     va_list pile);
 
@@ -153,7 +155,7 @@ MLV_Input_box *MLV_create_input_box_va(int top_left_corner_X, int top_left_corne
  * \param font La font à utiliser pour le texte.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
-MLV_Input_box *MLV_create_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
+MLVAPI MLV_Input_box *MLV_create_input_box_with_font_va(int top_left_corner_X, int top_left_corner_Y, int width, int height,
     MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor, const char *informativeMessage,
     const MLV_Font *font, va_list pile);
 
@@ -164,7 +166,7 @@ MLV_Input_box *MLV_create_input_box_with_font_va(int top_left_corner_X, int top_
  * \param message Le message d'entête.
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
-void MLV_change_informative_message_of_input_box_va(MLV_Input_box *input_box, const char *message, va_list pile);
+MLVAPI void MLV_change_informative_message_of_input_box_va(MLV_Input_box *input_box, const char *message, va_list pile);
 
 #ifdef __cplusplus
 }

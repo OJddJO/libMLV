@@ -68,7 +68,7 @@ SDL_Surface *create_surface(int width, int height) {
 #endif
 }
 
-MLV_Image *MLV_load_image(const char *file_image) {
+MLVAPI MLV_Image *MLV_load_image(const char *file_image) {
     if (MLV_data == NULL) {
         ERROR("Before using MLV_load_image, you have to initialise the MLV library by calling MLV_create_windows.");
     }
@@ -83,17 +83,17 @@ MLV_Image *MLV_load_image(const char *file_image) {
     return image;
 }
 
-int MLV_save_image_as_bmp(const MLV_Image *image, const char *file_image) {
+MLVAPI int MLV_save_image_as_bmp(const MLV_Image *image, const char *file_image) {
     return SDL_SaveBMP(image->surface, file_image);
 }
 
-void MLV_resize_image(MLV_Image *image, int width, int height) {
+MLVAPI void MLV_resize_image(MLV_Image *image, int width, int height) {
     double scalar_x = ((double)width) / ((double)image->surface->w);
     double scalar_y = ((double)height) / ((double)image->surface->h);
     MLV_scale_xy_image(image, scalar_x, scalar_y);
 }
 
-void MLV_vertical_image_mirror(MLV_Image *image) {
+MLVAPI void MLV_vertical_image_mirror(MLV_Image *image) {
     int width, height;
     MLV_get_image_size(image, &width, &height);
     Uint32 *pixel_src, *pixel_dst, tmp;
@@ -110,7 +110,7 @@ void MLV_vertical_image_mirror(MLV_Image *image) {
     }
 }
 
-void MLV_horizontal_image_mirror(MLV_Image *image) {
+MLVAPI void MLV_horizontal_image_mirror(MLV_Image *image) {
     int width, height;
     MLV_get_image_size(image, &width, &height);
     Uint32 *pixel_src, *pixel_dst, tmp;
@@ -127,7 +127,7 @@ void MLV_horizontal_image_mirror(MLV_Image *image) {
     }
 }
 
-void MLV_resize_image_with_proportions(MLV_Image *image, int width, int height) {
+MLVAPI void MLV_resize_image_with_proportions(MLV_Image *image, int width, int height) {
     double scalar_x = -1.0;
     double scalar_y = -1.0;
     if (width <= 0 && height <= 0) return;
@@ -138,46 +138,46 @@ void MLV_resize_image_with_proportions(MLV_Image *image, int width, int height) 
     MLV_scale_image(image, (scalar_x < scalar_y) ? scalar_x : scalar_y);
 }
 
-void MLV_get_image_size(const MLV_Image *image, int *width, int *height) {
+MLVAPI void MLV_get_image_size(const MLV_Image *image, int *width, int *height) {
     if (width) { *width = image->surface->w; }
     if (height) { *height = image->surface->h; }
 }
 
-int MLV_get_image_width(const MLV_Image *image) {
+MLVAPI int MLV_get_image_width(const MLV_Image *image) {
     return image->surface->w;
 }
 
-int MLV_get_image_height(const MLV_Image *image) {
+MLVAPI int MLV_get_image_height(const MLV_Image *image) {
     return image->surface->h;
 }
 
-void MLV_scale_xy_image(MLV_Image *image, double scalar_x, double scalar_y) {
+MLVAPI void MLV_scale_xy_image(MLV_Image *image, double scalar_x, double scalar_y) {
     MLV_rotate_and_scale_xy_image(image, 0.0, scalar_x, scalar_y);
 }
 
-void MLV_rotate_and_scale_xy_image(MLV_Image *image, double rotation, double scalar_x, double scalar_y) {
+MLVAPI void MLV_rotate_and_scale_xy_image(MLV_Image *image, double rotation, double scalar_x, double scalar_y) {
     SDL_Surface *dst;
     dst = rotozoomSurfaceXY(image->surface, rotation, scalar_x, scalar_y, 0);
     SDL_FreeSurface(image->surface);
     image->surface = dst;
 }
 
-void MLV_scale_image(MLV_Image *image, double scalar) {
+MLVAPI void MLV_scale_image(MLV_Image *image, double scalar) {
     MLV_rotate_and_scale_image(image, 0.0, scalar);
 }
 
-void MLV_rotate_image(MLV_Image *image, double rotation) {
+MLVAPI void MLV_rotate_image(MLV_Image *image, double rotation) {
     MLV_rotate_and_scale_image(image, rotation, 1.0);
 }
 
-void MLV_rotate_and_scale_image(MLV_Image *image, double rotation, double scalar) {
+MLVAPI void MLV_rotate_and_scale_image(MLV_Image *image, double rotation, double scalar) {
     SDL_Surface *dst;
     dst = rotozoomSurface(image->surface, rotation, scalar, 0);
     SDL_FreeSurface(image->surface);
     image->surface = dst;
 }
 
-MLV_Image *MLV_create_image(int width, int height) {
+MLVAPI MLV_Image *MLV_create_image(int width, int height) {
     MLV_Image *result = MLV_MALLOC(1, MLV_Image);
 
     result->surface = create_surface(width, height);
@@ -192,20 +192,20 @@ MLV_Image *MLV_create_image(int width, int height) {
     return result;
 }
 
-void MLV_free_image(MLV_Image *image) {
+MLVAPI void MLV_free_image(MLV_Image *image) {
     if (image) {
         SDL_FreeSurface(image->surface);
         MLV_FREE(image, MLV_Image);
     }
 }
 
-MLV_Image *MLV_copy_image(const MLV_Image *image) {
+MLVAPI MLV_Image *MLV_copy_image(const MLV_Image *image) {
     MLV_Image *result = MLV_MALLOC(1, MLV_Image);
     result->surface = SDL_ConvertSurface(image->surface, image->surface->format, image->surface->flags);
     return result;
 }
 
-MLV_Image *MLV_copy_partial_image(const MLV_Image *image, int x, int y, int width, int height) {
+MLVAPI MLV_Image *MLV_copy_partial_image(const MLV_Image *image, int x, int y, int width, int height) {
     MLV_Image *result = MLV_MALLOC(1, MLV_Image);
 
     SDL_Surface *tmp = create_surface(width, height);
@@ -233,7 +233,7 @@ MLV_Image *MLV_copy_partial_image(const MLV_Image *image, int x, int y, int widt
     return result;
 }
 
-void MLV_draw_image(const MLV_Image *image, int x, int y) {
+MLVAPI void MLV_draw_image(const MLV_Image *image, int x, int y) {
     SDL_Rect rectangle;
     rectangle.x = x;
     rectangle.y = y;
@@ -242,7 +242,7 @@ void MLV_draw_image(const MLV_Image *image, int x, int y) {
     SDL_BlitSurface(image->surface, NULL, MLV_data->screen, &rectangle);
 }
 
-void MLV_draw_partial_image(const MLV_Image *image, int x_source, int y_source, int width_source, int height_source,
+MLVAPI void MLV_draw_partial_image(const MLV_Image *image, int x_source, int y_source, int width_source, int height_source,
     int x, int y) {
     SDL_Rect rectangle_source;
     rectangle_source.x = x_source;
@@ -259,7 +259,7 @@ void MLV_draw_partial_image(const MLV_Image *image, int x_source, int y_source, 
     SDL_BlitSurface(image->surface, &rectangle_source, MLV_data->screen, &rectangle_dest);
 }
 
-void MLV_draw_scaled_rotated_image(MLV_Image *image, int centre_x, int centre_y, double rotation, double scalar) {
+MLVAPI void MLV_draw_scaled_rotated_image(MLV_Image *image, int centre_x, int centre_y, double rotation, double scalar) {
     SDL_Surface *dst;
     dst = rotozoomSurface(image->surface, rotation, scalar, 0);
     SDL_Rect rectangle_dest;
@@ -271,15 +271,15 @@ void MLV_draw_scaled_rotated_image(MLV_Image *image, int centre_x, int centre_y,
     SDL_FreeSurface(dst);
 }
 
-void MLV_draw_rotated_image(MLV_Image *image, int centre_x, int centre_y, double roation) {
+MLVAPI void MLV_draw_rotated_image(MLV_Image *image, int centre_x, int centre_y, double roation) {
     MLV_draw_scaled_rotated_image(image, centre_x, centre_y, roation, 1.0);
 }
 
-void MLV_draw_scaled_image(MLV_Image *image, int centre_x, int centre_y, double scalar) {
+MLVAPI void MLV_draw_scaled_image(MLV_Image *image, int centre_x, int centre_y, double scalar) {
     MLV_draw_scaled_rotated_image(image, centre_x, centre_y, 0.0, scalar);
 }
 
-void MLV_set_alpha_on_image(MLV_Alpha alpha, MLV_Image *image) {
+MLVAPI void MLV_set_alpha_on_image(MLV_Alpha alpha, MLV_Image *image) {
     SDL_Surface *surface = image->surface;
     SDL_LockSurface(surface);
 
@@ -307,7 +307,7 @@ void MLV_set_alpha_on_image(MLV_Alpha alpha, MLV_Image *image) {
     SDL_UnlockSurface(surface);
 }
 
-void MLV_set_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
+MLVAPI void MLV_set_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
     SDL_Surface *surface = image->surface;
     SDL_LockSurface(surface);
 
@@ -343,7 +343,7 @@ void MLV_set_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image) {
     SDL_UnlockSurface(surface);
 }
 
-SDL_Surface *MLV_get_image_data(MLV_Image *image) {
+MLVAPI SDL_Surface *MLV_get_image_data(MLV_Image *image) {
     return image->surface;
 }
 
@@ -396,15 +396,15 @@ void get_pixel_on_image(SDL_Surface *surface, int x, int y, int *red, int *green
     SDL_UnlockSurface(surface);
 }
 
-void MLV_get_pixel(int x, int y, int *red, int *green, int *blue, int *alpha) {
+MLVAPI void MLV_get_pixel(int x, int y, int *red, int *green, int *blue, int *alpha) {
     get_pixel_on_image(MLV_data->screen, x, y, red, green, blue, alpha);
 }
 
-void MLV_get_pixel_on_image(const MLV_Image *image, int x, int y, int *red, int *green, int *blue, int *alpha) {
+MLVAPI void MLV_get_pixel_on_image(const MLV_Image *image, int x, int y, int *red, int *green, int *blue, int *alpha) {
     get_pixel_on_image(image->surface, x, y, red, green, blue, alpha);
 }
 
-void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destination_image, int destination_x,
+MLVAPI void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destination_image, int destination_x,
     int destination_y) {
     SDL_Rect rectangle;
     rectangle.x = destination_x;
@@ -414,7 +414,7 @@ void MLV_draw_image_on_image(const MLV_Image *source_image, MLV_Image *destinati
     SDL_BlitSurface(source_image->surface, NULL, destination_image->surface, &rectangle);
 }
 
-void MLV_draw_partial_image_on_image(const MLV_Image *source_image, int source_x, int source_y, int width, int height,
+MLVAPI void MLV_draw_partial_image_on_image(const MLV_Image *source_image, int source_x, int source_y, int width, int height,
     MLV_Image *destination_image, int destination_x, int destination_y) {
     SDL_Rect rectangle_source, rectangle_destination;
 
@@ -435,16 +435,16 @@ void MLV_draw_partial_image_on_image(const MLV_Image *source_image, int source_x
 // Save screen                                                               //
 ///////////////////////////////////////////////////////////////////////////////
 
-void MLV_save_screen() {
+MLVAPI void MLV_save_screen() {
     SDL_BlitSurface(MLV_data->screen, NULL, MLV_data->save_screen, &(MLV_data->rectangle));
 }
 
-MLV_Image *MLV_get_screen() {
+MLVAPI MLV_Image *MLV_get_screen() {
     MLV_Image *image = MLV_create_image(MLV_data->rectangle.w, MLV_data->rectangle.h);
     SDL_BlitSurface(MLV_data->screen, NULL, image->surface, &(MLV_data->rectangle));
     return image;
 }
 
-void MLV_load_screen() {
+MLVAPI void MLV_load_screen() {
     SDL_BlitSurface(MLV_data->save_screen, NULL, MLV_data->screen, &(MLV_data->rectangle));
 }

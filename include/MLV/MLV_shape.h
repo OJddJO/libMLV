@@ -33,6 +33,7 @@
 #ifndef __MLV__MLV_FIGURES_H__
 #define __MLV__MLV_FIGURES_H__
 
+#include "MLV_config.h"
 #include "MLV_color.h"
 #include "MLV_image.h"
 
@@ -48,7 +49,7 @@ extern "C" {
  * \param radius Le rayon du cercle.
  * \param color La couleur du tracé.
  */
-void MLV_draw_circle(int x, int y, int radius, MLV_Color color);
+MLVAPI void MLV_draw_circle(int x, int y, int radius, MLV_Color color);
 
 /** \~french
  * \brief Dessine un disque plein dont le centre et le rayon sont passés en
@@ -59,7 +60,7 @@ void MLV_draw_circle(int x, int y, int radius, MLV_Color color);
  * \param radius Le rayon du cercle.
  * \param color La couleur du tracé.
  */
-void MLV_draw_filled_circle(int x, int y, int radius, MLV_Color color);
+MLVAPI void MLV_draw_filled_circle(int x, int y, int radius, MLV_Color color);
 
 /** \~french
  * \brief Dessine une ellipse.
@@ -70,7 +71,7 @@ void MLV_draw_filled_circle(int x, int y, int radius, MLV_Color color);
  * \param radius_y Le rayon en Y de l'ellipse.
  * \param color La couleur du tracé.
  */
-void MLV_draw_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color);
+MLVAPI void MLV_draw_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color);
 
 /** \~french
  * \brief Dessine une ellipse pleine.
@@ -81,7 +82,7 @@ void MLV_draw_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color)
  * \param radius_y Le rayon en Y de l'ellipse.
  * \param color La couleur du tracé.
  */
-void MLV_draw_filled_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color);
+MLVAPI void MLV_draw_filled_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color);
 
 /** \~french
  * \brief Dessine un polygone à partir d'une liste de sommets.
@@ -91,7 +92,7 @@ void MLV_draw_filled_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color
  * \param nb_points Le nombre de sommets du polygone.
  * \param color La couleur du tracé.
  */
-void MLV_draw_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color);
+MLVAPI void MLV_draw_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color);
 
 /** \~french
  * \brief Dessine un triangle (vide).
@@ -104,7 +105,7 @@ void MLV_draw_polygon(const int *vx, const int *vy, int nb_points, MLV_Color col
  * \param cy La coordonnée en Y dy troisième point du traingle.
  * \param color La couleur du triangle.
  */
-void MLV_draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color);
+MLVAPI void MLV_draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color);
 
 /** \~french
  * \brief Dessine un polygone plein à partir d'une liste de sommets.
@@ -114,7 +115,7 @@ void MLV_draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color
  * \param nb_points Le nombre de sommets du polygone.
  * \param color La couleur du tracé.
  */
-void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color);
+MLVAPI void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color);
 
 /** \~french
  * \brief Dessine un triangle plein.
@@ -127,7 +128,7 @@ void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Co
  * \param cy La coordonnée en Y dy troisième point du traingle.
  * \param color La couleur du triangle.
  */
-void MLV_draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color);
+MLVAPI void MLV_draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color);
 
 /** \~french
  * \brief Dessine une courbe de Bézier à partir d'une liste de sommets.
@@ -138,7 +139,7 @@ void MLV_draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, ML
  *                Bézier.
  * \param color La couleur du tracé.
  */
-void MLV_draw_bezier_curve(const int *vx, const int *vy, int nb_points, MLV_Color color);
+MLVAPI void MLV_draw_bezier_curve(const int *vx, const int *vy, int nb_points, MLV_Color color);
 
 /** \~french
  * \brief Dessine un polygone plein à partir d'une liste de sommets.
@@ -148,7 +149,7 @@ void MLV_draw_bezier_curve(const int *vx, const int *vy, int nb_points, MLV_Colo
  * \param nb_points Le nombre de sommets du polygone.
  * \param color La couleur du tracé.
  */
-void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color);
+MLVAPI void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Color color);
 
 /** \~french
  * \brief Dessine un rectangle dont la taille, la couleur et la position du
@@ -160,7 +161,7 @@ void MLV_draw_filled_polygon(const int *vx, const int *vy, int nb_points, MLV_Co
  * \param height La hauteur du rectangle.
  * \param color La couleur du tracé.
  */
-void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
+MLVAPI void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
 
 /** \~french
  * \brief Dessine un rectangle dont la taille, la couleur et la position du
@@ -172,7 +173,7 @@ void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
  * \param height La hauteur du rectangle.
  * \param color La couleur du tracé.
  */
-void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
+MLVAPI void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
 
 /** \~french
  * \brief Dessine un rectangle plein dont la taille, la couleur et la position
@@ -184,7 +185,7 @@ void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
  * \param height La hauteur du rectangle.
  * \param color La couleur du tracé.
  */
-void MLV_draw_filled_rectangle(int x, int y, int width, int height, MLV_Color color);
+MLVAPI void MLV_draw_filled_rectangle(int x, int y, int width, int height, MLV_Color color);
 
 /** \~french
  * \brief Dessine une ligne.
@@ -195,7 +196,7 @@ void MLV_draw_filled_rectangle(int x, int y, int width, int height, MLV_Color co
  * \param y2 La coordonnée en Y de la deuxième extrémité de la ligne.
  * \param color La couleur du tracé.
  */
-void MLV_draw_line(int x1, int y1, int x2, int y2, MLV_Color color);
+MLVAPI void MLV_draw_line(int x1, int y1, int x2, int y2, MLV_Color color);
 
 /** \~french
  * \brief Dessine un pixel dont les coordonnées sont passées en paramètres.
@@ -204,7 +205,7 @@ void MLV_draw_line(int x1, int y1, int x2, int y2, MLV_Color color);
  * \param y La coordonnée en Y du pixel.
  * \param color La couleur du tracé.
  */
-void MLV_draw_pixel(int x, int y, MLV_Color color);
+MLVAPI void MLV_draw_pixel(int x, int y, MLV_Color color);
 
 /** \~french
  * \brief Dessine un point dont les coordonnées sont passées en paramètres.
@@ -214,7 +215,7 @@ void MLV_draw_pixel(int x, int y, MLV_Color color);
  * \param y La coordonnée en Y du point.
  * \param color La couleur du tracé.
  */
-void MLV_draw_point(int x, int y, MLV_Color color);
+MLVAPI void MLV_draw_point(int x, int y, MLV_Color color);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Drawing operation on images                                               //
@@ -230,7 +231,7 @@ void MLV_draw_point(int x, int y, MLV_Color color);
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un disque plein dont le centre et le rayon sont passés en
@@ -242,7 +243,7 @@ void MLV_draw_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Ima
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_filled_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_filled_circle_on_image(int x, int y, int radius, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine une ellipse dans une image.
@@ -254,7 +255,7 @@ void MLV_draw_filled_circle_on_image(int x, int y, int radius, MLV_Color color, 
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine une ellipse pleine dans une image.
@@ -266,7 +267,7 @@ void MLV_draw_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Col
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_filled_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_filled_ellipse_on_image(int x, int y, int radius_x, int radius_y, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un polygone à partir d'une liste de sommets dans une image.
@@ -277,7 +278,7 @@ void MLV_draw_filled_ellipse_on_image(int x, int y, int radius_x, int radius_y, 
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un triangle (vide) sur une image passée en paramètre.
@@ -291,7 +292,7 @@ void MLV_draw_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_
  * \param color La couleur du triangle.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un polygone plein à partir d'une liste de sommets dans une
@@ -303,7 +304,7 @@ void MLV_draw_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, 
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un triangle plein sur une image passée en paramètre.
@@ -317,7 +318,7 @@ void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_point
  * \param color La couleur du triangle.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_filled_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
+MLVAPI void MLV_draw_filled_triangle_on_image(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
     MLV_Image *image);
 
 /** \~french
@@ -331,7 +332,7 @@ void MLV_draw_filled_triangle_on_image(int ax, int ay, int bx, int by, int cx, i
  * \param color La couleur du tracé.
  * \param image image dans laquelle la figure est dessinée
  */
-void MLV_draw_bezier_curve_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_bezier_curve_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un polygone plein à partir d'une liste de sommets dans une
@@ -343,7 +344,7 @@ void MLV_draw_bezier_curve_on_image(const int *vx, const int *vy, int nb_points,
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée
  */
-void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_points, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un rectangle dont la taille, la couleur et la position du
@@ -356,7 +357,7 @@ void MLV_draw_filled_polygon_on_image(const int *vx, const int *vy, int nb_point
  * \param color La couleur du rectangle.
  * \param image L'image dans laquelle la figure est dessinée .
  */
-void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un rectangle dont la taille, la couleur et la position du
@@ -369,7 +370,7 @@ void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color 
  * \param color La couleur du rectangle.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un rectangle plein dont la taille, la couleur et la position
@@ -382,7 +383,7 @@ void MLV_draw_rectangle_on_image(int x, int y, int width, int height, MLV_Color 
  * \param color La couleur du rectangle.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_filled_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_filled_rectangle_on_image(int x, int y, int width, int height, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine une ligne dans une image.
@@ -394,7 +395,7 @@ void MLV_draw_filled_rectangle_on_image(int x, int y, int width, int height, MLV
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_line_on_image(int x1, int y1, int x2, int y2, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_line_on_image(int x1, int y1, int x2, int y2, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un pixel dont les coordonnées sont passées en paramètres dans
@@ -405,7 +406,7 @@ void MLV_draw_line_on_image(int x1, int y1, int x2, int y2, MLV_Color color, MLV
  * \param color Couleur du tracé
  * \param image image dans laquelle la figure est dessinée
  */
-void MLV_draw_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image);
 
 /** \~french
  * \brief Dessine un point dont les coordonnées sont passées en paramètres.
@@ -416,7 +417,7 @@ void MLV_draw_pixel_on_image(int x, int y, MLV_Color color, MLV_Image *image);
  * \param color La couleur du tracé.
  * \param image L'image dans laquelle la figure est dessinée.
  */
-void MLV_draw_point_on_image(int x, int y, MLV_Color color, MLV_Image *image);
+MLVAPI void MLV_draw_point_on_image(int x, int y, MLV_Color color, MLV_Image *image);
 
 #ifdef __cplusplus
 }

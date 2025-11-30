@@ -46,7 +46,7 @@
 
 extern DataMLV *MLV_data;
 
-MLV_Event MLV_get_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
+MLVAPI MLV_Event MLV_get_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
     MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button, MLV_Button_state *state) {
     SDL_Event event;
     int invalidEvent = 1;
@@ -121,7 +121,7 @@ MLV_Event MLV_get_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key
     return MLV_NONE;
 }
 
-MLV_Event MLV_wait_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
+MLVAPI MLV_Event MLV_wait_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode, char **texte,
     MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button, MLV_Button_state *state) {
     MLV_Event resultat;
     while ((resultat = MLV_get_event(key_sym, key_mod, unicode, texte, input_box, mouse_x, mouse_y, mouse_button,
@@ -130,7 +130,7 @@ MLV_Event MLV_wait_event(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *ke
     return resultat;
 }
 
-MLV_Event MLV_wait_event_or_milliseconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_event_or_milliseconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
     char **texte, MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button,
     MLV_Button_state *state, int milliseconds) {
     MLV_Event resultat;
@@ -142,24 +142,24 @@ MLV_Event MLV_wait_event_or_milliseconds(MLV_Keyboard_button *key_sym, MLV_Keybo
     return resultat;
 }
 
-MLV_Event MLV_wait_event_or_seconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_event_or_seconds(MLV_Keyboard_button *key_sym, MLV_Keyboard_modifier *key_mod, int *unicode,
     char **texte, MLV_Input_box **input_box, int *mouse_x, int *mouse_y, MLV_Mouse_button *mouse_button,
     MLV_Button_state *state, int seconds) {
     return MLV_wait_event_or_milliseconds(key_sym, key_mod, unicode, texte, input_box, mouse_x, mouse_y, mouse_button,
         state, seconds * 1000);
 }
 
-void MLV_flush_event_queue() {
+MLVAPI void MLV_flush_event_queue() {
     MLV_get_event(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-MLV_Event MLV_wait_keyboard_or_mouse(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode, int *mouse_x,
+MLVAPI MLV_Event MLV_wait_keyboard_or_mouse(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode, int *mouse_x,
     int *mouse_y) {
     MLV_Event resultat;
     MLV_Button_state state;
     MLV_Mouse_button mouse_button;
 
-    // We remove all existing event from the queue
+    // MLVAPI We remove all existing event from the queue
     MLV_flush_event_queue();
 
     MLV_Keyboard_button tmp_sym;
@@ -192,13 +192,13 @@ MLV_Event MLV_wait_keyboard_or_mouse(MLV_Keyboard_button *sym, MLV_Keyboard_modi
     return resultat;
 }
 
-MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int *mouse_x, int *mouse_y, int milliseconds) {
     MLV_Event resultat;
     MLV_Button_state state;
     MLV_Mouse_button mouse_button;
 
-    // We remove all existing event from the queue
+    // MLVAPI We remove all existing event from the queue
     MLV_flush_event_queue();
 
     int time = MLV_get_time();
@@ -238,12 +238,12 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(MLV_Keyboard_button *sym, M
     return resultat;
 }
 
-MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
+MLVAPI MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(MLV_Keyboard_button *sym, MLV_Keyboard_modifier *mod, int *unicode,
     int *mouse_x, int *mouse_y, int seconds) {
     return MLV_wait_keyboard_or_mouse_or_milliseconds(sym, mod, unicode, mouse_x, mouse_y, seconds * 1000);
 }
 
-const char *MLV_convert_event_to_string(MLV_Event event_code) {
+MLVAPI const char *MLV_convert_event_to_string(MLV_Event event_code) {
     switch (event_code) {
         case MLV_NONE:
             return "MLV_NONE";
@@ -261,7 +261,7 @@ const char *MLV_convert_event_to_string(MLV_Event event_code) {
     return NULL;
 }
 
-MLV_Event MLV_convert_string_to_event(const char *event_string) {
+MLVAPI MLV_Event MLV_convert_string_to_event(const char *event_string) {
     if (strcmp(event_string, "MLV_NONE") == 0) { return MLV_NONE; }
     if (strcmp(event_string, "MLV_KEY") == 0) { return MLV_KEY; }
     if (strcmp(event_string, "MLV_INPUT_BOX") == 0) { return MLV_INPUT_BOX; }
@@ -271,7 +271,7 @@ MLV_Event MLV_convert_string_to_event(const char *event_string) {
     return -1;
 }
 
-const char *MLV_convert_button_state_to_string(MLV_Button_state state_code) {
+MLVAPI const char *MLV_convert_button_state_to_string(MLV_Button_state state_code) {
     switch (state_code) {
         case MLV_PRESSED:
             return "MLV_PRESSED";
@@ -283,7 +283,7 @@ const char *MLV_convert_button_state_to_string(MLV_Button_state state_code) {
     return NULL;
 }
 
-MLV_Button_state MLV_convert_string_to_button_state(const char *state_string) {
+MLVAPI MLV_Button_state MLV_convert_string_to_button_state(const char *state_string) {
     if (strcmp(state_string, "MLV_PRESSED")) { return MLV_PRESSED; }
     if (strcmp(state_string, "MLV_RELEASED")) { return MLV_RELEASED; }
     ERROR("Unexpected state name.");

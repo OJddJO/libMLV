@@ -32,6 +32,8 @@
 #ifndef __MLV__MLV_TIME_H__
 #define __MLV__MLV_TIME_H__
 
+#include "MLV_config.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -42,21 +44,21 @@ extern "C" {
  *
  * \param milliseconds Le nombre de milli-secondes à attendre.
  */
-void MLV_wait_milliseconds(int milliseconds);
+MLVAPI void MLV_wait_milliseconds(int milliseconds);
 
 /** \~french
  * \brief Le programme s'intérompt pendant un nombre de secondes.
  *
  * \param seconds Le nombre de secondes à attendre.
  */
-void MLV_wait_seconds(int seconds);
+MLVAPI void MLV_wait_seconds(int seconds);
 
 /** \~french
  * \brief Renvoie le nombre de millisecondes écoulées depuis le début de
  *        l'initialisation de la bibliothèque MLV ( avec MLV_create_window ).
  * \return Le temps écoulé depuis l'initialisation de la bibliothèque MLV.
  */
-int MLV_get_time();
+MLVAPI int MLV_get_time();
 
 /** \~french
  * \brief Donne la date du jour (seconde/heure/jour/mois/annee).
@@ -80,7 +82,7 @@ int MLV_get_time();
  *         pris en compte, 0 si il ne l'a pas été et -1 si l'information
  *         n'est pas disponible.
  */
-int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, int *year, int *day_of_the_week);
+MLVAPI int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, int *year, int *day_of_the_week);
 
 /** \~french
  * \brief Configure la fréquence de rafraichissement en Hz.
@@ -92,21 +94,21 @@ int MLV_get_date(int *seconds, int *minutes, int *hours, int *day, int *month, i
  *
  * \param rate Fréquence de rafraîchissement.
  */
-void MLV_change_frame_rate(int rate);
+MLVAPI void MLV_change_frame_rate(int rate);
 
 /** \~french
  * \brief Donne la fréquence de rafraîchissement courante.
  *
  * \return La fréquence de rafraîchissement courante.
  */
-int MLV_get_frame_rate();
+MLVAPI int MLV_get_frame_rate();
 
 /** \~french
  * \brief Suspend l'exécution du programme de façon à ce que le temps écoulé
  *        depuis le drenier appel à cette fonction, soit égale à la période de
  *        la fréquence de rafraîchissement configuré par MLV_change_frame_rate.
  */
-void MLV_delay_according_to_frame_rate();
+MLVAPI void MLV_delay_according_to_frame_rate();
 
 #ifdef __cplusplus
 }
