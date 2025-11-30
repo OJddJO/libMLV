@@ -3,6 +3,7 @@
  *
  *   Copyright (C) 2010,2011,2012 Adrien Boussicault, Marc Zipstein
  *   Copyright (C) 2016 Eric Laporte (Bug on MLV_get_random_integer)
+ *	 Copyright (C) 2025 OJddJO
  *
  *    This Library is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
