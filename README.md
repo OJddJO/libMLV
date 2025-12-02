@@ -30,7 +30,7 @@ If you are not a beginner, we recommend you to use the SDL libraries (sdl, sdl-g
 
 > [!NOTE]
 > Currently, only `x86_64` architecture is supported.
-> There's a version for `Linux` (any linux should be fine, tested on `NixOS`, `Ubuntu`, `Arch`) and for `Windows`.
+> There's a version for `Linux` (any linux should be fine, just recompile it from source, tested on `NixOS`, `Ubuntu`, `Arch`) and for `Windows`.
 > `MacOS` will maybe be supported one day...
 
 Go to the [releases](https://github.com/OJddJO/libMLV/releases) and download the version you need.
