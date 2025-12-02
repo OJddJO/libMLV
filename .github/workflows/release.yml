@@ -64,7 +64,7 @@ jobs:
       - name: Package assets
         run: |
           set -e
-          mkdir -p release tmp_release tmp_release/include/MLV
+          mkdir -p release tmp_release tmp_release/include/ tmp_release/include/MLV
           rm -rf tmp_release/* _linux/build/
           cp -R _linux/* tmp_release/
           cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
@@ -112,7 +112,7 @@ jobs:
 
       - name: Package assets
         run: |
-          mkdir -p release tmp_release tmp_release/include/MLV
+          mkdir -p release tmp_release tmp_release/include/ tmp_release/include/MLV
           rm -rf tmp_release/* _windows/build/
           cp -R _windows/* tmp_release/
           cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
