@@ -64,11 +64,11 @@ jobs:
       - name: Package assets
         run: |
           set -e
-          mkdir -p release tmp_release tmp_release/include/MLV
           rm -rf tmp_release/* _linux/build/
+          mkdir -p release tmp_release tmp_release/include/MLV
           cp -R _linux/* tmp_release/
           cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
-          cp -R include/MLV/* tmp_release/include/MLV/
+          cp -R include/MLV/* tmp_release/include/MLV
           cp -R data tmp_release/bin/
           tar -czf "release/MLV-${VERSION}-linux.tar.gz" -C tmp_release .
           rm -rf tmp_release
@@ -112,11 +112,11 @@ jobs:
 
       - name: Package assets
         run: |
-          mkdir -p release tmp_release tmp_release/include/MLV
           rm -rf tmp_release/* _windows/build/
+          mkdir -p release tmp_release tmp_release/include/MLV
           cp -R _windows/* tmp_release/
           cp -R README.md AUTHORS COPYING gpl.txt tmp_release/
-          cp -R include/MLV/* tmp_release/include/MLV/
+          cp -R include/MLV/* tmp_release/include/MLV
           cp -R data tmp_release/bin/
           cd tmp_release && 7z a -tzip "../release/MLV-${VERSION}-windows.zip" .
         shell: msys2 {0}
