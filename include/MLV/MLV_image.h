@@ -32,13 +32,14 @@
 #define __MLV__MLV_IMAGE_H__
 
 #include <stdint.h>
-#include <SDL/SDL_video.h>
 #include "MLV_config.h"
 #include "MLV_color.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef struct SDL_Surface SDL_Surface;
 
 /** \~french
  * \brief Définit le type Image dans la bibliothèque MLV.
